@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     LoginController,
     ReservationController,
     ServerBrowseController,
+    UserController,
     ServerController
 };
 
@@ -13,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('/login', [LoginController::class, 'login']);
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware('auth:api')->group(function () {
 
         Route::get('/servers', [ServerBrowseController::class, 'index']);
         Route::post('/reserve', [ReservationController::class, 'store']);
-        Route::get('/my-reservations', [ReservationController::class, 'myReservations']);
+        Route::get('/my-reservations', [ReservationController::class, 'show']);
 
-        Route::apiResource('/users', App\Http\Controllers\UserController::class)->only([
+        Route::apiResource('/users', UserController::class)->only([
             'store',
             'edit',
             'update',
