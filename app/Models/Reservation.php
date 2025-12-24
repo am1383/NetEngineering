@@ -9,6 +9,11 @@ use App\Models\Server;
 
 class Reservation extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         'user_id', 'server_id', 'start_time',
         'end_time', 'rent_type', 'total_price', 'status',

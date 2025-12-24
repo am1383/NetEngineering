@@ -11,6 +11,7 @@ use App\Interfaces\Repositories\{
 };
 
 use App\Interfaces\Services\ReservationServiceInterface;
+use Illuminate\Support\Collection;
 
 class ReservationService implements ReservationServiceInterface
 {
@@ -66,5 +67,11 @@ class ReservationService implements ReservationServiceInterface
         return $rentType === 'hourly'
             ? $hours * $pricePerHour
             : ceil($hours / 24) * $pricePerDay;
+    }
+
+    public function getMyReservation(): Collection
+    {
+        return $this->reservationRepository
+            ->getMyReservations();
     }
 }

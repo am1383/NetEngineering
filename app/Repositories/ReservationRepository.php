@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\Repositories\ReservationRepositoryInterface;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class ReservationRepository extends GenericRepository implements ReservationRepositoryInterface
 {
@@ -16,5 +17,12 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
             'username' => $userName,
             'password' => $password,
         ]);
+    }
+
+    public function getMyReservations(): Collection
+    {
+        return auth()->user()->reservations()
+            ->with(['server', 'credential'])
+            ->get();
     }
 }

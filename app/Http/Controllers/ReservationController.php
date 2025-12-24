@@ -17,7 +17,7 @@ class ReservationController
 
     public function show()
     {
-        return auth()->user()->reservations()
-            ->with(['server', 'credential'])->get();
+        return $this->reservationService
+            ->getMyReservation();
     }
 }
