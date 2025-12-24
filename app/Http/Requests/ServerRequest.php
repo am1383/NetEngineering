@@ -22,6 +22,7 @@ class ServerRequest extends BaseRequest
         $methodSpecificRules = match ($this->method()) {
             'POST' => [
             ],
+            
             'PUT' => [
                 'cpu' => 'nullable|string|max:50',
                 'gpu' => 'nullable|string|max:50',

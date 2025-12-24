@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Server extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         'cpu', 'gpu', 'ram', 'storage', 'os',
         'price_per_hour', 'price_per_day', 'is_active',
