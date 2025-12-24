@@ -22,7 +22,10 @@ class StoreReservationRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            //
+            'server_id' => 'required|integer|exists:servers,id',
+            'start_time' => 'required|date|after:now',
+            'end_time' => 'required|date|after:start_time',
+            'rent_type' => 'required|string|in:hourly,daily',
         ];
     }
 }
