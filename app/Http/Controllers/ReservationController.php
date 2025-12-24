@@ -17,7 +17,7 @@ class ReservationController
     public function store(StoreReservationRequest $request): JsonResponse
     {
         $reservation = $this->reservationService
-            ->createReservation($request->server_id);
+            ->createReservation($request->server_id, $request->start_time, $request->end_time, $request->rent_type);
 
         return $this->successResponse(new ReservationResource($reservation), status: 201);
     }
