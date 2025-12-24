@@ -7,6 +7,9 @@ use App\Interfaces\Services\ServerServiceInterface;
 use App\Models\Server;
 use Illuminate\Support\Collection;
 
+/**
+ * Class ServerService
+ */
 class ServerService implements ServerServiceInterface
 {
     public function __construct(private ServerRepositoryInterface $serverRepository) {}
