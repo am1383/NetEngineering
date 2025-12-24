@@ -7,7 +7,13 @@ use App\Interfaces\Services\LoginServiceInterface;
 
 class LoginController
 {
-    public function __construct(private LoginServiceInterface $authService) {}
+    public function __construct(private LoginServiceInterface $loginService) {}
 
-    public function login(LoginRequest $request) {}
+    public function login(LoginRequest $request) 
+    {
+        return $this->loginService->login(
+            $request->phone_number,
+            $request->password
+        );
+    }
 }
