@@ -19,6 +19,6 @@ class AdminReservationController
         $this->reservationRepository
             ->assignCredentials($reservation, $request->user_name, $request->password);
         
-        return $this->successResponse(message: 'Credentials assigned successfully');
+        return $this->successResponse();
     }
 }
