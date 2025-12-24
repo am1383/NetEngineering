@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AdminUserSeeder extends Seeder
@@ -19,7 +18,7 @@ class AdminUserSeeder extends Seeder
             ],
             [
                 'name' => 'System Admin',
-                'phone_number' => '09183121519',
+                'phone_number' => '+989183121519',
                 'password' => 'admin12345',
                 'role' => 'admin',
             ]
