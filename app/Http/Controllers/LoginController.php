@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Interfaces\Services\LoginServiceInterface;
 use App\Traits\ApiResponseTrait;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +21,6 @@ class LoginController
             $request->password
         );
 
-        return $this->successResponse($data);
+        return $this->successResponse(new UserResource($data));
     }
 }
