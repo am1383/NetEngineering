@@ -19,16 +19,18 @@ Route::prefix('v1')->group(function () {
         Route::post('/reserve', [ReservationController::class, 'store']);
         Route::get('/my-reservations', [ReservationController::class, 'myReservations']);
 
-        Route::middleware('role:admin')->group(function () {
-            Route::post('/admin/servers', [ServerController::class, 'store']);
-            Route::put('/admin/servers/{server}', [ServerController::class, 'update']);
-            Route::post('/admin/reservations/{reservation}/credential', [AdminReservationController::class, 'setCredential']);
+        Route::apiResource('/users', App\Http\Controllers\UserController::class)->only([
+            'store',
+            'edit',
+            'update',
+        ]);
 
-            Route::apiResource('/users', App\Http\Controllers\UserController::class)->only([
-                'store',
-                'edit',
-                'update',
-            ]);
+        Route::middleware('role:admin')->group(function () {
+            Route::prefix('/admin')->group(function () {
+                Route::post('/servers', [ServerController::class, 'store']);
+                Route::put('/servers/{server}', [ServerController::class, 'update']);
+                Route::post('/reservations/{reservation}/credential', [AdminReservationController::class, 'setCredential']);
+            });
         });
     });
 });
