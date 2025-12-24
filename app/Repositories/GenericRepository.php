@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use GenericRepositoryInterface;
+use App\Interfaces\Repositories\GenericRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class GenericRepository implements GenericRepositoryInterface

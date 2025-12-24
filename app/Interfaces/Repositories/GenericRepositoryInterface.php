@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Interfaces\Repositories;
+
 use Illuminate\Database\Eloquent\Model;
 
 interface GenericRepositoryInterface
