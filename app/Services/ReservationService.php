@@ -11,8 +11,12 @@ use App\Interfaces\Repositories\{
 };
 
 use App\Interfaces\Services\ReservationServiceInterface;
+use App\Models\Reservation;
 use Illuminate\Support\Collection;
 
+/**
+ * Class ReservationService
+ */
 class ReservationService implements ReservationServiceInterface
 {
     public function __construct(
@@ -21,22 +25,22 @@ class ReservationService implements ReservationServiceInterface
         private ServerCredentialRepositoryInterface $serverCredentialRepository
     ) {}
 
-    public function createReservation(int $severId)
+    public function createReservation(int $serverId, int $startTime, int $endTime, string $rentType): Reservation
     {
         $server = $this->serverRepository->findOrFail($serverId);
 
-        $hasConflict = Reservation::where('server_id', $server->id)
-            ->where(function ($q) use ($request) {
-                $q->whereBetween('start_time', [$start_time, $end_time])
-                  ->orWhereBetween('end_time', [$start_time, $end_time]);
-            })->exists();
+        $hasConflict = $this->reservationRepository->hasConflict(
+            $serverId,
+            $startTime,
+            $endTime
+        );
 
         throw_if(
             $hasConflict,
             ConfilictException::class
         );
 
-        $hours = $this->getDurationInHours($start_time, $end_time);
+        $hours = $this->getDurationInHours($startTime, $endTime);
 
         $price = $this->calculateRentalPrice($rentType, $hours, $server->price_per_hour, $server->price_per_day);
 

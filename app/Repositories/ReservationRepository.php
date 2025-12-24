@@ -19,6 +19,15 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
         ]);
     }
 
+    public function hasConflict(int $serverId, int $startTime, int $endTime): bool
+    {
+        return $this->model->where('server_id', $serverId)
+            ->where(function ($q) use ($startTime, $endTime) {
+                $q->whereBetween('start_time', [$startTime, $endTime])
+                  ->orWhereBetween('end_time', [$startTime, $endTime]);
+            })->exists();
+    }
+
     public function getMyReservations(): Collection
     {
         return auth()->user()->reservations()
