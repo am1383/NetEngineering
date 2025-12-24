@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 trait ApiResponseTrait
 {
-    protected function successResponse(mixed $data = null, string $message = 'success', int $status = 200): JsonResponse
+    protected function successResponse(mixed $data = null, string $message = '', int $status = 200): JsonResponse
     {
         $response = [
             'success' => true,
