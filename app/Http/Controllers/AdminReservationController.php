@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AdminReservationRequest;
+use App\Interfaces\Repositories\ReservationRepositoryInterface;
 use App\Models\Reservation;
 
 class AdminReservationController
 {
-    public function setCredential(Request $request, Reservation $reservation)
-    {
-        $reservation->credential()->update([
-            'username' => $request->username,
-            'password' => $request->password,
-        ]);
+    public function __construct(private ReservationRepositoryInterface $reservationRepository) {}
 
-        return response()->json(['message' => 'Credentials set']);
+    public function setCredential(AdminReservationRequest $request, Reservation $reservation)
+    {
+        return $this->reservationRepository
+            ->assignCredentials($reservation, $request->user_name, $request->password);
     }
 }
 

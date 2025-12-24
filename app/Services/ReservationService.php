@@ -20,7 +20,7 @@ class ReservationService implements ReservationServiceInterface
         private ServerCredentialRepositoryInterface $serverCredentialRepository
     ) {}
 
-    public function storeReserve()
+    public function createReservation(int $severId)
     {
         $server = $this->serverRepository->findOrFail($serverId);
 
