@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServerBrowseRequest;
 use App\Interfaces\Services\ServerServiceInterface;
-use Illuminate\Http\Request;
 
 class ServerBrowseController
 {
     public function __construct(private ServerServiceInterface $serverService) {}
 
-    public function index(Request $request)
+    public function index(ServerBrowseRequest $request)
     {
         return $this->serverService
-            ->getAvailableServers($request->get('gpu'), $request->get('cpu'));
+            ->getAvailableServers($request->gpu, $request->cpu);
     }
 }
