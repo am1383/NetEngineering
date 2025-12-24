@@ -22,4 +22,9 @@ class UserService implements UserServiceInterface
     {
         return $this->userRepository->update($attributes, $id);
     }
+
+    public function getUserInformationById(int $id): Authenticatable
+    {
+        return $this->userRepository->find($id);
+    }
 }

@@ -9,4 +9,6 @@ interface UserServiceInterface
     public function createUser(array $attributes): Authenticatable;
 
     public function updateUser(array $attributes, int $id): bool;
+
+    public function getUserInformationById(int $id): Authenticatable;
 }
