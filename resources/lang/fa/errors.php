@@ -19,7 +19,7 @@ return [
     'method_not_allowed' => 'متد انتخاب شده مجاز نیست.',
     'unauthenticated' => 'برای دسترسی باید وارد شوید.',
     'unauthorized' => 'شما اجازه دسترسی به این بخش را ندارید.',
-    'database_error' => 'خطای پایگاه داده رخ داده است.',
-    'internal_server_error' => 'خطای داخلی سرور رخ داده است.',
+    'database_error' => 'خطای داخلی رخ داده است.',
+    'internal_server_error' => 'خطای داخلی رخ داده است.',
     'time_slot_unavailable' => 'اسلات زمانی مورد نظر شما در دسترس نمیباشد',
 ];
