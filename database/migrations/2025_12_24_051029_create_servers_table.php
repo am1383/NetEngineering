@@ -13,14 +13,19 @@ return new class extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
-            $table->string('cpu');
-            $table->string('gpu')->nullable();
-            $table->integer('ram');
+
+            $table->foreignId('cpu_id')->constrained();
+            $table->string('slug');
+            $table->string('server_name');
+            $table->uuid('uuid')->unique()->index();
+            $table->foreignId('gpu_id')->constrained();
+            $table->foreignId('ram_id')->constrained();
             $table->integer('storage');
             $table->string('os');
             $table->decimal('price_per_hour', 10, 2);
             $table->decimal('price_per_day', 10, 2);
             $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }
