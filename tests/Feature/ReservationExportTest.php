@@ -33,7 +33,7 @@ class ReservationExportTest extends TestCase
     {
         $adminUser = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121519'),
-            'role_id' => RoleEnum::ADMIN,
+            'role_id' => RoleEnum::ADMIN->value,
         ]);
 
         Passport::actingAs($adminUser);
