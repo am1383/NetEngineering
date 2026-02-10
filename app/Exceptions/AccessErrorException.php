@@ -2,15 +2,15 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
-class AccessErrorException extends Exception
+class AccessErrorException extends \Exception
 {
     public function render(): JsonResponse
     {
         return response()->json([
             'message' => __('errors.access_error'),
-        ], 403);
+        ], Response::HTTP_FORBIDDEN);
     }
 }

@@ -3,10 +3,11 @@
 namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 trait ApiResponseTrait
 {
-    protected function successResponse(mixed $data = null, string $message = '', int $status = 200): JsonResponse
+    protected function successResponse(mixed $data = null, string $message = '', int $status = Response::HTTP_OK): JsonResponse
     {
         $response = [
             'success' => true,
@@ -17,6 +18,8 @@ trait ApiResponseTrait
             $response['data'] = $data;
         }
 
-        return response()->json($response, $status);
+        return response()->json(
+            $response, $status
+        );
     }
 }
