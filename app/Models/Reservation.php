@@ -26,11 +26,11 @@ class Reservation extends Model
 
     protected static function booted(): void
     {
-        static::creating(function ($model): void {
-            $model->uuid = (string) Str::uuid();
+        static::creating(function (Model $model): void {
+            $model->uuid = Str::uuid();
         });
 
-        static::creating(function ($model): void {
+        static::creating(function (Model $model): void {
             $model->ip = fake()->ipv4();
         });
     }

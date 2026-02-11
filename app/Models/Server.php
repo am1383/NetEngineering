@@ -37,8 +37,8 @@ class Server extends Model
 
     protected static function booted(): void
     {
-        static::creating(function ($model): void {
-            $model->uuid = (string) Str::uuid();
+        static::creating(function (Model $model): void {
+            $model->uuid = Str::uuid();
         });
     }
 
