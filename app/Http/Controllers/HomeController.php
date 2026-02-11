@@ -11,7 +11,7 @@ class HomeController extends Controller
         private readonly HomeServiceInterface $homeService
     ) {}
 
-    public function status(): JsonResponse
+    public function __invoke(): JsonResponse
     {
         return $this->successResponse($this->homeService
             ->getStatus()
