@@ -15,7 +15,7 @@ class ReservationTest extends TestCase
     public function test_user_can_reserve_server(): void
     {
         $this->createSeeders();
-        $user = $this->actingAsUser();
+        $userId = $this->actingAsUser();
         $server = $this->createServer();
         $payload = $this->validPayload($server);
 
@@ -23,7 +23,7 @@ class ReservationTest extends TestCase
 
         $response->assertCreated();
         $this->assertDatabaseHas('reservations', [
-            'user_id' => $user->id,
+            'user_id' => $userId,
             'server_id' => $server->id,
             'rent_type' => RentTypeEnum::DAILY_RENT,
         ]);
@@ -76,7 +76,7 @@ class ReservationTest extends TestCase
         $this->seed('RamSeeder');
     }
 
-    private function actingAsUser(): User
+    private function actingAsUser(): int
     {
         $user = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
@@ -85,6 +85,6 @@ class ReservationTest extends TestCase
 
         Passport::actingAs($user);
 
-        return $user;
+        return $user->id;
     }
 }
