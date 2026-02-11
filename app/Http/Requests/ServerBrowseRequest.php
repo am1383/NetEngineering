@@ -22,8 +22,8 @@ class ServerBrowseRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'gpu' => 'nullable|string|min:5|max:50|exists:gpus,slug',
-            'cpu' => 'nullable|string|min:5|max:50|exists:cpus,slug',
+            'gpu' => 'nullable|slug|exists:gpus,slug',
+            'cpu' => 'nullable|slug|exists:cpus,slug',
         ];
     }
 }
