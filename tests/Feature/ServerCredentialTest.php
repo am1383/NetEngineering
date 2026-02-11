@@ -16,10 +16,10 @@ class ServerCredentialTest extends TestCase
     public function test_admin_can_set_credential(): void
     {
         $this->createSeeders();
-        $server = $this->createServer();
+        $serverId = $this->createServer();
         $this->actingAsAdminUser();
-        $user = $this->createUser();
-        $reservation = $this->createReservation($user->id, $server->id);
+        $userId = $this->createUser();
+        $reservation = $this->createReservation($userId, $serverId);
         $payload = [
             'user_name' => 'Username test',
             'password' => 'test123',
@@ -48,7 +48,7 @@ class ServerCredentialTest extends TestCase
         ]);
     }
 
-    private function createServer(): Server
+    private function createServer(): int
     {
         return Server::factory()->create([
             'slug' => 'srv-teh-web-03',
@@ -61,7 +61,7 @@ class ServerCredentialTest extends TestCase
             'os' => 'Linux',
             'gpu_id' => 1,
             'is_active' => false,
-        ]);
+        ])->id;
     }
 
     private function actingAsAdminUser(): void
@@ -74,12 +74,12 @@ class ServerCredentialTest extends TestCase
         Passport::actingAs($adminUser);
     }
 
-    private function createUser(): User
+    private function createUser(): int
     {
         return User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
             'role_id' => RoleEnum::USER->value,
-        ]);
+        ])->id;
     }
 
     private function createSeeders(): void
