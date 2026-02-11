@@ -11,7 +11,7 @@ class StatusTest extends TestCase
         $this->createSeeders();
 
         $response = $this->getJson('/api/v1/status');
-        
+
         $response->assertOk()
             ->assertJsonStructure([
                 'data' => [

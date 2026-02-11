@@ -12,18 +12,13 @@ class ReservationExportTest extends TestCase
 {
     public function test_export_reservations(): void
     {
-        $this->createSeeders();
+        $this->seed('DatabaseSeeder');
         $this->actingAsAdminUser();
 
         $response = $this->get('/api/v1/admin/export-reservations');
 
         $response->assertOk();
         $response->assertHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    }
-
-    private function createSeeders(): void
-    {
-        $this->seed('DatabaseSeeder');
     }
 
     private function actingAsAdminUser(): void

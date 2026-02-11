@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace App\Services;
 
@@ -15,13 +15,13 @@ class UserService implements UserServiceInterface
 
     public function createUser(array $attributes): Authenticatable
     {
-        $this->attachUserRole($attributes);
+        $attributes = $this->assignDefaultRole($attributes);
 
         return $this->userRepository
             ->store($attributes);
     }
 
-    private function attachUserRole(array $attributes): array
+    private function assignDefaultRole(array $attributes): array
     {
         $attributes['role_id'] = RoleEnum::USER;
 
