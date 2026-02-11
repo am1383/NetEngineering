@@ -14,6 +14,7 @@ class ReservationTest extends TestCase
 {
     public function test_user_can_reserve_server(): void
     {
+        $this->createSeeders();
         $user = $this->actingAsUser();
         $server = $this->createServer();
         $payload = $this->validPayload($server);
@@ -30,6 +31,7 @@ class ReservationTest extends TestCase
 
     public function test_get_user_reservation(): void
     {
+        $this->createSeeders();
         $this->actingAsUser();
         $server = $this->createServer();
         $payload = $this->validPayload($server);
@@ -53,10 +55,6 @@ class ReservationTest extends TestCase
 
     private function createServer(): Server
     {
-        $this->seed('CpuSeeder');
-        $this->seed('GpuSeeder');
-        $this->seed('RamSeeder');
-
         return Server::factory()->create([
             'slug' => 'srv-teh-web-01',
             'server_name' => 'Server Number One',
@@ -70,10 +68,16 @@ class ReservationTest extends TestCase
         ]);
     }
 
-    private function actingAsUser(): User
+    private function createSeeders(): void
     {
         $this->seed('RoleSeeder');
+        $this->seed('CpuSeeder');
+        $this->seed('GpuSeeder');
+        $this->seed('RamSeeder');
+    }
 
+    private function actingAsUser(): User
+    {
         $user = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
             'role_id' => RoleEnum::USER->value,

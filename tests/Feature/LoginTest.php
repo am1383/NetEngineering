@@ -12,6 +12,7 @@ class LoginTest extends TestCase
 {
     public function test_user_cannot_login_with_wrong_password(): void
     {
+        $this->seed('RoleSeeder');
         $this->createUser();
 
         $response = $this->postJson('/api/v1/login', [
@@ -27,8 +28,6 @@ class LoginTest extends TestCase
 
     private function createUser(): void
     {
-        $this->seed('RoleSeeder');
-
         User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09123334444'),
             'role_id' => RoleEnum::USER,

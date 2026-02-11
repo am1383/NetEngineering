@@ -23,16 +23,13 @@ class ReservationExportTest extends TestCase
 
     private function createSeeders(): void
     {
-        $this->seed('RoleSeeder');
-        $this->seed('CpuSeeder');
-        $this->seed('GpuSeeder');
-        $this->seed('RamSeeder');
+        $this->seed('DatabaseSeeder');
     }
 
     private function actingAsAdminUser(): void
     {
         $adminUser = User::factory()->create([
-            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121519'),
+            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121515'),
             'role_id' => RoleEnum::ADMIN->value,
         ]);
 
