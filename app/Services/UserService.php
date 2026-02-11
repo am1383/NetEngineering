@@ -2,29 +2,41 @@
 
 namespace App\Services;
 
+use App\Enums\RoleEnum;
 use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-/**
- * Class UserService
- */
 class UserService implements UserServiceInterface
 {
-    public function __construct(private UserRepositoryInterface $userRepository) {}
+    public function __construct(
+        private readonly UserRepositoryInterface $userRepository
+    ) {}
 
     public function createUser(array $attributes): Authenticatable
     {
-        return $this->userRepository->store($attributes);
+        $this->attachUserRole($attributes);
+
+        return $this->userRepository
+            ->store($attributes);
     }
 
-    public function updateUser(array $attributes, int $id): bool
+    private function attachUserRole(array $attributes): array
     {
-        return $this->userRepository->update($attributes, $id);
+        $attributes['role_id'] = RoleEnum::USER;
+
+        return $attributes;
     }
 
-    public function getUserInformationById(int $id): Authenticatable
+    public function updateUser(array $attributes): bool
     {
-        return $this->userRepository->find($id);
+        return $this->userRepository
+            ->update($attributes, auth()->user());
+    }
+
+    public function getUserInformation(): Authenticatable
+    {
+        return $this->userRepository
+            ->findOrFail(auth()->id());
     }
 }

@@ -11,7 +11,7 @@ class LoginRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return auth()->guest();
+        return true;
     }
 
     /**

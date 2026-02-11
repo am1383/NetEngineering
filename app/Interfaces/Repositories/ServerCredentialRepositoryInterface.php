@@ -2,4 +2,7 @@
 
 namespace App\Interfaces\Repositories;
 
-interface ServerCredentialRepositoryInterface extends GenericRepositoryInterface {}
+interface ServerCredentialRepositoryInterface extends GenericRepositoryInterface
+{
+    public function assignCredentials(int $reservationId, string $userName, string $password): void;
+}

@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Reservation;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
+    use HasApiTokens, HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,11 +51,16 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role_id === RoleEnum::ADMIN->value;
     }
 
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function role(): HasOne
+    {
+        return $this->hasOne(Role::class);
     }
 }

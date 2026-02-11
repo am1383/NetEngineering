@@ -14,6 +14,12 @@ class ServerResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'storage' => $this->storage,
+            'os' => $this->os,
+            'is_active' => $this->is_active,
+            'price_per_hour' => $this->price_per_hour,
+            'price_per_day' => $this->price_per_day,
+        ];
     }
 }

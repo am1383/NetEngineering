@@ -76,7 +76,7 @@ class ReservationTest extends TestCase
 
         $user = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
-            'role_id' => RoleEnum::USER,
+            'role_id' => RoleEnum::USER->value,
         ]);
 
         Passport::actingAs($user);

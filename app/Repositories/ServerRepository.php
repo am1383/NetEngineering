@@ -3,19 +3,36 @@
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\ServerRepositoryInterface;
-use App\Repositories\GenericRepository;
+use App\Models\Server;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class ServerRepository extends GenericRepository implements ServerRepositoryInterface
 {
-    public function __construct(protected Model $model) {}
+    public function __construct(
+        protected readonly Model $model
+    ) {}
 
-    public function getAvailableServers($gpu, $cpu): Collection
+    public function findOrFailByUuid(string $serverUuid): Server
+    {
+        return $this->model->select(['id', 'price_per_day', 'price_per_hour'])
+            ->where('uuid', $serverUuid)
+            ->firstOrFail();
+    }
+
+    public function getAvailableServers(?string $gpu, ?string $cpu): Collection
     {
         return $this->model->active()
-            ->when($gpu, fn($q) => $q->where('gpu', $gpu))
-            ->when($cpu, fn($q) => $q->where('cpu', $cpu))
-            ->get();
+            ->when($cpu, function (Builder $q) use ($cpu): void {
+                $q->whereHas('cpu', function (Builder $q) use ($cpu): void {
+                    $q->where('slug', $cpu);
+                });
+            })
+            ->when($gpu, function (Builder $q) use ($gpu): void {
+                $q->whereHas('gpu', function (Builder $q) use ($gpu): void {
+                    $q->where('slug', $gpu);
+                });
+            })->get();
     }
 }

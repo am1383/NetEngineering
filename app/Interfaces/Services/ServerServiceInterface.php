@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Interfaces\Services;
 
@@ -9,7 +9,7 @@ interface ServerServiceInterface
 {
     public function createServer(array $attributes): Server;
 
-    public function updateServer(array $attributes, int $id): bool;
+    public function updateServer(array $attributes, Server $server): bool;
 
-    public function getAvailableServers($gpu, $cpu): Collection;
+    public function getAvailableServers(?string $gpu, ?string $cpu): Collection;
 }

@@ -10,11 +10,11 @@ use Tests\TestCase;
 
 class ReservationExportTest extends TestCase
 {
-    public function testExportReservations(): void
+    public function test_export_reservations(): void
     {
         $this->createSeeders();
         $this->actingAsAdminUser();
-        
+
         $response = $this->get('/api/v1/admin/export-reservations');
 
         $response->assertOk();
@@ -23,7 +23,7 @@ class ReservationExportTest extends TestCase
 
     private function createSeeders(): void
     {
-        $this->seed('RoleSeeder');  
+        $this->seed('RoleSeeder');
         $this->seed('CpuSeeder');
         $this->seed('GpuSeeder');
         $this->seed('RamSeeder');

@@ -44,4 +44,10 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
                 'reservations.status',
             ]);
     }
+
+    public function paidCount(): int
+    {
+        return $this->model->paid()
+            ->count();
+    }
 }

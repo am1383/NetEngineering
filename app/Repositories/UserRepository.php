@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRepository extends GenericRepository implements UserRepositoryInterface
 {
-    public function __construct(protected Model $model) {}
+    public function __construct(
+        protected readonly Model $model
+    ) {}
 }

@@ -96,7 +96,7 @@ class ServerTest extends TestCase
     {
         $user = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
-            'role_id' => RoleEnum::USER,
+            'role_id' => RoleEnum::USER->value,
         ]);
 
         Passport::actingAs($user);
@@ -106,7 +106,7 @@ class ServerTest extends TestCase
     {
         $user = User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121517'),
-            'role_id' => RoleEnum::ADMIN,
+            'role_id' => RoleEnum::ADMIN->value,
         ]);
 
         Passport::actingAs($user);

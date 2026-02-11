@@ -3,32 +3,35 @@
 namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
+use App\Helpers\PhoneNumberHelper;
 use App\Interfaces\Services\LoginServiceInterface;
 use App\Models\User;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class LoginService
- */
 class LoginService implements LoginServiceInterface
 {
-    public function login(string $phoneNumber, string $password): Authenticatable
+    public function login(string $phoneNumber, string $password): array
     {
-        $normalizedPhoneNumber = normalizePhoneNumber($phoneNumber);
+        $credentials = $this->createLoginCredentials(
+            PhoneNumberHelper::normalizePhoneNumber($phoneNumber),
+            $password
+        );
 
-        $credentials = $this->createLoginCredentials($normalizedPhoneNumber, $password);
+        $this->validateCredentials($credentials);
 
+        return [
+            'token' => $this->createToken(
+                auth()->user()
+            ),
+        ];
+    }
+
+    private function validateCredentials(array $credentials): void
+    {
         throw_unless(
             Auth::attempt($credentials),
             InvalidCredentialsException::class
         );
-
-        $user = auth()->user();
-
-        return tap($user, function ($user) {
-            $user->refresh_token = $this->createToken($user);
-        });
     }
 
     private function createLoginCredentials(string $phoneNumber, string $password): array
@@ -39,7 +42,7 @@ class LoginService implements LoginServiceInterface
         ];
     }
 
-    private function createToken(User $user, string $name = 'user'): string
+    private function createToken(User $user, string $name = 'api'): string
     {
         return $user->createToken($name)->accessToken;
     }

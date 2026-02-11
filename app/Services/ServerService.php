@@ -7,25 +7,27 @@ use App\Interfaces\Services\ServerServiceInterface;
 use App\Models\Server;
 use Illuminate\Support\Collection;
 
-/**
- * Class ServerService
- */
 class ServerService implements ServerServiceInterface
 {
-    public function __construct(private ServerRepositoryInterface $serverRepository) {}
+    public function __construct(
+        private readonly ServerRepositoryInterface $serverRepository
+    ) {}
 
     public function createServer(array $attributes): Server
     {
-        return $this->serverRepository->store($attributes);
+        return $this->serverRepository
+            ->store($attributes);
     }
 
-    public function updateServer(array $attributes, int $id): bool
+    public function updateServer(array $attributes, Server $server): bool
     {
-        return $this->serverRepository->update($attributes, $id);
+        return $this->serverRepository
+            ->update($attributes, $server);
     }
 
-    public function getAvailableServers($gpu, $cpu): Collection
+    public function getAvailableServers(?string $gpu, ?string $cpu): Collection
     {
-        return $this->serverRepository->getAvailableServers($gpu, $cpu);
+        return $this->serverRepository
+            ->getAvailableServers($gpu, $cpu);
     }
 }

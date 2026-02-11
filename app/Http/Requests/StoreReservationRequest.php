@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\RentTypeEnum;
 use App\Http\Requests\Request as BaseRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreReservationRequest extends BaseRequest
 {
@@ -22,10 +24,10 @@ class StoreReservationRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'server_id' => 'required|integer|exists:servers,id',
-            'start_time' => 'required|date|after:now',
+            'server_uuid' => 'required|string|exists:servers,uuid',
+            'start_time' => 'required|date|after:now|before:end_time',
             'end_time' => 'required|date|after:start_time',
-            'rent_type' => 'required|string|in:hourly,daily',
+            'rent_type' => ['required', 'string',  new Enum(RentTypeEnum::class)],
         ];
     }
 }

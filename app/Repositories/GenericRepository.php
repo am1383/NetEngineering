@@ -3,15 +3,23 @@
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\GenericRepositoryInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class GenericRepository implements GenericRepositoryInterface
 {
-    public function __construct(protected Model $model) {}
+    public function __construct(
+        protected readonly Model $model
+    ) {}
 
-    public function find(int $id): ?Model
+    public function count(string $columns = 'id'): int
     {
-        return $this->model->find($id);
+        return $this->model->count($columns);
+    }
+
+    public function queryFetchAll(array $columns = ['*']): Builder
+    {
+        return $this->model->select($columns);
     }
 
     public function findOrFail(int $id): Model
@@ -24,15 +32,8 @@ class GenericRepository implements GenericRepositoryInterface
         return $this->model->create($attributes);
     }
 
-    public function update(array $attributes, int $id): bool
+    public function update(array $attributes, Model $model): bool
     {
-        return $this->model->find($id)
-            ->update($attributes);
-    }
-
-    public function delete(int $id): ?bool
-    {
-        return $this->model->find($id)
-            ->delete();
+        return $model->update($attributes);
     }
 }

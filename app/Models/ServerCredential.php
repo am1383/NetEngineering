@@ -13,10 +13,22 @@ class ServerCredential extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'reservation_id', 
-        'username', 
+        'reservation_id',
+        'username',
         'password',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 
     public function reservation(): BelongsTo
     {

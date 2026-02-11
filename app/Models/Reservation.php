@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Models\Server;
+use Illuminate\Support\Str;
+use League\Uri\Builder;
 
 class Reservation extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +24,22 @@ class Reservation extends Model
         'end_time', 'rent_type', 'total_price', 'status',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function ($model): void {
+            $model->uuid = (string) Str::uuid();
+        });
+
+        static::creating(function ($model): void {
+            $model->ip = fake()->ipv4();
+        });
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function server(): BelongsTo
     {
         return $this->belongsTo(Server::class);
@@ -27,5 +48,15 @@ class Reservation extends Model
     public function credential(): HasOne
     {
         return $this->hasOne(ServerCredential::class);
+    }
+
+    public function scopePaid(Builder $query): Builder
+    {
+        return $query->where('status', StatusEnum::PAID);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 }

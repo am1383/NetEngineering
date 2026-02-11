@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\LoginResource;
 use App\Interfaces\Services\LoginServiceInterface;
-use App\Traits\ApiResponseTrait;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class LoginController
+class LoginController extends Controller
 {
-    use ApiResponseTrait;
+    public function __construct(
+        private readonly LoginServiceInterface $loginService
+    ) {}
 
-    public function __construct(private LoginServiceInterface $loginService) {}
-
-    public function login(LoginRequest $request): JsonResponse 
+    public function login(LoginRequest $request): JsonResponse
     {
         $data = $this->loginService->login(
             $request->phone_number,
             $request->password
         );
 
-        return $this->successResponse(new UserResource($data));
+        return $this->successResponse(
+            new LoginResource($data)
+        );
     }
 }

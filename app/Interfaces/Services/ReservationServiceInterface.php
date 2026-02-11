@@ -2,12 +2,13 @@
 
 namespace App\Interfaces\Services;
 
+use App\DTOs\Reservation\StoreReservationDTO;
 use App\Models\Reservation;
 use Illuminate\Support\Collection;
 
 interface ReservationServiceInterface
 {
-    public function createReservation(int $serverId, int $startTime, int $endTime, string $rentType): Reservation;
+    public function storeReservation(StoreReservationDTO $dto): Reservation;
 
-    public function getMyReservation(): Collection;
+    public function getUserReservation(): Collection;
 }
