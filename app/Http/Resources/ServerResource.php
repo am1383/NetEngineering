@@ -16,7 +16,7 @@ class ServerResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'name'=> $this->server_name,
+            'name' => $this->server_name,
             'cpu' => $this->whenLoaded('cpu', function (): array {
                 return [
                     'name' => $this->cpu->model,
