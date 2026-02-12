@@ -23,6 +23,8 @@ class Server extends Model
         'price_per_hour', 'price_per_day', 'is_active',
     ];
 
+    protected $with = ['cpu', 'gpu', 'ram'];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -60,6 +62,11 @@ class Server extends Model
     public function gpu(): BelongsTo
     {
         return $this->belongsTo(Gpu::class);
+    }
+
+    public function ram(): BelongsTo
+    {
+        return $this->belongsTo(Ram::class);
     }
 
     public function getRouteKeyName(): string
