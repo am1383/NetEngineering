@@ -14,6 +14,13 @@ class CpuResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'brand' => $this->brand,
+            'model' => $this->model,
+            'cores' => $this->cores,
+            'threads' => $this->threads,
+            'base_clock' => $this->base_clock,
+            'boost_clock' => $this->boost_clock,
+        ];
     }
 }
