@@ -15,6 +15,23 @@ class ServerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'uuid' => $this->uuid,
+            'name'=> $this->server_name,
+            'cpu' => $this->whenLoaded('cpu', function (): array {
+                return [
+                    'name' => $this->cpu->model,
+                ];
+            }),
+            'gpu' => $this->whenLoaded('gpu', function (): array {
+                return [
+                    'name' => $this->gpu->model,
+                ];
+            }),
+            'ram' => $this->whenLoaded('ram', function (): array {
+                return [
+                    'name' => $this->ram->model,
+                ];
+            }),
             'storage' => $this->storage,
             'os' => $this->os,
             'is_active' => $this->is_active,
