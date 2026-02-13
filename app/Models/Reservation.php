@@ -24,6 +24,8 @@ class Reservation extends Model
         'end_time', 'rent_type', 'total_price', 'status',
     ];
 
+    protected $with = ['credential'];
+
     protected static function booted(): void
     {
         static::creating(function (Model $model): void {
