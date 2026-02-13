@@ -21,7 +21,8 @@ class AdminUserSeeder extends Seeder
                 'name' => 'System Admin',
                 'phone_number' => '+989183121519',
                 'password' => 'admin12345',
-                'role_id' => Role::where('name', 'user')->value('id'),
+                'role_id' => Role::where('name', 'user')
+                    ->value('id'),
             ]
         );
     }

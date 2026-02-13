@@ -20,7 +20,7 @@ class ServerSeeder extends Seeder
             [
                 'slug' => 'ryzen-9-5900x',
                 'server_name' => 'Server Number One',
-                'uuid' => (string) Str::uuid(),
+                'uuid' => Str::uuid(),
                 'cpu_id' => 1,
                 'gpu_id' => 1,
                 'ram_id' => 1,
@@ -35,7 +35,7 @@ class ServerSeeder extends Seeder
             [
                 'slug' => 'ryzen-7-7800x3d',
                 'server_name' => 'Server Number Two',
-                'uuid' => (string) Str::uuid(),
+                'uuid' => Str::uuid(),
                 'cpu_id' => 1,
                 'gpu_id' => 1,
                 'ram_id' => 1,
@@ -50,7 +50,7 @@ class ServerSeeder extends Seeder
             [
                 'slug' => 'intel-i9-13900k',
                 'server_name' => 'Server Number Three',
-                'uuid' => (string) Str::uuid(),
+                'uuid' => Str::uuid(),
                 'cpu_id' => 1,
                 'gpu_id' => 1,
                 'ram_id' => 1,

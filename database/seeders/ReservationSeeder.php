@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RentTypeEnum;
 use App\Enums\StatusEnum;
 use App\Models\Reservation;
 use App\Models\Role;
@@ -31,7 +32,7 @@ class ReservationSeeder extends Seeder
             'server_id' => $server->id,
             'start_time' => now()->timestamp,
             'end_time' => now()->addHours(5)->timestamp,
-            'rent_type' => 'hourly',
+            'rent_type' => RentTypeEnum::HOURLY_RENT,
             'total_price' => 100000,
             'status' => StatusEnum::PAID,
         ]);
