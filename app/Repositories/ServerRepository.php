@@ -14,9 +14,9 @@ class ServerRepository extends GenericRepository implements ServerRepositoryInte
         protected readonly Model $model
     ) {}
 
-    public function findOrFailByUuid(string $serverUuid): Server
+    public function findOrFailByUuid(string $serverUuid, array $columns = ['*']): Server
     {
-        return $this->model->select(['id', 'price_per_day', 'price_per_hour'])
+        return $this->model->select($columns)
             ->where('uuid', $serverUuid)
             ->firstOrFail();
     }

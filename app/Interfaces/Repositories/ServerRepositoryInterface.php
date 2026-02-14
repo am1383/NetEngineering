@@ -9,5 +9,5 @@ interface ServerRepositoryInterface extends GenericRepositoryInterface
 {
     public function getAvailableServers(?string $gpu, ?string $cpu): Collection;
 
-    public function findOrFailByUuid(string $serverUuid): Server;
+    public function findOrFailByUuid(string $serverUuid, array $columns = ['*']): Server;
 }
