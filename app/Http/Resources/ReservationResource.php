@@ -21,6 +21,17 @@ class ReservationResource extends JsonResource
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
             'status' => $this->status,
+            'total_price' => $this->total_price,
+            'username' => $this->whenLoaded('credential', function (): array {
+                return [
+                    'name' => $this->credential->username,
+                ];
+            }),
+            'password' => $this->whenLoaded('credential', function (): array {
+                return [
+                    'password' => $this->credential->password,
+                ];
+            }),
         ];
     }
 }
