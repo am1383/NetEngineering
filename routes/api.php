@@ -14,17 +14,19 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::get('/status', HomeController::class);
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/register', RegisterController::class);
 
+    Route::get('/server/{server}/unavailable', [ServerController::class, 'unavailable']);
+    Route::get('/status', HomeController::class);
     Route::get('/gpus', [GpuController::class, 'index']);
     Route::get('/cpus', [CpuController::class, 'index']);
 
     Route::middleware('auth:api')->group(function () {
         Route::get('/servers', [ServerBrowseController::class, 'index']);
-        Route::post('/reserve', [ReservationController::class, 'store']);
+        Route::get('/reservation/without-credential', [ReservationController::class, 'withoutCredential']);
         Route::get('/my-reservations', [ReservationController::class, 'show']);
+        Route::post('/reserve', [ReservationController::class, 'store']);
 
         Route::apiResource('/users', UserController::class)->only([
             'store',
@@ -35,9 +37,11 @@ Route::prefix('v1')->group(function () {
         Route::middleware('admin')->group(function () {
             Route::prefix('/admin')->group(function () {
                 Route::get('/export-reservations', ReservationExportController::class);
-                Route::post('/servers', [ServerController::class, 'store']);
-                Route::patch('/server/{server}', [ServerController::class, 'update']);
-                Route::post('/reservation/{reservation}/credential', [ServerCredentialController::class, 'setCredential']);
+                Route::controller(ServerController::class)->group(function () {
+                    Route::post('/servers', 'store');
+                    Route::patch('/server/{server}', 'update');
+                });
+                Route::put('/reservation/{reservation}/credential', [ServerCredentialController::class, 'setCredential']);
             });
         });
     });
