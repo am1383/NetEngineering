@@ -23,7 +23,7 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'phone_number' => 'required|string|max:20|unique:users,phone_number',
+            'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users,phone_number',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
         ];
