@@ -15,11 +15,11 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
 
     public function hasConflict(int $serverId, int $startTime, int $endTime): bool
     {
-        return $this->model->where('server_id', $serverId)
-            ->where(function (Builder $q) use ($startTime, $endTime): void {
-                $q->whereBetween('start_time', [$startTime, $endTime])
-                    ->orWhereBetween('end_time', [$startTime, $endTime]);
-            })->exists();
+        return $this->model
+            ->where('server_id', $serverId)
+            ->where('start_time', '<', $endTime)
+            ->where('end_time', '>', $startTime)
+            ->exists();
     }
 
     public function getUserReservations(): Collection
@@ -49,5 +49,24 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
     {
         return $this->model->paid()
             ->count();
+    }
+
+    public function fetchUserReserveWithoutCredential(): Collection
+    {
+        return $this->model->where('user_id', auth()->id())
+            ->whereDoesntHave('credential', function (Builder $query) {
+                $query->whereNull(['username, password']);
+            })
+            ->with('server')
+            ->get()
+            ->pluck('server.name');
+    }
+
+    public function fetchServerReservations(int $serverId): Collection
+    {
+        return $this->model->select(['start_time', 'end_time'])
+            ->where('server_id', $serverId)
+            ->orderBy('start_time')
+            ->get();
     }
 }
