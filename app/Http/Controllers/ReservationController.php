@@ -37,4 +37,10 @@ class ReservationController extends Controller
                 ->getUserReservation()
         ));
     }
+
+    public function withoutCredential(): JsonResponse
+    {
+        return $this->successResponse($this->reservationService
+            ->getUserReserveWithoutCredential());
+    }
 }
