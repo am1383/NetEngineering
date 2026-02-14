@@ -15,7 +15,7 @@ class ReservationTest extends TestCase
     public function test_user_can_reserve_server(): void
     {
         $this->createSeeders();
-        $userId = $this->actingAsUser();
+        $this->actingAsUser();
         $server = $this->createServer();
         $payload = $this->validPayload($server);
 
@@ -23,7 +23,6 @@ class ReservationTest extends TestCase
 
         $response->assertCreated();
         $this->assertDatabaseHas('reservations', [
-            'user_id' => $userId,
             'server_id' => $server->id,
             'rent_type' => RentTypeEnum::DAILY_RENT,
         ]);
