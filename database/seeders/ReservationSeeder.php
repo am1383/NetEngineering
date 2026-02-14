@@ -7,7 +7,6 @@ use App\Enums\StatusEnum;
 use App\Models\Reservation;
 use App\Models\Role;
 use App\Models\Server;
-use App\Models\ServerCredential;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -33,14 +32,8 @@ class ReservationSeeder extends Seeder
             'start_time' => now()->timestamp,
             'end_time' => now()->addHours(5)->timestamp,
             'rent_type' => RentTypeEnum::HOURLY_RENT,
-            'total_price' => 100000,
+            'total_price' => fake()->numberBetween(50_000, 3_000_000),
             'status' => StatusEnum::PAID,
-        ]);
-
-        ServerCredential::create([
-            'reservation_id' => $reservation->id,
-            'username' => null,
-            'password' => null,
         ]);
     }
 }
