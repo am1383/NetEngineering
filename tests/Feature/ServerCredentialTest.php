@@ -25,7 +25,7 @@ class ServerCredentialTest extends TestCase
             'password' => 'test123',
         ];
 
-        $response = $this->postJson(
+        $response = $this->putJson(
             "/api/v1/admin/reservation/{$reservation->uuid}/credential",
             $payload
         );
