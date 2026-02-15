@@ -49,7 +49,7 @@ class Reservation extends Model
 
     public function credential(): HasOne
     {
-        return $this->hasOne(ServerCredential::class);
+        return $this->hasOne(ServerCredential::class, 'reservation_id');
     }
 
     public function scopePaid(Builder $query): Builder
