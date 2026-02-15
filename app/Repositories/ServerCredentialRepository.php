@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\DTOs\ServerCredential\AssignServerCredentialDTO;
 use App\Interfaces\Repositories\ServerCredentialRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,14 +12,14 @@ class ServerCredentialRepository extends GenericRepository implements ServerCred
         protected readonly Model $model
     ) {}
 
-    public function assignCredentials(int $reservationId, string $userName, string $password): void
+    public function assignCredentials(AssignServerCredentialDTO $dto): void
     {
         $this->model->updateOrCreate([
-            'reservation_id' => $reservationId,
+            'reservation_id' => $dto->reservationId,
         ],
             [
-                'username' => $userName,
-                'password' => $password,
+                'username' => $dto->userName,
+                'password' => $dto->password,
             ]);
     }
 }
