@@ -63,7 +63,6 @@ class RegisterTest extends TestCase
             'email' => 'john@example.com',
             'role_id' => RoleEnum::USER->value,
             'phone_number' => '09183121518',
-            'password' => fake()->password(8),
         ]);
     }
 

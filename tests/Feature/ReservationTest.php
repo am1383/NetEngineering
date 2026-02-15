@@ -55,15 +55,8 @@ class ReservationTest extends TestCase
     private function createServer(): Server
     {
         return Server::factory()->create([
-            'slug' => 'srv-teh-web-01',
-            'server_name' => 'Server Number One',
-            'ram_id' => 1,
-            'gpu_id' => 1,
             'storage' => 512,
             'os' => 'Linux',
-            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'cpu_id' => 1,
         ]);
     }
 

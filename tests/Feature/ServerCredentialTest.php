@@ -22,7 +22,7 @@ class ServerCredentialTest extends TestCase
         $reservation = $this->createReservation($userId, $serverId);
         $payload = [
             'user_name' => 'Username test',
-            'password' => 'test123',
+            'password' => 'Test123@123',
         ];
 
         $response = $this->putJson(
@@ -40,9 +40,6 @@ class ServerCredentialTest extends TestCase
     {
         return Reservation::factory()->create([
             'server_id' => $serverId,
-            'start_time' => now()->addHour()->timestamp,
-            'end_time' => now()->addHours(5)->timestamp,
-            'total_price' => fake()->numberBetween(50_000, 3_000_000),
             'status' => StatusEnum::PAID,
             'user_id' => $userId,
         ]);

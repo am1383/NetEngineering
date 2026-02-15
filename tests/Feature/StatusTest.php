@@ -8,7 +8,7 @@ class StatusTest extends TestCase
 {
     public function test_get_status(): void
     {
-        $this->createSeeders();
+        $this->seed('DatabaseSeeder');
 
         $response = $this->getJson('/api/v1/status');
 
@@ -23,10 +23,5 @@ class StatusTest extends TestCase
             ->assertJsonPath('data.users', 3)
             ->assertJsonPath('data.servers', 3)
             ->assertJsonPath('data.reservations', 1);
-    }
-
-    private function createSeeders(): void
-    {
-        $this->seed('DatabaseSeeder');
     }
 }
