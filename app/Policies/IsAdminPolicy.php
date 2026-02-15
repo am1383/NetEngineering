@@ -2,15 +2,13 @@
 
 namespace App\Policies;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 
 class IsAdminPolicy
 {
-    /**
-     * Create a new policy instance.
-     */
-    public function __construct()
+    public function isAdmin(User $user): bool
     {
-        //
+        return $user->role_id === RoleEnum::ADMIN->value;
     }
 }
