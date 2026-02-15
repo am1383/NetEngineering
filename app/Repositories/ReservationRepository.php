@@ -22,7 +22,7 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
             ->exists();
     }
 
-    public function getUserReservations(): Collection
+    public function fetchUserReservations(): Collection
     {
         return auth()->user()->reservations()
             ->with(['server', 'credential'])

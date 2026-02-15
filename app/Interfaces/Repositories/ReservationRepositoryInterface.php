@@ -11,7 +11,7 @@ interface ReservationRepositoryInterface extends GenericRepositoryInterface
 
     public function hasConflict(int $serverId, int $startTime, int $endTime): bool;
 
-    public function getUserReservations(): Collection;
+    public function fetchUserReservations(): Collection;
 
     public function fetchUserReserveWithoutCredential(): Collection;
 
