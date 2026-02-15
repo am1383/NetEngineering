@@ -8,14 +8,14 @@ use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
-    public function test_user_registration(): void
+    public function test_user_can_register(): void
     {
         $this->createRoleSeeder();
         $payload = [
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'phone_number' => '09183121518',
-            'password' => 'password',
+            'password' => 'Test@1234',
         ];
 
         $response = $this->postJson('/api/v1/register', $payload);
