@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'System Admin',
                 'phone_number' => '+989183121519',
-                'password' => 'admin12345',
+                'password' => fake()->password(8),
                 'role_id' => Role::where('name', 'user')
                     ->value('id'),
             ]
