@@ -15,17 +15,7 @@ class ServerTest extends TestCase
     {
         $this->createSeeders();
         $this->actingAsAdminUser();
-        $server = Server::factory()->create([
-            'slug' => 'srv-teh-web-02',
-            'server_name' => 'Server Number Two',
-            'ram_id' => 1,
-            'gpu_id' => 1,
-            'storage' => 1024,
-            'os' => 'Windows',
-            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'cpu_id' => 1,
-        ]);
+        $server = Server::factory()->create();
         $payload = [
             'ram_id' => 2,
             'storage' => 512,
@@ -41,7 +31,6 @@ class ServerTest extends TestCase
             'slug' => $server->slug,
             'ram_id' => 2,
             'storage' => 512,
-            'cpu_id' => 1,
         ]);
     }
 
@@ -50,39 +39,18 @@ class ServerTest extends TestCase
         $this->createSeeders();
         $this->actingAsUser();
         Server::factory()->create([
-            'slug' => 'srv-teh-web-01',
-            'server_name' => 'Server Number One',
-            'cpu_id' => 1,
-            'ram_id' => 1,
             'storage' => 256,
             'os' => 'Linux',
-            'gpu_id' => 1,
-            'price_per_hour' => 1400,
-            'price_per_day' => 2800,
             'is_active' => true,
         ]);
         Server::factory()->create([
-            'slug' => 'srv-teh-web-02',
-            'server_name' => 'Server Number Two',
-            'cpu_id' => 2,
-            'ram_id' => 2,
             'storage' => 256,
             'os' => 'Linux',
-            'price_per_hour' => 1400,
-            'price_per_day' => 2800,
-            'gpu_id' => 2,
             'is_active' => true,
         ]);
         Server::factory()->create([
-            'slug' => 'srv-teh-web-03',
-            'server_name' => 'Server Number Three',
-            'cpu_id' => 1,
-            'ram_id' => 1,
             'storage' => 256,
-            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
             'os' => 'Linux',
-            'gpu_id' => 1,
             'is_active' => false,
         ]);
 

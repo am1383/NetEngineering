@@ -16,7 +16,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson('/api/v1/login', [
             'phone_number' => '09123334444',
-            'password' => 'wrong-password',
+            'password' => 'Wrong-password@123',
         ]);
 
         $response->assertUnauthorized()
@@ -30,7 +30,6 @@ class LoginTest extends TestCase
         User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09123334444'),
             'role_id' => RoleEnum::USER->value,
-            'password' => fake()->password(8),
         ]);
     }
 }
