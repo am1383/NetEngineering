@@ -11,8 +11,7 @@ class StoreServerCredentialRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()
-            ->isAdmin();
+        return auth()->check();
     }
 
     /**
