@@ -5,9 +5,10 @@ namespace App\Http\Middleware;
 use App\Exceptions\AccessErrorException;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminRoleMiddleware
+class IsAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +17,8 @@ class AdminRoleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        throw_unless(
-            $request->user()->isAdmin(),
+        throw_if(
+            Gate::denies('is-admin'),
             AccessErrorException::class
         );
 
