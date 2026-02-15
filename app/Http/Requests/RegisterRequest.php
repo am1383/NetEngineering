@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request as BaseRequest;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends BaseRequest
 {
@@ -25,7 +26,12 @@ class RegisterRequest extends BaseRequest
             'name' => 'required|string|min:3|max:255',
             'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users,phone_number',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+            'password' => ['required', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols(),
+            ],
         ];
     }
 }
