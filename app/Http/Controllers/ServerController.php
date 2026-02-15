@@ -8,6 +8,7 @@ use App\Interfaces\Services\ReservationServiceInterface;
 use App\Interfaces\Services\ServerServiceInterface;
 use App\Models\Server;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class ServerController extends Controller
 {
@@ -23,7 +24,7 @@ class ServerController extends Controller
 
         return $this->successResponse(
             new ServerResource($server),
-            status: 201
+            status: Response::HTTP_CREATED
         );
     }
 

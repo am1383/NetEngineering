@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
@@ -16,6 +17,6 @@ class RegisterController extends Controller
             $request->validated()
         );
 
-        return $this->successResponse(status: 201);
+        return $this->successResponse(status: Response::HTTP_CREATED);
     }
 }

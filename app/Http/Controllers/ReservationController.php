@@ -7,6 +7,7 @@ use App\Http\Requests\StoreReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Interfaces\Services\ReservationServiceInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class ReservationController extends Controller
 {
@@ -26,7 +27,7 @@ class ReservationController extends Controller
 
         return $this->successResponse(
             new ReservationResource($reservation),
-            status: 201
+            status: Response::HTTP_CREATED
         );
     }
 
