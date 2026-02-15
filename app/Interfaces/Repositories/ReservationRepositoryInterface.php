@@ -13,5 +13,9 @@ interface ReservationRepositoryInterface extends GenericRepositoryInterface
 
     public function getUserReservations(): Collection;
 
+    public function fetchUserReserveWithoutCredential(): Collection;
+
+    public function fetchServerReservations(int $serverId): Collection;
+
     public function queryFetchReservationExport(): Builder;
 }

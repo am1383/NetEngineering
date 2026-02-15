@@ -13,6 +13,7 @@ use App\Interfaces\Repositories\ServerCredentialRepositoryInterface;
 use App\Interfaces\Repositories\ServerRepositoryInterface;
 use App\Interfaces\Services\ReservationServiceInterface;
 use App\Models\Reservation;
+use App\Models\Server;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,10 @@ class ReservationService implements ReservationServiceInterface
     public function storeReservation(StoreReservationDTO $dto): Reservation
     {
         $server = $this->serverRepository
-            ->findOrFailByUuid($dto->serverUuid);
+            ->findOrFailByUuid(
+                $dto->serverUuid,
+                ['id', 'price_per_day', 'price_per_hour']
+            );
 
         $startTimestamp = TimeHelper::datetimeToTimestamp($dto->startTime);
         $endTimestamp = TimeHelper::datetimeToTimestamp($dto->endTime);
@@ -101,9 +105,58 @@ class ReservationService implements ReservationServiceInterface
             : ceil($dto->hours / Carbon::HOURS_PER_DAY) * $dto->pricePerDay;
     }
 
+    public function getUserReserveWithoutCredential(): Collection
+    {
+        return $this->reservationRepository
+            ->fetchUserReserveWithoutCredential();
+    }
+
     public function getUserReservation(): Collection
     {
         return $this->reservationRepository
             ->getUserReservations();
+    }
+
+    public function getServerReservationsTime(Server $server): Collection
+    {
+        $reservations = $this->reservationRepository
+            ->fetchServerReservations($server->id);
+
+        return $this->mergeUnavailableRanges($reservations);
+    }
+
+    private function mergeUnavailableRanges(Collection $reservations): Collection
+    {
+        return $reservations->reduce(
+            function (Collection $carry, Reservation $reservation): Collection {
+                $start = Carbon::createFromTimestamp($reservation->start_time);
+                $end = Carbon::createFromTimestamp($reservation->end_time);
+
+                if ($carry->isEmpty()) {
+                    return $carry->push([
+                        'start' => $start->toDateTimeString(),
+                        'end' => $end->toDateTimeString(),
+                    ]);
+                }
+
+                $lastIndex = $carry->count() - 1;
+                $lastEnd = Carbon::parse($carry[$lastIndex]['end']);
+
+                if ($start->lte($lastEnd)) {
+                    $carry[$lastIndex]['end'] = max(
+                        $end->toDateTimeString(),
+                        $carry[$lastIndex]['end']
+                    );
+                } else {
+                    $carry->push([
+                        'start' => $start->toDateTimeString(),
+                        'end' => $end->toDateTimeString(),
+                    ]);
+                }
+
+                return $carry;
+            },
+            collect()
+        )->values();
     }
 }

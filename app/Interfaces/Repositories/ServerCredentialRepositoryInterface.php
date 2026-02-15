@@ -2,7 +2,9 @@
 
 namespace App\Interfaces\Repositories;
 
+use App\DTOs\ServerCredential\AssignServerCredentialDTO;
+
 interface ServerCredentialRepositoryInterface extends GenericRepositoryInterface
 {
-    public function assignCredentials(int $reservationId, string $userName, string $password): void;
+    public function assignCredentials(AssignServerCredentialDTO $dto): void;
 }
