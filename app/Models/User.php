@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -46,11 +45,6 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
-    }
-
-    public function isAdmin(): bool
-    {
-        return $this->role_id === RoleEnum::ADMIN->value;
     }
 
     public function reservations(): HasMany
