@@ -25,7 +25,7 @@ class RegisterRequest extends BaseRequest
             'name' => 'required|string|min:3|max:255',
             'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users,phone_number',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:6',
         ];
     }
 }
