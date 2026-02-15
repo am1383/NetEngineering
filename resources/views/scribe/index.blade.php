@@ -171,7 +171,7 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --data "{
     \"phone_number\": \"09564255931\",
-    \"password\": \"gxwmi\\/#iw\\/\"
+    \"password\": \"architecto\"
 }"
 </code></pre></div>
 
@@ -188,7 +188,7 @@ const headers = {
 
 let body = {
     "phone_number": "09564255931",
-    "password": "gxwmi\/#iw\/"
+    "password": "architecto"
 };
 
 fetch(url, {
@@ -292,10 +292,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-login"
-               value="gxwmi/#iw/"
+               value="architecto"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>gxwmi/#iw/</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
         </form>
 
@@ -1679,7 +1679,7 @@ Must be one of:
     \"name\": \"b\",
     \"phone_number\": \"09564255931\",
     \"email\": \"cecil42@example.com\",
-    \"password\": \"\\/#iw\\/kXaz\"
+    \"password\": \"architecto\"
 }"
 </code></pre></div>
 
@@ -1698,7 +1698,7 @@ let body = {
     "name": "b",
     "phone_number": "09564255931",
     "email": "cecil42@example.com",
-    "password": "\/#iw\/kXaz"
+    "password": "architecto"
 };
 
 fetch(url, {
@@ -1826,10 +1826,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-users"
-               value="/#iw/kXaz"
+               value="architecto"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>/#iw/kXaz</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
         </form>
 
@@ -1852,8 +1852,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"name\": \"b\",
     \"phone_number\": \"09564255931\",
-    \"email\": \"cecil42@example.com\",
-    \"password\": \"\\/#iw\\/kXaz\"
+    \"email\": \"cecil42@example.com\"
 }"
 </code></pre></div>
 
@@ -1871,8 +1870,7 @@ const headers = {
 let body = {
     "name": "b",
     "phone_number": "09564255931",
-    "email": "cecil42@example.com",
-    "password": "\/#iw\/kXaz"
+    "email": "cecil42@example.com"
 };
 
 fetch(url, {
@@ -2017,10 +2015,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="PUTapi-v1-users--id-"
-               value="/#iw/kXaz"
+               value=""
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>/#iw/kXaz</code></p>
+
         </div>
         </form>
 
@@ -2414,7 +2412,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": false
+    \"is_active\": true
 }"
 </code></pre></div>
 
@@ -2437,7 +2435,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": false
+    "is_active": true
 };
 
 fetch(url, {
@@ -2639,7 +2637,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -2661,7 +2659,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"user_name\": \"bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw\",
-    \"password\": \"7L\'ff2dSF\'8nSGnI)Tx\"
+    \"password\": \"architecto\"
 }"
 </code></pre></div>
 
@@ -2678,7 +2676,7 @@ const headers = {
 
 let body = {
     "user_name": "bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw",
-    "password": "7L'ff2dSF'8nSGnI)Tx"
+    "password": "architecto"
 };
 
 fetch(url, {
@@ -2795,10 +2793,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
-               value="7L'ff2dSF'8nSGnI)Tx"
+               value="architecto"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>7L'ff2dSF'8nSGnI)Tx</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
         </form>
 

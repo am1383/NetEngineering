@@ -38,9 +38,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 6 characters.'
+        description: ''
         required: true
-        example: 'gxwmi/#iw/'
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -48,7 +48,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       phone_number: '09564255931'
-      password: 'gxwmi/#iw/'
+      password: architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -637,9 +637,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 6 characters.'
+        description: ''
         required: true
-        example: '/#iw/kXaz'
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -649,7 +649,7 @@ endpoints:
       name: b
       phone_number: '09564255931'
       email: cecil42@example.com
-      password: '/#iw/kXaz'
+      password: architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -729,9 +729,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 6 characters.'
+        description: ''
         required: false
-        example: '/#iw/kXaz'
+        example: null
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -741,7 +741,6 @@ endpoints:
       name: b
       phone_number: '09564255931'
       email: cecil42@example.com
-      password: '/#iw/kXaz'
     fileParameters: []
     responses: []
     responseFields: []
@@ -1033,7 +1032,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1047,7 +1046,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: false
+      is_active: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -1104,9 +1103,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 6 characters.'
+        description: ''
         required: true
-        example: "7L'ff2dSF'8nSGnI)Tx"
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -1114,7 +1113,7 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       user_name: bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw
-      password: "7L'ff2dSF'8nSGnI)Tx"
+      password: architecto
     fileParameters: []
     responses: []
     responseFields: []
