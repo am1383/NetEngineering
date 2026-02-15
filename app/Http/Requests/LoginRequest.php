@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request as BaseRequest;
+use Illuminate\Validation\Rules\Password;
 
 class LoginRequest extends BaseRequest
 {
@@ -23,7 +24,12 @@ class LoginRequest extends BaseRequest
     {
         return [
             'phone_number' => 'required|string|regex:/^09\d{9}$/',
-            'password' => 'required|string|min:6',
+            'password' => ['required', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols(),
+            ],
         ];
     }
 }

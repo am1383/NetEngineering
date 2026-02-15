@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request as BaseRequest;
+use Illuminate\Validation\Rules\Password;
 
 class StoreServerCredentialRequest extends BaseRequest
 {
@@ -23,7 +24,12 @@ class StoreServerCredentialRequest extends BaseRequest
     {
         return [
             'user_name' => 'required|string|min:6',
-            'password' => 'required|string|min:6',
+            'password' => ['required', Password::min(8)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols(),
+            ],
         ];
     }
 }
