@@ -33,7 +33,7 @@ class UserController extends Controller
         );
     }
 
-    public function edit(): JsonResponse
+    public function show(): JsonResponse
     {
         $user = $this->userService
             ->getUserInformation();

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Test user',
             'email' => 'user@example.com',
             'phone_number' => '+989183121516',
-            'password' => 'password',
+            'password' => 'Password@123',
             'role_id' => Role::where('name', 'user')
                 ->value('id'),
         ]);
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'name' => 'Test admin user',
             'email' => 'am205379@gmail.com',
             'phone_number' => '+989183121517',
-            'password' => 'password',
+            'password' => 'Password@123',
             'role_id' => Role::where('name', 'admin')
                 ->value('id'),
         ]);
