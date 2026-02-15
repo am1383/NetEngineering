@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ServerCredential extends Model
 {
@@ -18,16 +19,9 @@ class ServerCredential extends Model
         'password',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function credential(): HasOne
     {
-        return [
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(ServerCredential::class, 'reservation_id');
     }
 
     public function reservation(): BelongsTo
