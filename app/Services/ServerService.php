@@ -28,6 +28,6 @@ class ServerService implements ServerServiceInterface
     public function getAvailableServers(?string $gpu, ?string $cpu): Collection
     {
         return $this->serverRepository
-            ->getAvailableServers($gpu, $cpu);
+            ->fetchAvailableServers($gpu, $cpu);
     }
 }

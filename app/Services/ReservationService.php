@@ -114,7 +114,7 @@ class ReservationService implements ReservationServiceInterface
     public function getUserReservation(): Collection
     {
         return $this->reservationRepository
-            ->getUserReservations();
+            ->fetchUserReservations();
     }
 
     public function getServerReservationsTime(Server $server): Collection

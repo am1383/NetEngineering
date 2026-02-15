@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 interface ServerRepositoryInterface extends GenericRepositoryInterface
 {
-    public function getAvailableServers(?string $gpu, ?string $cpu): Collection;
+    public function fetchAvailableServers(?string $gpu, ?string $cpu): Collection;
 
     public function findOrFailByUuid(string $serverUuid, array $columns = ['*']): Server;
 }

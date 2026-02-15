@@ -21,7 +21,7 @@ class ServerRepository extends GenericRepository implements ServerRepositoryInte
             ->firstOrFail();
     }
 
-    public function getAvailableServers(?string $gpu, ?string $cpu): Collection
+    public function fetchAvailableServers(?string $gpu, ?string $cpu): Collection
     {
         return $this->model->active()
             ->when($cpu, function (Builder $q) use ($cpu): void {
