@@ -37,7 +37,7 @@ class RegisterTest extends TestCase
 
         $response = $this->postJson('/api/v1/register', $payload);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     public function test_user_registration_fails_with_existing_email(): void
@@ -54,7 +54,7 @@ class RegisterTest extends TestCase
 
         $response = $this->postJson('/api/v1/register', $payload);
 
-        $response->assertStatus(422);
+        $response->assertUnprocessable();
     }
 
     private function createUser(): void
@@ -63,7 +63,7 @@ class RegisterTest extends TestCase
             'email' => 'john@example.com',
             'role_id' => RoleEnum::USER->value,
             'phone_number' => '09183121518',
-            'password' => 'password',
+            'password' => fake()->password(8),
         ]);
     }
 

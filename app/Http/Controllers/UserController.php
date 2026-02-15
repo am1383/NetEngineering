@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
 
         return $this->successResponse(
             new UserResource($user),
-            status: 201
+            status: Response::HTTP_CREATED
         );
     }
 

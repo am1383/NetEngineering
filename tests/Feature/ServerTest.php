@@ -22,8 +22,8 @@ class ServerTest extends TestCase
             'gpu_id' => 1,
             'storage' => 1024,
             'os' => 'Windows',
-            'price_per_hour' => 1400,
-            'price_per_day' => 2800,
+            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
+            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
             'cpu_id' => 1,
         ]);
         $payload = [
@@ -79,8 +79,8 @@ class ServerTest extends TestCase
             'cpu_id' => 1,
             'ram_id' => 1,
             'storage' => 256,
-            'price_per_hour' => 1400,
-            'price_per_day' => 2800,
+            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
+            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
             'os' => 'Linux',
             'gpu_id' => 1,
             'is_active' => false,

@@ -61,8 +61,8 @@ class ReservationTest extends TestCase
             'gpu_id' => 1,
             'storage' => 512,
             'os' => 'Linux',
-            'price_per_hour' => 12000,
-            'price_per_day' => 2400,
+            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
+            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
             'cpu_id' => 1,
         ]);
     }

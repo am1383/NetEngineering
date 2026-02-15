@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Enums\RoleEnum;
 use App\Helpers\PhoneNumberHelper;
 use App\Models\User;
-use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -20,7 +19,7 @@ class LoginTest extends TestCase
             'password' => 'wrong-password',
         ]);
 
-        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
+        $response->assertUnauthorized()
             ->assertJson([
                 'message' => __('errors.invalid_credentials_error'),
             ]);
@@ -30,8 +29,8 @@ class LoginTest extends TestCase
     {
         User::factory()->create([
             'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09123334444'),
-            'role_id' => RoleEnum::USER,
-            'password' => 'secret123',
+            'role_id' => RoleEnum::USER->value,
+            'password' => fake()->password(8),
         ]);
     }
 }
