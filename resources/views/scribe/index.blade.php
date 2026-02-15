@@ -130,7 +130,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 14, 2026</li>
+        <li>Last updated: February 15, 2026</li>
     </ul>
 </div>
 
@@ -319,7 +319,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"name\": \"b\",
     \"phone_number\": \"09564255931\",
     \"email\": \"cecil42@example.com\",
-    \"password\": \"\\/#iw\\/kXaz\"
+    \"password\": \"architecto\"
 }"
 </code></pre></div>
 
@@ -338,7 +338,7 @@ let body = {
     "name": "b",
     "phone_number": "09564255931",
     "email": "cecil42@example.com",
-    "password": "\/#iw\/kXaz"
+    "password": "architecto"
 };
 
 fetch(url, {
@@ -466,10 +466,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-register"
-               value="/#iw/kXaz"
+               value="architecto"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>/#iw/kXaz</code></p>
+<p>Example: <code>architecto</code></p>
         </div>
         </form>
 
@@ -1502,7 +1502,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --data "{
     \"server_uuid\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
     \"start_time\": \"2022-03-10\",
-    \"end_time\": \"2052-03-09\",
+    \"end_time\": \"2052-03-10\",
     \"rent_type\": \"architecto\"
 }"
 </code></pre></div>
@@ -1521,7 +1521,7 @@ const headers = {
 let body = {
     "server_uuid": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
     "start_time": "2022-03-10",
-    "end_time": "2052-03-09",
+    "end_time": "2052-03-10",
     "rent_type": "architecto"
 };
 
@@ -1638,10 +1638,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_time"                data-endpoint="POSTapi-v1-reserve"
-               value="2052-03-09"
+               value="2052-03-10"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-09</code></p>
+<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-10</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>rent_type</code></b>&nbsp;&nbsp;
@@ -2174,7 +2174,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": false
+    \"is_active\": true
 }"
 </code></pre></div>
 
@@ -2197,7 +2197,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": false
+    "is_active": true
 };
 
 fetch(url, {
@@ -2386,7 +2386,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 
@@ -2414,7 +2414,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": true
+    \"is_active\": false
 }"
 </code></pre></div>
 
@@ -2437,7 +2437,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": true
+    "is_active": false
 };
 
 fetch(url, {
@@ -2639,7 +2639,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 

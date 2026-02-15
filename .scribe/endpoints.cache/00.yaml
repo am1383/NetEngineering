@@ -117,9 +117,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 6 characters.'
+        description: ''
         required: true
-        example: '/#iw/kXaz'
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -129,7 +129,7 @@ endpoints:
       name: b
       phone_number: '09564255931'
       email: cecil42@example.com
-      password: '/#iw/kXaz'
+      password: architecto
     fileParameters: []
     responses: []
     responseFields: []
@@ -549,7 +549,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
         required: true
-        example: '2052-03-09'
+        example: '2052-03-10'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -571,7 +571,7 @@ endpoints:
     cleanBodyParameters:
       server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
       start_time: '2022-03-10'
-      end_time: '2052-03-09'
+      end_time: '2052-03-10'
       rent_type: architecto
     fileParameters: []
     responses: []
@@ -896,7 +896,7 @@ endpoints:
         name: is_active
         description: ''
         required: true
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -910,7 +910,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: false
+      is_active: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -1035,7 +1035,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1049,7 +1049,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: true
+      is_active: false
     fileParameters: []
     responses: []
     responseFields: []
