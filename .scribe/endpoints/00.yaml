@@ -4,46 +4,6 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/v1/status
-    metadata:
-      custom: []
-      groupName: Endpoints
-      groupDescription: ''
-      subgroup: ''
-      subgroupDescription: ''
-      title: ''
-      description: ''
-      authenticated: false
-      deprecated: false
-    headers:
-      Content-Type: application/json
-      Accept: application/json
-    urlParameters: []
-    cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
-        custom: []
-        status: 200
-        content: '{"success":true,"message":"","data":{"users":3,"servers":3,"reservations":1}}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-    auth: []
-    controller: null
-    method: null
-    route: null
-  -
-    custom: []
-    httpMethods:
       - POST
     uri: api/v1/login
     metadata:
@@ -133,9 +93,9 @@ endpoints:
       phone_number:
         custom: []
         name: phone_number
-        description: 'Must not be greater than 20 characters.'
+        description: 'Must match the regex /^09\d{9}$/.'
         required: true
-        example: ngzmiyvdljnikhwa
+        example: '09564255931'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -146,7 +106,7 @@ endpoints:
         name: email
         description: 'Must be a valid email address.'
         required: true
-        example: breitenberg.gilbert@example.com
+        example: cecil42@example.com
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -155,9 +115,9 @@ endpoints:
       password:
         custom: []
         name: password
-        description: 'Must be at least 8 characters.'
+        description: 'Must be at least 6 characters.'
         required: true
-        example: kXaz<m
+        example: '/#iw/kXaz'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -165,11 +125,103 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       name: b
-      phone_number: ngzmiyvdljnikhwa
-      email: breitenberg.gilbert@example.com
-      password: kXaz<m
+      phone_number: '09564255931'
+      email: cecil42@example.com
+      password: '/#iw/kXaz'
     fileParameters: []
     responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/server/{server_slug}/unavailable'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      server_slug:
+        custom: []
+        name: server_slug
+        description: 'The slug of the server.'
+        required: true
+        example: ryzen-9-5900x
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      server_slug: ryzen-9-5900x
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"","data":[{"start":"2026-02-14 12:27:07","end":"2026-02-14 17:27:07"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/status
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"","data":{"users":3,"servers":3,"reservations":1}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -368,8 +420,8 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - POST
-    uri: api/v1/reserve
+      - GET
+    uri: api/v1/reservation/without-credential
     metadata:
       custom: []
       groupName: Endpoints
@@ -387,60 +439,19 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters:
-      server_uuid:
-        custom: []
-        name: server_uuid
-        description: 'The <code>uuid</code> of an existing record in the servers table.'
-        required: true
-        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      start_time:
-        custom: []
-        name: start_time
-        description: 'Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>.'
-        required: true
-        example: '2022-03-08'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      end_time:
-        custom: []
-        name: end_time
-        description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
-        required: true
-        example: '2052-03-07'
-        type: string
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-      rent_type:
-        custom: []
-        name: rent_type
-        description: ''
-        required: true
-        example: architecto
-        type: string
-        enumValues:
-          - hourly
-          - daily
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanBodyParameters:
-      server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      start_time: '2022-03-08'
-      end_time: '2052-03-07'
-      rent_type: architecto
+    bodyParameters: []
+    cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"You must be logged in to access this resource."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -481,6 +492,87 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: '*'
         description: null
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/reserve
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      server_uuid:
+        custom: []
+        name: server_uuid
+        description: 'The <code>uuid</code> of an existing record in the servers table.'
+        required: true
+        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      start_time:
+        custom: []
+        name: start_time
+        description: 'Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>.'
+        required: true
+        example: '2022-03-10'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      end_time:
+        custom: []
+        name: end_time
+        description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
+        required: true
+        example: '2052-03-09'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      rent_type:
+        custom: []
+        name: rent_type
+        description: ''
+        required: true
+        example: architecto
+        type: string
+        enumValues:
+          - hourly
+          - daily
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+      start_time: '2022-03-10'
+      end_time: '2052-03-09'
+      rent_type: architecto
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
@@ -802,7 +894,7 @@ endpoints:
         name: is_active
         description: ''
         required: true
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -816,7 +908,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: true
+      is_active: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -941,7 +1033,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -955,7 +1047,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: false
+      is_active: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -966,7 +1058,7 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - POST
+      - PUT
     uri: 'api/v1/admin/reservation/{reservation_uuid}/credential'
     metadata:
       custom: []
@@ -987,14 +1079,14 @@ endpoints:
         name: reservation_uuid
         description: ''
         required: true
-        example: a5a4fe9d-7f46-4551-9ec4-9ce20b743151
+        example: d524328d-5af9-4c16-8002-c8a4e6e8127f
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      reservation_uuid: a5a4fe9d-7f46-4551-9ec4-9ce20b743151
+      reservation_uuid: d524328d-5af9-4c16-8002-c8a4e6e8127f
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
