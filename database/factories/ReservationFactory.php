@@ -17,7 +17,9 @@ class ReservationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'start_time' => now()->addHour()->timestamp,
+            'end_time' => now()->addHours(5)->timestamp,
+            'total_price' => fake()->numberBetween(50_000, 3_000_000),
         ];
     }
 }
