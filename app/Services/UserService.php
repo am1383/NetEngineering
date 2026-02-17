@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Enums\RoleEnum;
 use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,17 +14,8 @@ class UserService implements UserServiceInterface
 
     public function createUser(array $attributes): Authenticatable
     {
-        $attributes = $this->assignDefaultRole($attributes);
-
         return $this->userRepository
             ->store($attributes);
-    }
-
-    private function assignDefaultRole(array $attributes): array
-    {
-        $attributes['role_id'] = RoleEnum::USER;
-
-        return $attributes;
     }
 
     public function updateUser(array $attributes): bool
