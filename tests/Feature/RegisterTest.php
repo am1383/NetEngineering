@@ -19,7 +19,7 @@ class RegisterTest extends TestCase
         $payload = [
             'name' => fake()->userName(),
             'email' => $email,
-            'phone_number' => fake()->phoneNumber(),
+            'phone_number' => fake()->regexify('09[0-9]{9}'),
             'password' => 'Test@123',
         ];
 
@@ -54,7 +54,6 @@ class RegisterTest extends TestCase
         $payload = [
             'name' => fake()->userName(),
             'email' => $email,
-            'phone_number' => fake()->phoneNumber(),
             'password' => fake()->password(8),
         ];
 

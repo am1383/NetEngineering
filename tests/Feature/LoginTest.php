@@ -15,7 +15,7 @@ class LoginTest extends TestCase
 
     public function test_user_cannot_login_with_wrong_password(): void
     {
-        $phoneNumber = fake()->phoneNumber();
+        $phoneNumber = fake()->regexify('09[0-9]{9}');
         User::factory()->create([
             'phone_number' => $phoneNumber,
         ]);
