@@ -59,7 +59,7 @@ Route::prefix('v1')->group(function () {
                     Route::patch('/servers/{server}', 'update')
                         ->name('update.server');
                 });
-                Route::put(uri: '/reservations/{reservation}/credential', [ServerCredentialController::class, 'setCredential'])
+                Route::put('/reservations/{reservation}/credential', [ServerCredentialController::class, 'setCredential'])
                     ->name('put.server.credential');
             });
         });
