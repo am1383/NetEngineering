@@ -14,34 +14,53 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::post('/login', [LoginController::class, 'login']);
-    Route::post('/register', RegisterController::class);
+    Route::post('/login', [LoginController::class, 'login'])
+        ->name('login');
+    Route::post('/register', RegisterController::class)
+        ->name('register');
 
-    Route::get('/server/{server}/unavailable', [ServerController::class, 'unavailable']);
-    Route::get('/status', HomeController::class);
-    Route::get('/gpus', [GpuController::class, 'index']);
-    Route::get('/cpus', [CpuController::class, 'index']);
+    Route::get('/servers/{server}/unavailable', [ServerController::class, 'unavailable'])
+        ->name('unavailabe.server');
+    Route::get('/status', HomeController::class)
+        ->name('home.status');
+    Route::get('/gpus', [GpuController::class, 'index'])
+        ->name('index.gpu');
+    Route::get('/cpus', [CpuController::class, 'index'])
+        ->name('index.cpu');
 
     Route::middleware('auth:api')->group(function () {
-        Route::get('/servers', [ServerBrowseController::class, 'index']);
-        Route::get('/reservation/without-credential', [ReservationController::class, 'withoutCredential']);
-        Route::get('/my-reservations', [ReservationController::class, 'show']);
-        Route::post('/reserve', [ReservationController::class, 'store']);
+        Route::get('/servers', [ServerBrowseController::class, 'index'])
+            ->name('index.server');
+        Route::get('/reservation/without-credential', [ReservationController::class, 'withoutCredential'])
+            ->name('without.credential');
+        Route::get('/my-reservations', [ReservationController::class, 'show'])
+            ->name('show.reservation');
+        Route::post('/reserve', [ReservationController::class, 'store'])
+            ->name('store.reserve');
+
+        Route::controller(UserController::class)->group(function () {
+            Route::patch('/profile/update', [UserController::class, 'update'])
+                ->name('profile.update');
+            Route::get('/profile', [UserController::class, 'show'])
+                ->name('profile.show');
+        });
 
         Route::apiResource('/users', UserController::class)->only([
             'store',
-            'show',
-            'update',
         ]);
 
         Route::middleware('admin')->group(function () {
             Route::prefix('/admin')->group(function () {
-                Route::get('/export-reservations', ReservationExportController::class);
+                Route::get('/export-reservations', ReservationExportController::class)
+                    ->name('export.reservation');
                 Route::controller(ServerController::class)->group(function () {
-                    Route::post('/servers', 'store');
-                    Route::patch('/server/{server}', 'update');
+                    Route::post('/servers', 'store')
+                        ->name('store.server');
+                    Route::patch('/servers/{server}', 'update')
+                        ->name('update.server');
                 });
-                Route::put('/reservation/{reservation}/credential', [ServerCredentialController::class, 'setCredential']);
+                Route::put(uri: '/reservations/{reservation}/credential', [ServerCredentialController::class, 'setCredential'])
+                    ->name('put.server.credential');
             });
         });
     });
