@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'role_id' => RoleEnum::USER->value,
             'email' => fake()->unique()->safeEmail(),
-            'phone_number' => fake()->unique()->phoneNumber(),
+            'phone_number' => fake()->regexify('09[0-9]{9}'),
             'password' => fake()->password(8),
         ];
     }
