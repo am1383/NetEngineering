@@ -6,11 +6,15 @@ use Tests\TestCase;
 
 class GpuTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed('GpuSeeder');
+    }
+
     public function test_get_gpus(): void
     {
-        $this->seed('GpuSeeder');
-
-        $response = $this->get('/api/v1/gpus');
+        $response = $this->get(route('index.gpu'));
 
         $response->assertOk()
             ->assertJsonCount(3, 'data');

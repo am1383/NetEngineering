@@ -3,19 +3,22 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleEnum;
-use App\Helpers\PhoneNumberHelper;
 use App\Models\User;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ReservationExportTest extends TestCase
 {
-    public function test_export_reservations(): void
+    protected function setUp(): void
     {
+        parent::setUp();
         $this->seed('DatabaseSeeder');
         $this->actingAsAdminUser();
+    }
 
-        $response = $this->get('/api/v1/admin/export-reservations');
+    public function test_export_reservations(): void
+    {
+        $response = $this->get(route('export.reservation'));
 
         $response->assertOk();
         $response->assertHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -24,7 +27,6 @@ class ReservationExportTest extends TestCase
     private function actingAsAdminUser(): void
     {
         $adminUser = User::factory()->create([
-            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121515'),
             'role_id' => RoleEnum::ADMIN->value,
         ]);
 

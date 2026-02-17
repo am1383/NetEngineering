@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Enums\RentTypeEnum;
-use App\Enums\RoleEnum;
-use App\Helpers\PhoneNumberHelper;
 use App\Models\Server;
 use App\Models\User;
 use Laravel\Passport\Passport;
@@ -12,14 +10,19 @@ use Tests\TestCase;
 
 class ReservationTest extends TestCase
 {
-    public function test_user_can_reserve_server(): void
+    protected function setUp(): void
     {
+        parent::setUp();
         $this->createSeeders();
         $this->actingAsUser();
-        $server = $this->createServer();
+    }
+
+    public function test_user_can_reserve_server(): void
+    {
+        $server = Server::factory()->create();
         $payload = $this->validPayload($server);
 
-        $response = $this->postJson('/api/v1/reserve', $payload);
+        $response = $this->postJson(route('store.reserve'), $payload);
 
         $response->assertCreated();
         $this->assertDatabaseHas('reservations', [
@@ -30,13 +33,11 @@ class ReservationTest extends TestCase
 
     public function test_get_user_reservation(): void
     {
-        $this->createSeeders();
-        $this->actingAsUser();
-        $server = $this->createServer();
+        $server = Server::factory()->create();
         $payload = $this->validPayload($server);
 
-        $this->postJson('/api/v1/reserve', $payload);
-        $response = $this->getJson('/api/v1/my-reservations');
+        $this->postJson(route('store.reserve'), $payload);
+        $response = $this->getJson(route('show.reservation'));
 
         $response->assertOk()
             ->assertJsonCount(1, 'data');
@@ -52,14 +53,6 @@ class ReservationTest extends TestCase
         ];
     }
 
-    private function createServer(): Server
-    {
-        return Server::factory()->create([
-            'storage' => 512,
-            'os' => 'Linux',
-        ]);
-    }
-
     private function createSeeders(): void
     {
         $this->seed('RoleSeeder');
@@ -68,15 +61,10 @@ class ReservationTest extends TestCase
         $this->seed('RamSeeder');
     }
 
-    private function actingAsUser(): int
+    private function actingAsUser(): void
     {
-        $user = User::factory()->create([
-            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
-            'role_id' => RoleEnum::USER->value,
-        ]);
+        $user = User::factory()->create();
 
         Passport::actingAs($user);
-
-        return $user->id;
     }
 }

@@ -2,27 +2,34 @@
 
 namespace Tests\Feature;
 
-use App\Enums\RoleEnum;
 use App\Models\User;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed('RoleSeeder');
+    }
+
     public function test_user_can_register(): void
     {
-        $this->createRoleSeeder();
+        $email = fake()->unique()->email();
         $payload = [
-            'name' => 'John Doe',
-            'email' => 'john@example.com',
-            'phone_number' => '09183121518',
-            'password' => 'Test@1234',
+            'name' => fake()->userName(),
+            'email' => $email,
+            'phone_number' => fake()->phoneNumber(),
+            'password' => 'Test@123',
         ];
 
-        $response = $this->postJson('/api/v1/register', $payload);
+        $response = $this->postJson(route('register'),
+            $payload
+        );
 
         $response->assertCreated();
         $this->assertDatabaseHas('users', [
-            'email' => 'john@example.com',
+            'email' => $email,
         ]);
     }
 
@@ -35,39 +42,24 @@ class RegisterTest extends TestCase
             'password' => 'short',
         ];
 
-        $response = $this->postJson('/api/v1/register', $payload);
+        $response = $this->postJson(route('register'), $payload);
 
         $response->assertUnprocessable();
     }
 
     public function test_user_registration_fails_with_existing_email(): void
     {
-        $this->createRoleSeeder();
-        $this->createUser();
-
+        $email = fake()->unique()->email();
+        User::factory()->create(['email' => $email]);
         $payload = [
-            'name' => 'Jane Doe',
-            'email' => 'john@example.com',
-            'phone_number' => '09183121519',
-            'password' => 'password',
+            'name' => fake()->userName(),
+            'email' => $email,
+            'phone_number' => fake()->phoneNumber(),
+            'password' => fake()->password(8),
         ];
 
-        $response = $this->postJson('/api/v1/register', $payload);
+        $response = $this->postJson(route('register'), $payload);
 
         $response->assertUnprocessable();
-    }
-
-    private function createUser(): void
-    {
-        User::factory()->create([
-            'email' => 'john@example.com',
-            'role_id' => RoleEnum::USER->value,
-            'phone_number' => '09183121518',
-        ]);
-    }
-
-    private function createRoleSeeder(): void
-    {
-        $this->seed('RoleSeeder');
     }
 }
