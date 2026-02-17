@@ -139,7 +139,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: 'api/v1/server/{server_slug}/unavailable'
+    uri: 'api/v1/servers/{server_slug}/unavailable'
     metadata:
       custom: []
       groupName: Endpoints
@@ -176,7 +176,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"success":true,"message":"","data":[{"start":"2026-02-14 12:27:07","end":"2026-02-14 17:27:07"}]}'
+        content: '{"success":true,"message":"","data":[{"start":"2026-02-17 06:50:52","end":"2026-02-17 11:50:52"}]}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -536,7 +536,7 @@ endpoints:
         name: start_time
         description: 'Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>.'
         required: true
-        example: '2022-03-10'
+        example: '2022-03-12'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -547,7 +547,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
         required: true
-        example: '2052-03-10'
+        example: '2052-03-12'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -568,8 +568,8 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      start_time: '2022-03-10'
-      end_time: '2052-03-10'
+      start_time: '2022-03-12'
+      end_time: '2052-03-12'
       rent_type: architecto
     fileParameters: []
     responses: []
@@ -660,9 +660,8 @@ endpoints:
   -
     custom: []
     httpMethods:
-      - PUT
       - PATCH
-    uri: 'api/v1/users/{id}'
+    uri: api/v1/profile/update
     metadata:
       custom: []
       groupName: Endpoints
@@ -676,20 +675,8 @@ endpoints:
     headers:
       Content-Type: application/json
       Accept: application/json
-    urlParameters:
-      id:
-        custom: []
-        name: id
-        description: 'The ID of the user.'
-        required: true
-        example: 1
-        type: integer
-        enumValues: []
-        exampleWasSpecified: false
-        nullable: false
-        deprecated: false
-    cleanUrlParameters:
-      id: 1
+    urlParameters: []
+    cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -743,6 +730,46 @@ endpoints:
       email: cecil42@example.com
     fileParameters: []
     responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/profile
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 401
+        content: '{"message":"You must be logged in to access this resource."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []
     auth: []
     controller: null
@@ -919,7 +946,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/v1/admin/server/{server_slug}'
+    uri: 'api/v1/admin/servers/{server_slug}'
     metadata:
       custom: []
       groupName: Endpoints
@@ -1032,7 +1059,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1046,7 +1073,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: true
+      is_active: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -1058,7 +1085,7 @@ endpoints:
     custom: []
     httpMethods:
       - PUT
-    uri: 'api/v1/admin/reservation/{reservation_uuid}/credential'
+    uri: 'api/v1/admin/reservations/{reservation_uuid}/credential'
     metadata:
       custom: []
       groupName: Endpoints
@@ -1078,14 +1105,14 @@ endpoints:
         name: reservation_uuid
         description: ''
         required: true
-        example: d524328d-5af9-4c16-8002-c8a4e6e8127f
+        example: 847a9d66-a5ec-4b8e-8059-3b29c975be2d
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      reservation_uuid: d524328d-5af9-4c16-8002-c8a4e6e8127f
+      reservation_uuid: 847a9d66-a5ec-4b8e-8059-3b29c975be2d
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:

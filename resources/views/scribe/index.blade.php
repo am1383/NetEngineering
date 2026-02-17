@@ -56,16 +56,6 @@
     </div>
 
     <div id="toc">
-                    <ul id="tocify-header-introduction" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="introduction">
-                    <a href="#introduction">Introduction</a>
-                </li>
-                            </ul>
-                    <ul id="tocify-header-authenticating-requests" class="tocify-header">
-                <li class="tocify-item level-1" data-unique="authenticating-requests">
-                    <a href="#authenticating-requests">Authenticating requests</a>
-                </li>
-                            </ul>
                     <ul id="tocify-header-endpoints" class="tocify-header">
                 <li class="tocify-item level-1" data-unique="endpoints">
                     <a href="#endpoints">Endpoints</a>
@@ -77,8 +67,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-register">
                                 <a href="#endpoints-POSTapi-v1-register">POST api/v1/register</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-server--server_slug--unavailable">
-                                <a href="#endpoints-GETapi-v1-server--server_slug--unavailable">GET api/v1/server/{server_slug}/unavailable</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-servers--server_slug--unavailable">
+                                <a href="#endpoints-GETapi-v1-servers--server_slug--unavailable">GET api/v1/servers/{server_slug}/unavailable</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-status">
                                 <a href="#endpoints-GETapi-v1-status">GET api/v1/status</a>
@@ -104,8 +94,11 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-users">
                                 <a href="#endpoints-POSTapi-v1-users">POST api/v1/users</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-users--id-">
-                                <a href="#endpoints-PUTapi-v1-users--id-">PUT api/v1/users/{id}</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-profile-update">
+                                <a href="#endpoints-PATCHapi-v1-profile-update">PATCH api/v1/profile/update</a>
+                            </li>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-profile">
+                                <a href="#endpoints-GETapi-v1-profile">GET api/v1/profile</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-admin-export-reservations">
                                 <a href="#endpoints-GETapi-v1-admin-export-reservations">GET api/v1/admin/export-reservations</a>
@@ -113,11 +106,11 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-admin-servers">
                                 <a href="#endpoints-POSTapi-v1-admin-servers">POST api/v1/admin/servers</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-admin-server--server_slug-">
-                                <a href="#endpoints-PATCHapi-v1-admin-server--server_slug-">PATCH api/v1/admin/server/{server_slug}</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-admin-servers--server_slug-">
+                                <a href="#endpoints-PATCHapi-v1-admin-servers--server_slug-">PATCH api/v1/admin/servers/{server_slug}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-reservation--reservation_uuid--credential">
-                                <a href="#endpoints-PUTapi-v1-admin-reservation--reservation_uuid--credential">PUT api/v1/admin/reservation/{reservation_uuid}/credential</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PUTapi-v1-admin-reservations--reservation_uuid--credential">
+                                <a href="#endpoints-PUTapi-v1-admin-reservations--reservation_uuid--credential">PUT api/v1/admin/reservations/{reservation_uuid}/credential</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -130,24 +123,16 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 15, 2026</li>
+        <li>Last updated: February 17, 2026</li>
     </ul>
 </div>
 
 <div class="page-wrapper">
     <div class="dark-box"></div>
     <div class="content">
-        <h1 id="introduction">Introduction</h1>
-<aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
-</aside>
-<pre><code>This documentation aims to provide all the information you need to work with our API.
+        <p>This API documentation describes the available endpoints and how to use them.</p>
 
-&lt;aside&gt;As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).&lt;/aside&gt;</code></pre>
-
-        <h1 id="authenticating-requests">Authenticating requests</h1>
-<p>This API is not authenticated.</p>
+        <p>This API is not authenticated.</p>
 
         <h1 id="endpoints">Endpoints</h1>
 
@@ -473,33 +458,34 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-v1-server--server_slug--unavailable">GET api/v1/server/{server_slug}/unavailable</h2>
+                    <h2 id="endpoints-GETapi-v1-servers--server_slug--unavailable">GET api/v1/servers/{server_slug}/unavailable</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-v1-server--server_slug--unavailable">
+<span id="example-requests-GETapi-v1-servers--server_slug--unavailable">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/server/ryzen-9-5900x/unavailable" \
+    --get "http://localhost/api/v1/servers/ryzen-9-5900x/unavailable" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/server/ryzen-9-5900x/unavailable"
+    "http://localhost/api/v1/servers/ryzen-9-5900x/unavailable"
 );
 
 const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
+
 
 fetch(url, {
     method: "GET",
@@ -508,7 +494,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-v1-server--server_slug--unavailable">
+<span id="example-responses-GETapi-v1-servers--server_slug--unavailable">
             <blockquote>
             <p>Example response (200):</p>
         </blockquote>
@@ -526,50 +512,50 @@ access-control-allow-origin: *
     &quot;message&quot;: &quot;&quot;,
     &quot;data&quot;: [
         {
-            &quot;start&quot;: &quot;2026-02-14 12:27:07&quot;,
-            &quot;end&quot;: &quot;2026-02-14 17:27:07&quot;
+            &quot;start&quot;: &quot;2026-02-17 06:50:52&quot;,
+            &quot;end&quot;: &quot;2026-02-17 11:50:52&quot;
         }
     ]
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-v1-server--server_slug--unavailable" hidden>
+<span id="execution-results-GETapi-v1-servers--server_slug--unavailable" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-server--server_slug--unavailable"></span>:
+                id="execution-response-status-GETapi-v1-servers--server_slug--unavailable"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-server--server_slug--unavailable"
+    <pre class="json"><code id="execution-response-content-GETapi-v1-servers--server_slug--unavailable"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-v1-server--server_slug--unavailable" hidden>
+<span id="execution-error-GETapi-v1-servers--server_slug--unavailable" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-server--server_slug--unavailable">
+    <pre><code id="execution-error-message-GETapi-v1-servers--server_slug--unavailable">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-v1-server--server_slug--unavailable" data-method="GET"
-      data-path="api/v1/server/{server_slug}/unavailable"
+<form id="form-GETapi-v1-servers--server_slug--unavailable" data-method="GET"
+      data-path="api/v1/servers/{server_slug}/unavailable"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-server--server_slug--unavailable', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-servers--server_slug--unavailable', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-server--server_slug--unavailable"
-                    onclick="tryItOut('GETapi-v1-server--server_slug--unavailable');">Try it out ⚡
+                    id="btn-tryout-GETapi-v1-servers--server_slug--unavailable"
+                    onclick="tryItOut('GETapi-v1-servers--server_slug--unavailable');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-server--server_slug--unavailable"
-                    onclick="cancelTryOut('GETapi-v1-server--server_slug--unavailable');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-v1-servers--server_slug--unavailable"
+                    onclick="cancelTryOut('GETapi-v1-servers--server_slug--unavailable');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-server--server_slug--unavailable"
+                    id="btn-executetryout-GETapi-v1-servers--server_slug--unavailable"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -577,7 +563,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/v1/server/{server_slug}/unavailable</code></b>
+            <b><code>api/v1/servers/{server_slug}/unavailable</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -586,7 +572,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-server--server_slug--unavailable"
+                              name="Content-Type"                data-endpoint="GETapi-v1-servers--server_slug--unavailable"
                value="application/json"
                data-component="header">
     <br>
@@ -598,7 +584,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-server--server_slug--unavailable"
+                              name="Accept"                data-endpoint="GETapi-v1-servers--server_slug--unavailable"
                value="application/json"
                data-component="header">
     <br>
@@ -611,7 +597,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="server_slug"                data-endpoint="GETapi-v1-server--server_slug--unavailable"
+                              name="server_slug"                data-endpoint="GETapi-v1-servers--server_slug--unavailable"
                value="ryzen-9-5900x"
                data-component="url">
     <br>
@@ -646,6 +632,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
+
 
 fetch(url, {
     method: "GET",
@@ -1108,6 +1095,7 @@ const headers = {
     "Accept": "application/json",
 };
 
+
 fetch(url, {
     method: "GET",
     headers,
@@ -1259,6 +1247,7 @@ const headers = {
     "Accept": "application/json",
 };
 
+
 fetch(url, {
     method: "GET",
     headers,
@@ -1385,6 +1374,7 @@ const headers = {
     "Accept": "application/json",
 };
 
+
 fetch(url, {
     method: "GET",
     headers,
@@ -1501,8 +1491,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"server_uuid\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"start_time\": \"2022-03-10\",
-    \"end_time\": \"2052-03-10\",
+    \"start_time\": \"2022-03-12\",
+    \"end_time\": \"2052-03-12\",
     \"rent_type\": \"architecto\"
 }"
 </code></pre></div>
@@ -1520,8 +1510,8 @@ const headers = {
 
 let body = {
     "server_uuid": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "start_time": "2022-03-10",
-    "end_time": "2052-03-10",
+    "start_time": "2022-03-12",
+    "end_time": "2052-03-12",
     "rent_type": "architecto"
 };
 
@@ -1626,10 +1616,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_time"                data-endpoint="POSTapi-v1-reserve"
-               value="2022-03-10"
+               value="2022-03-12"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-03-10</code></p>
+<p>Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-03-12</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_time</code></b>&nbsp;&nbsp;
@@ -1638,10 +1628,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_time"                data-endpoint="POSTapi-v1-reserve"
-               value="2052-03-10"
+               value="2052-03-12"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-10</code></p>
+<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-12</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>rent_type</code></b>&nbsp;&nbsp;
@@ -1833,20 +1823,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-PUTapi-v1-users--id-">PUT api/v1/users/{id}</h2>
+                    <h2 id="endpoints-PATCHapi-v1-profile-update">PATCH api/v1/profile/update</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-PUTapi-v1-users--id-">
+<span id="example-requests-PATCHapi-v1-profile-update">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
-    <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/users/1" \
+    <pre><code class="language-bash">curl --request PATCH \
+    "http://localhost/api/v1/profile/update" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1859,7 +1849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/users/1"
+    "http://localhost/api/v1/profile/update"
 );
 
 const headers = {
@@ -1874,64 +1864,60 @@ let body = {
 };
 
 fetch(url, {
-    method: "PUT",
+    method: "PATCH",
     headers,
     body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 </span>
 
-<span id="example-responses-PUTapi-v1-users--id-">
+<span id="example-responses-PATCHapi-v1-profile-update">
 </span>
-<span id="execution-results-PUTapi-v1-users--id-" hidden>
+<span id="execution-results-PATCHapi-v1-profile-update" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-PUTapi-v1-users--id-"></span>:
+                id="execution-response-status-PATCHapi-v1-profile-update"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-PUTapi-v1-users--id-"
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-profile-update"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-PUTapi-v1-users--id-" hidden>
+<span id="execution-error-PATCHapi-v1-profile-update" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PUTapi-v1-users--id-">
+    <pre><code id="execution-error-message-PATCHapi-v1-profile-update">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-PUTapi-v1-users--id-" data-method="PUT"
-      data-path="api/v1/users/{id}"
+<form id="form-PATCHapi-v1-profile-update" data-method="PATCH"
+      data-path="api/v1/profile/update"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-users--id-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-profile-update', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PUTapi-v1-users--id-"
-                    onclick="tryItOut('PUTapi-v1-users--id-');">Try it out ⚡
+                    id="btn-tryout-PATCHapi-v1-profile-update"
+                    onclick="tryItOut('PATCHapi-v1-profile-update');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PUTapi-v1-users--id-"
-                    onclick="cancelTryOut('PUTapi-v1-users--id-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PATCHapi-v1-profile-update"
+                    onclick="cancelTryOut('PATCHapi-v1-profile-update');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PUTapi-v1-users--id-"
+                    id="btn-executetryout-PATCHapi-v1-profile-update"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
             </button>
             </h3>
             <p>
-            <small class="badge badge-darkblue">PUT</small>
-            <b><code>api/v1/users/{id}</code></b>
-        </p>
-            <p>
             <small class="badge badge-purple">PATCH</small>
-            <b><code>api/v1/users/{id}</code></b>
+            <b><code>api/v1/profile/update</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -1940,7 +1926,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PUTapi-v1-users--id-"
+                              name="Content-Type"                data-endpoint="PATCHapi-v1-profile-update"
                value="application/json"
                data-component="header">
     <br>
@@ -1952,33 +1938,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PUTapi-v1-users--id-"
+                              name="Accept"                data-endpoint="PATCHapi-v1-profile-update"
                value="application/json"
                data-component="header">
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>id</code></b>&nbsp;&nbsp;
-<small>integer</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="number" style="display: none"
-               step="any"               name="id"                data-endpoint="PUTapi-v1-users--id-"
-               value="1"
-               data-component="url">
-    <br>
-<p>The ID of the user. Example: <code>1</code></p>
-            </div>
-                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>name</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="name"                data-endpoint="PUTapi-v1-users--id-"
+                              name="name"                data-endpoint="PATCHapi-v1-profile-update"
                value="b"
                data-component="body">
     <br>
@@ -1990,7 +1963,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="phone_number"                data-endpoint="PUTapi-v1-users--id-"
+                              name="phone_number"                data-endpoint="PATCHapi-v1-profile-update"
                value="09564255931"
                data-component="body">
     <br>
@@ -2002,7 +1975,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="email"                data-endpoint="PUTapi-v1-users--id-"
+                              name="email"                data-endpoint="PATCHapi-v1-profile-update"
                value="cecil42@example.com"
                data-component="body">
     <br>
@@ -2014,13 +1987,140 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="password"                data-endpoint="PUTapi-v1-users--id-"
+                              name="password"                data-endpoint="PATCHapi-v1-profile-update"
                value=""
                data-component="body">
     <br>
 
         </div>
         </form>
+
+                    <h2 id="endpoints-GETapi-v1-profile">GET api/v1/profile</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-profile">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/v1/profile" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/v1/profile"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-v1-profile">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary style="cursor: pointer;">
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre></details>         <pre>
+
+<code class="language-json" style="max-height: 300px;">{
+    &quot;message&quot;: &quot;You must be logged in to access this resource.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-profile" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-profile"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-profile"
+      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-profile" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-profile">
+
+Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</code></pre>
+</span>
+<form id="form-GETapi-v1-profile" data-method="GET"
+      data-path="api/v1/profile"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-profile', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-profile"
+                    onclick="tryItOut('GETapi-v1-profile');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-profile"
+                    onclick="cancelTryOut('GETapi-v1-profile');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-profile"
+                    data-initial-text="Send Request 💥"
+                    data-loading-text="⏱ Sending..."
+                    hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/profile</code></b>
+        </p>
+                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Content-Type"                data-endpoint="GETapi-v1-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                                <div style="padding-left: 28px; clear: unset;">
+                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
+&nbsp;
+ &nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="Accept"                data-endpoint="GETapi-v1-profile"
+               value="application/json"
+               data-component="header">
+    <br>
+<p>Example: <code>application/json</code></p>
+            </div>
+                        </form>
 
                     <h2 id="endpoints-GETapi-v1-admin-export-reservations">GET api/v1/admin/export-reservations</h2>
 
@@ -2049,6 +2149,7 @@ const headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
+
 
 fetch(url, {
     method: "GET",
@@ -2388,20 +2489,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-PATCHapi-v1-admin-server--server_slug-">PATCH api/v1/admin/server/{server_slug}</h2>
+                    <h2 id="endpoints-PATCHapi-v1-admin-servers--server_slug-">PATCH api/v1/admin/servers/{server_slug}</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-PATCHapi-v1-admin-server--server_slug-">
+<span id="example-requests-PATCHapi-v1-admin-servers--server_slug-">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/v1/admin/server/ryzen-9-5900x" \
+    "http://localhost/api/v1/admin/servers/ryzen-9-5900x" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2412,14 +2513,14 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": true
+    \"is_active\": false
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/server/ryzen-9-5900x"
+    "http://localhost/api/v1/admin/servers/ryzen-9-5900x"
 );
 
 const headers = {
@@ -2435,7 +2536,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": true
+    "is_active": false
 };
 
 fetch(url, {
@@ -2446,45 +2547,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-PATCHapi-v1-admin-server--server_slug-">
+<span id="example-responses-PATCHapi-v1-admin-servers--server_slug-">
 </span>
-<span id="execution-results-PATCHapi-v1-admin-server--server_slug-" hidden>
+<span id="execution-results-PATCHapi-v1-admin-servers--server_slug-" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-v1-admin-server--server_slug-"></span>:
+                id="execution-response-status-PATCHapi-v1-admin-servers--server_slug-"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-v1-admin-server--server_slug-"
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-admin-servers--server_slug-"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-PATCHapi-v1-admin-server--server_slug-" hidden>
+<span id="execution-error-PATCHapi-v1-admin-servers--server_slug-" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-v1-admin-server--server_slug-">
+    <pre><code id="execution-error-message-PATCHapi-v1-admin-servers--server_slug-">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-PATCHapi-v1-admin-server--server_slug-" data-method="PATCH"
-      data-path="api/v1/admin/server/{server_slug}"
+<form id="form-PATCHapi-v1-admin-servers--server_slug-" data-method="PATCH"
+      data-path="api/v1/admin/servers/{server_slug}"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-admin-server--server_slug-', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-admin-servers--server_slug-', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-v1-admin-server--server_slug-"
-                    onclick="tryItOut('PATCHapi-v1-admin-server--server_slug-');">Try it out ⚡
+                    id="btn-tryout-PATCHapi-v1-admin-servers--server_slug-"
+                    onclick="tryItOut('PATCHapi-v1-admin-servers--server_slug-');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-v1-admin-server--server_slug-"
-                    onclick="cancelTryOut('PATCHapi-v1-admin-server--server_slug-');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PATCHapi-v1-admin-servers--server_slug-"
+                    onclick="cancelTryOut('PATCHapi-v1-admin-servers--server_slug-');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-v1-admin-server--server_slug-"
+                    id="btn-executetryout-PATCHapi-v1-admin-servers--server_slug-"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2492,7 +2593,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-purple">PATCH</small>
-            <b><code>api/v1/admin/server/{server_slug}</code></b>
+            <b><code>api/v1/admin/servers/{server_slug}</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2501,7 +2602,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                              name="Content-Type"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="application/json"
                data-component="header">
     <br>
@@ -2513,7 +2614,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                              name="Accept"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="application/json"
                data-component="header">
     <br>
@@ -2526,7 +2627,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="server_slug"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                              name="server_slug"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="ryzen-9-5900x"
                data-component="url">
     <br>
@@ -2539,7 +2640,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="cpu_id"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="cpu_id"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="16"
                data-component="body">
     <br>
@@ -2551,7 +2652,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="gpu_id"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="gpu_id"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="16"
                data-component="body">
     <br>
@@ -2563,7 +2664,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="ram_id"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="ram_id"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="16"
                data-component="body">
     <br>
@@ -2575,7 +2676,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="storage"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="storage"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="90"
                data-component="body">
     <br>
@@ -2587,7 +2688,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="os"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                              name="os"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="g"
                data-component="body">
     <br>
@@ -2599,7 +2700,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="price_per_hour"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="price_per_hour"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="12"
                data-component="body">
     <br>
@@ -2611,7 +2712,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="number" style="display: none"
-               step="any"               name="price_per_day"                data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+               step="any"               name="price_per_day"                data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                value="77"
                data-component="body">
     <br>
@@ -2622,39 +2723,39 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <small>boolean</small>&nbsp;
 <i>optional</i> &nbsp;
  &nbsp;
-                <label data-endpoint="PATCHapi-v1-admin-server--server_slug-" style="display: none">
+                <label data-endpoint="PATCHapi-v1-admin-servers--server_slug-" style="display: none">
             <input type="radio" name="is_active"
                    value="true"
-                   data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                   data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                    data-component="body"             >
             <code>true</code>
         </label>
-        <label data-endpoint="PATCHapi-v1-admin-server--server_slug-" style="display: none">
+        <label data-endpoint="PATCHapi-v1-admin-servers--server_slug-" style="display: none">
             <input type="radio" name="is_active"
                    value="false"
-                   data-endpoint="PATCHapi-v1-admin-server--server_slug-"
+                   data-endpoint="PATCHapi-v1-admin-servers--server_slug-"
                    data-component="body"             >
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
-                    <h2 id="endpoints-PUTapi-v1-admin-reservation--reservation_uuid--credential">PUT api/v1/admin/reservation/{reservation_uuid}/credential</h2>
+                    <h2 id="endpoints-PUTapi-v1-admin-reservations--reservation_uuid--credential">PUT api/v1/admin/reservations/{reservation_uuid}/credential</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-PUTapi-v1-admin-reservation--reservation_uuid--credential">
+<span id="example-requests-PUTapi-v1-admin-reservations--reservation_uuid--credential">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/admin/reservation/d524328d-5af9-4c16-8002-c8a4e6e8127f/credential" \
+    "http://localhost/api/v1/admin/reservations/847a9d66-a5ec-4b8e-8059-3b29c975be2d/credential" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2666,7 +2767,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/admin/reservation/d524328d-5af9-4c16-8002-c8a4e6e8127f/credential"
+    "http://localhost/api/v1/admin/reservations/847a9d66-a5ec-4b8e-8059-3b29c975be2d/credential"
 );
 
 const headers = {
@@ -2687,45 +2788,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-PUTapi-v1-admin-reservation--reservation_uuid--credential">
+<span id="example-responses-PUTapi-v1-admin-reservations--reservation_uuid--credential">
 </span>
-<span id="execution-results-PUTapi-v1-admin-reservation--reservation_uuid--credential" hidden>
+<span id="execution-results-PUTapi-v1-admin-reservations--reservation_uuid--credential" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-PUTapi-v1-admin-reservation--reservation_uuid--credential"></span>:
+                id="execution-response-status-PUTapi-v1-admin-reservations--reservation_uuid--credential"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-reservation--reservation_uuid--credential"
+    <pre class="json"><code id="execution-response-content-PUTapi-v1-admin-reservations--reservation_uuid--credential"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-PUTapi-v1-admin-reservation--reservation_uuid--credential" hidden>
+<span id="execution-error-PUTapi-v1-admin-reservations--reservation_uuid--credential" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PUTapi-v1-admin-reservation--reservation_uuid--credential">
+    <pre><code id="execution-error-message-PUTapi-v1-admin-reservations--reservation_uuid--credential">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-PUTapi-v1-admin-reservation--reservation_uuid--credential" data-method="PUT"
-      data-path="api/v1/admin/reservation/{reservation_uuid}/credential"
+<form id="form-PUTapi-v1-admin-reservations--reservation_uuid--credential" data-method="PUT"
+      data-path="api/v1/admin/reservations/{reservation_uuid}/credential"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-reservation--reservation_uuid--credential', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-v1-admin-reservations--reservation_uuid--credential', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PUTapi-v1-admin-reservation--reservation_uuid--credential"
-                    onclick="tryItOut('PUTapi-v1-admin-reservation--reservation_uuid--credential');">Try it out ⚡
+                    id="btn-tryout-PUTapi-v1-admin-reservations--reservation_uuid--credential"
+                    onclick="tryItOut('PUTapi-v1-admin-reservations--reservation_uuid--credential');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PUTapi-v1-admin-reservation--reservation_uuid--credential"
-                    onclick="cancelTryOut('PUTapi-v1-admin-reservation--reservation_uuid--credential');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PUTapi-v1-admin-reservations--reservation_uuid--credential"
+                    onclick="cancelTryOut('PUTapi-v1-admin-reservations--reservation_uuid--credential');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PUTapi-v1-admin-reservation--reservation_uuid--credential"
+                    id="btn-executetryout-PUTapi-v1-admin-reservations--reservation_uuid--credential"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -2733,7 +2834,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-darkblue">PUT</small>
-            <b><code>api/v1/admin/reservation/{reservation_uuid}/credential</code></b>
+            <b><code>api/v1/admin/reservations/{reservation_uuid}/credential</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -2742,7 +2843,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
+                              name="Content-Type"                data-endpoint="PUTapi-v1-admin-reservations--reservation_uuid--credential"
                value="application/json"
                data-component="header">
     <br>
@@ -2754,7 +2855,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
+                              name="Accept"                data-endpoint="PUTapi-v1-admin-reservations--reservation_uuid--credential"
                value="application/json"
                data-component="header">
     <br>
@@ -2767,11 +2868,11 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="reservation_uuid"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
-               value="d524328d-5af9-4c16-8002-c8a4e6e8127f"
+                              name="reservation_uuid"                data-endpoint="PUTapi-v1-admin-reservations--reservation_uuid--credential"
+               value="847a9d66-a5ec-4b8e-8059-3b29c975be2d"
                data-component="url">
     <br>
-<p>Example: <code>d524328d-5af9-4c16-8002-c8a4e6e8127f</code></p>
+<p>Example: <code>847a9d66-a5ec-4b8e-8059-3b29c975be2d</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2780,7 +2881,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="user_name"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
+                              name="user_name"                data-endpoint="PUTapi-v1-admin-reservations--reservation_uuid--credential"
                value="bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw"
                data-component="body">
     <br>
@@ -2792,7 +2893,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="password"                data-endpoint="PUTapi-v1-admin-reservation--reservation_uuid--credential"
+                              name="password"                data-endpoint="PUTapi-v1-admin-reservations--reservation_uuid--credential"
                value="architecto"
                data-component="body">
     <br>

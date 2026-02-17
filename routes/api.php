@@ -39,15 +39,13 @@ Route::prefix('v1')->group(function () {
             ->name('store.reserve');
 
         Route::controller(UserController::class)->group(function () {
+            Route::post('/users', [UserController::class, 'store'])
+                ->name('store.user');
             Route::patch('/profile/update', [UserController::class, 'update'])
                 ->name('profile.update');
             Route::get('/profile', [UserController::class, 'show'])
                 ->name('profile.show');
         });
-
-        Route::apiResource('/users', UserController::class)->only([
-            'store',
-        ]);
 
         Route::middleware('admin')->group(function () {
             Route::prefix('/admin')->group(function () {
