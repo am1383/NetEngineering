@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
-use App\Helpers\PhoneNumberHelper;
 use App\Interfaces\Services\LoginServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,7 @@ class LoginService implements LoginServiceInterface
     public function login(string $phoneNumber, string $password): array
     {
         $credentials = $this->createLoginCredentials(
-            PhoneNumberHelper::normalizePhoneNumber($phoneNumber),
+            $phoneNumber,
             $password
         );
 

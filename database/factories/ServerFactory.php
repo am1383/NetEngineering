@@ -2,9 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Cpu;
-use App\Models\Gpu;
-use App\Models\Ram;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,13 +19,13 @@ class ServerFactory extends Factory
         return [
             'slug' => fake()->slug(12),
             'server_name' => fake()->name(),
-            'ram_id' => Ram::firstOrFail(),
-            'gpu_id' => Gpu::firstOrFail(),
+            'ram_id' => 1,
+            'gpu_id' => 1,
             'storage' => 1024,
             'os' => 'Windows',
             'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
             'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'cpu_id' => Cpu::firstOrFail(),
+            'cpu_id' => 1,
         ];
     }
 }
