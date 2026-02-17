@@ -24,7 +24,7 @@ class UserRequest extends BaseRequest
                     ->symbols(),
                 ],
             ],
-            'PUT' => [
+            'PUT', 'PATCH' => [
                 'password' => ['nullable', Password::min(8)
                     ->letters()
                     ->mixedCase()
@@ -35,6 +35,7 @@ class UserRequest extends BaseRequest
                 'phone_number' => 'nullable|string|regex:/^09\d{9}$/|unique:users,phone_number',
                 'email' => 'nullable|email|unique:users,email',
             ],
+
             default => []
         };
 
