@@ -140,13 +140,16 @@ class ReservationService implements ReservationServiceInterface
                 }
 
                 $lastIndex = $carry->count() - 1;
-                $lastEnd = Carbon::parse($carry[$lastIndex]['end']);
+                $last = $carry->get($lastIndex);
+                $lastEnd = Carbon::parse($last['end']);
 
                 if ($start->lte($lastEnd)) {
-                    $carry[$lastIndex]['end'] = max(
+                    $last['end'] = max(
                         $end->toDateTimeString(),
-                        $carry[$lastIndex]['end']
+                        $last['end']
                     );
+
+                    $carry->put($lastIndex, $last);
                 } else {
                     $carry->push([
                         'start' => $start->toDateTimeString(),
