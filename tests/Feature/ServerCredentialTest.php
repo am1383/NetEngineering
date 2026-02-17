@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleEnum;
-use App\Enums\StatusEnum;
-use App\Helpers\PhoneNumberHelper;
 use App\Models\Reservation;
 use App\Models\Server;
 use App\Models\User;
@@ -13,20 +11,25 @@ use Tests\TestCase;
 
 class ServerCredentialTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->createSeeders();
+        $this->actingAsAdminUser();
+    }
+
     public function test_admin_can_set_credential(): void
     {
-        $this->createSeeders();
-        $serverId = $this->createServer();
-        $this->actingAsAdminUser();
-        $userId = $this->createUser();
+        $serverId = Server::factory()->create()->id;
+        $userId = User::factory()->create()->id;
         $reservation = $this->createReservation($userId, $serverId);
         $payload = [
-            'user_name' => 'Username test',
-            'password' => 'Test123@123',
+            'user_name' => fake()->userName(),
+            'password' => 'Test@123',
         ];
 
         $response = $this->putJson(
-            "/api/v1/admin/reservation/{$reservation->uuid}/credential",
+            route('put.server.credential', $reservation->uuid),
             $payload
         );
 
@@ -40,43 +43,17 @@ class ServerCredentialTest extends TestCase
     {
         return Reservation::factory()->create([
             'server_id' => $serverId,
-            'status' => StatusEnum::PAID,
             'user_id' => $userId,
         ]);
-    }
-
-    private function createServer(): int
-    {
-        return Server::factory()->create([
-            'slug' => 'srv-teh-web-03',
-            'server_name' => 'Server Number Three',
-            'cpu_id' => 1,
-            'ram_id' => 1,
-            'storage' => 256,
-            'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-            'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'os' => 'Linux',
-            'gpu_id' => 1,
-            'is_active' => false,
-        ])->id;
     }
 
     private function actingAsAdminUser(): void
     {
         $adminUser = User::factory()->create([
-            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121519'),
             'role_id' => RoleEnum::ADMIN->value,
         ]);
 
         Passport::actingAs($adminUser);
-    }
-
-    private function createUser(): int
-    {
-        return User::factory()->create([
-            'phone_number' => PhoneNumberHelper::normalizePhoneNumber('09183121516'),
-            'role_id' => RoleEnum::USER->value,
-        ])->id;
     }
 
     private function createSeeders(): void

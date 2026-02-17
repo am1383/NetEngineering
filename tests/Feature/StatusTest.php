@@ -6,11 +6,15 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed('DatabaseSeeder');
+    }
+
     public function test_get_status(): void
     {
-        $this->seed('DatabaseSeeder');
-
-        $response = $this->getJson('/api/v1/status');
+        $response = $this->getJson(route('home.status'));
 
         $response->assertOk()
             ->assertJsonStructure([
