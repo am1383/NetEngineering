@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -45,6 +46,13 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (User $user): void {
+            $user->role_id ??= RoleEnum::USER->value;
+        });
     }
 
     public function reservations(): HasMany
