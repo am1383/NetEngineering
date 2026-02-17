@@ -54,8 +54,9 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
     public function fetchUserReserveWithoutCredential(): Collection
     {
         return $this->model->where('user_id', auth()->id())
-            ->whereDoesntHave('credential', function (Builder $query) {
-                $query->whereNull(['username, password']);
+            ->whereHas('credential', function (Builder $query): void {
+                $query->whereNull('username')
+                    ->whereNull('password');
             })
             ->with('server')
             ->get()
