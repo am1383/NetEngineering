@@ -6,9 +6,12 @@ use Carbon\Carbon;
 
 class TimeHelper
 {
-    public static function datetimeToTimestamp(string $startTime): int
+    public static function datetimeToTimestamp(string $startTime, string $timezone = 'UTC'): int
     {
-        return Carbon::parse($startTime)
-            ->timestamp;
+        return Carbon::createFromFormat(
+            'Y-m-d H:i:s',
+            $startTime,
+            $timezone
+        )->timestamp;
     }
 }
