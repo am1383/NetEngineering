@@ -41,7 +41,7 @@ Route::prefix('v1')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::post('/users', [UserController::class, 'store'])
                 ->name('store.user');
-            Route::patch('/profile/update', [UserController::class, 'update'])
+            Route::patch('/profile', [UserController::class, 'update'])
                 ->name('profile.update');
             Route::get('/profile', [UserController::class, 'show'])
                 ->name('profile.show');
