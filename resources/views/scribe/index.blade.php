@@ -94,8 +94,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-POSTapi-v1-users">
                                 <a href="#endpoints-POSTapi-v1-users">POST api/v1/users</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-profile-update">
-                                <a href="#endpoints-PATCHapi-v1-profile-update">PATCH api/v1/profile/update</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-PATCHapi-v1-profile">
+                                <a href="#endpoints-PATCHapi-v1-profile">PATCH api/v1/profile</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-profile">
                                 <a href="#endpoints-GETapi-v1-profile">GET api/v1/profile</a>
@@ -123,7 +123,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: February 17, 2026</li>
+        <li>Last updated: February 18, 2026</li>
     </ul>
 </div>
 
@@ -1491,8 +1491,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"server_uuid\": \"6ff8f7f6-1eb3-3525-be4a-3932c805afed\",
-    \"start_time\": \"2022-03-12\",
-    \"end_time\": \"2052-03-12\",
+    \"start_time\": \"2022-03-13\",
+    \"end_time\": \"2052-03-13\",
     \"rent_type\": \"architecto\"
 }"
 </code></pre></div>
@@ -1510,8 +1510,8 @@ const headers = {
 
 let body = {
     "server_uuid": "6ff8f7f6-1eb3-3525-be4a-3932c805afed",
-    "start_time": "2022-03-12",
-    "end_time": "2052-03-12",
+    "start_time": "2022-03-13",
+    "end_time": "2052-03-13",
     "rent_type": "architecto"
 };
 
@@ -1616,10 +1616,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_time"                data-endpoint="POSTapi-v1-reserve"
-               value="2022-03-12"
+               value="2022-03-13"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-03-12</code></p>
+<p>Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-03-13</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_time</code></b>&nbsp;&nbsp;
@@ -1628,10 +1628,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_time"                data-endpoint="POSTapi-v1-reserve"
-               value="2052-03-12"
+               value="2052-03-13"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-12</code></p>
+<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-03-13</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>rent_type</code></b>&nbsp;&nbsp;
@@ -1823,20 +1823,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-PATCHapi-v1-profile-update">PATCH api/v1/profile/update</h2>
+                    <h2 id="endpoints-PATCHapi-v1-profile">PATCH api/v1/profile</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-PATCHapi-v1-profile-update">
+<span id="example-requests-PATCHapi-v1-profile">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/v1/profile/update" \
+    "http://localhost/api/v1/profile" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1849,7 +1849,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/profile/update"
+    "http://localhost/api/v1/profile"
 );
 
 const headers = {
@@ -1871,45 +1871,45 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-PATCHapi-v1-profile-update">
+<span id="example-responses-PATCHapi-v1-profile">
 </span>
-<span id="execution-results-PATCHapi-v1-profile-update" hidden>
+<span id="execution-results-PATCHapi-v1-profile" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-v1-profile-update"></span>:
+                id="execution-response-status-PATCHapi-v1-profile"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-v1-profile-update"
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-profile"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-PATCHapi-v1-profile-update" hidden>
+<span id="execution-error-PATCHapi-v1-profile" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-v1-profile-update">
+    <pre><code id="execution-error-message-PATCHapi-v1-profile">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-PATCHapi-v1-profile-update" data-method="PATCH"
-      data-path="api/v1/profile/update"
+<form id="form-PATCHapi-v1-profile" data-method="PATCH"
+      data-path="api/v1/profile"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-profile-update', this);">
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-profile', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-v1-profile-update"
-                    onclick="tryItOut('PATCHapi-v1-profile-update');">Try it out ⚡
+                    id="btn-tryout-PATCHapi-v1-profile"
+                    onclick="tryItOut('PATCHapi-v1-profile');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-v1-profile-update"
-                    onclick="cancelTryOut('PATCHapi-v1-profile-update');" hidden>Cancel 🛑
+                    id="btn-canceltryout-PATCHapi-v1-profile"
+                    onclick="cancelTryOut('PATCHapi-v1-profile');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-v1-profile-update"
+                    id="btn-executetryout-PATCHapi-v1-profile"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -1917,7 +1917,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-purple">PATCH</small>
-            <b><code>api/v1/profile/update</code></b>
+            <b><code>api/v1/profile</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -1926,7 +1926,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="Content-Type"                data-endpoint="PATCHapi-v1-profile"
                value="application/json"
                data-component="header">
     <br>
@@ -1938,7 +1938,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="Accept"                data-endpoint="PATCHapi-v1-profile"
                value="application/json"
                data-component="header">
     <br>
@@ -1951,7 +1951,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="name"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="name"                data-endpoint="PATCHapi-v1-profile"
                value="b"
                data-component="body">
     <br>
@@ -1963,7 +1963,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="phone_number"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="phone_number"                data-endpoint="PATCHapi-v1-profile"
                value="09564255931"
                data-component="body">
     <br>
@@ -1975,7 +1975,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="email"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="email"                data-endpoint="PATCHapi-v1-profile"
                value="cecil42@example.com"
                data-component="body">
     <br>
@@ -1987,7 +1987,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="password"                data-endpoint="PATCHapi-v1-profile-update"
+                              name="password"                data-endpoint="PATCHapi-v1-profile"
                value=""
                data-component="body">
     <br>
@@ -2273,7 +2273,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": true
+    \"is_active\": false
 }"
 </code></pre></div>
 
@@ -2296,7 +2296,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": true
+    "is_active": false
 };
 
 fetch(url, {
@@ -2485,7 +2485,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>true</code></p>
+<p>Example: <code>false</code></p>
         </div>
         </form>
 
@@ -2513,7 +2513,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
     \"os\": \"g\",
     \"price_per_hour\": 12,
     \"price_per_day\": 77,
-    \"is_active\": false
+    \"is_active\": true
 }"
 </code></pre></div>
 
@@ -2536,7 +2536,7 @@ let body = {
     "os": "g",
     "price_per_hour": 12,
     "price_per_day": 77,
-    "is_active": false
+    "is_active": true
 };
 
 fetch(url, {
@@ -2738,7 +2738,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             <code>false</code>
         </label>
     <br>
-<p>Example: <code>false</code></p>
+<p>Example: <code>true</code></p>
         </div>
         </form>
 

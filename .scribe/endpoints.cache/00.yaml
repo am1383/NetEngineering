@@ -538,7 +538,7 @@ endpoints:
         name: start_time
         description: 'Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>.'
         required: true
-        example: '2022-03-12'
+        example: '2022-03-13'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -549,7 +549,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
         required: true
-        example: '2052-03-12'
+        example: '2052-03-13'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -570,8 +570,8 @@ endpoints:
         deprecated: false
     cleanBodyParameters:
       server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      start_time: '2022-03-12'
-      end_time: '2052-03-12'
+      start_time: '2022-03-13'
+      end_time: '2052-03-13'
       rent_type: architecto
     fileParameters: []
     responses: []
@@ -663,7 +663,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: api/v1/profile/update
+    uri: api/v1/profile
     metadata:
       custom: []
       groupName: Endpoints
@@ -922,7 +922,7 @@ endpoints:
         name: is_active
         description: ''
         required: true
-        example: true
+        example: false
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -936,7 +936,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: true
+      is_active: false
     fileParameters: []
     responses: []
     responseFields: []
@@ -1061,7 +1061,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1075,7 +1075,7 @@ endpoints:
       os: g
       price_per_hour: 12
       price_per_day: 77
-      is_active: false
+      is_active: true
     fileParameters: []
     responses: []
     responseFields: []
