@@ -12,8 +12,8 @@ final class PaginationDTO
     public static function fromRequest(array $data): self
     {
         return new self(
-            $data['page'] ?? 1,
-            $data['per_page'] ?? 10
+            $data['page'] ?? config('pagination.default_page'),
+            $data['per_page'] ?? config('pagination.default_per_page'),
         );
     }
 }
