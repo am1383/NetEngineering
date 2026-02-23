@@ -29,7 +29,7 @@ return new class extends Migration
             $table->enum(
                 'status',
                 array_column(StatusEnum::cases(), 'value')
-            )->default(StatusEnum::PENDING);
+            )->default(StatusEnum::PENDING->value);
 
             $table->timestamps();
         });
