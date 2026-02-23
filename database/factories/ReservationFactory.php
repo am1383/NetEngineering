@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\RentTypeEnum;
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,8 @@ class ReservationFactory extends Factory
         return [
             'start_time' => now()->addHour()->timestamp,
             'end_time' => now()->addHours(5)->timestamp,
-            'status' => StatusEnum::PAID,
+            'status' => StatusEnum::PAID->value,
+            'rent_type' => RentTypeEnum::HOURLY_RENT->value,
             'total_price' => fake()->numberBetween(50_000, 3_000_000),
         ];
     }
