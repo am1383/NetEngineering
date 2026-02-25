@@ -35,15 +35,15 @@ Route::prefix('v1')->group(function () {
             ->name('without.credential');
         Route::get('/my-reservations', [ReservationController::class, 'show'])
             ->name('show.reservation');
-        Route::post('/reserve', [ReservationController::class, 'store'])
+        Route::post('/reserves', [ReservationController::class, 'store'])
             ->name('store.reserve');
 
         Route::controller(UserController::class)->group(function () {
             Route::post('/users', [UserController::class, 'store'])
                 ->name('store.user');
-            Route::patch('/profile', [UserController::class, 'update'])
+            Route::match(['PUT', 'PATCH'], '/user/profile', [UserController::class, 'update'])
                 ->name('profile.update');
-            Route::get('/profile', [UserController::class, 'show'])
+            Route::get('/user/profile', [UserController::class, 'show'])
                 ->name('profile.show');
         });
 
