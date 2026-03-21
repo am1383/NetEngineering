@@ -3,23 +3,33 @@
 namespace App\Providers;
 
 use App\Exports\ReservationExport;
-use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use App\Interfaces\Services\CpuServiceInterface;
-use App\Interfaces\Services\GpuServiceInterface;
-use App\Interfaces\Services\HomeServiceInterface;
-use App\Interfaces\Services\LoginServiceInterface;
-use App\Interfaces\Services\ReservationServiceInterface;
-use App\Interfaces\Services\ServerCredentialServiceInterface;
-use App\Interfaces\Services\ServerServiceInterface;
-use App\Interfaces\Services\UserServiceInterface;
-use App\Services\CpuService;
-use App\Services\GpuService;
-use App\Services\HomeService;
-use App\Services\LoginService;
-use App\Services\ReservationService;
-use App\Services\ServerCredentialService;
-use App\Services\ServerService;
-use App\Services\UserService;
+
+use App\Interfaces\Repositories\{
+    ReservationRepositoryInterface
+};
+
+use App\Interfaces\Services\{
+    CpuServiceInterface,
+    GpuServiceInterface,
+    HomeServiceInterface,
+    LoginServiceInterface,
+    ReservationServiceInterface,
+    ServerCredentialServiceInterface,
+    ServerServiceInterface,
+    UserServiceInterface
+};
+
+use App\Services\{
+    CpuService,
+    GpuService,
+    HomeService,
+    LoginService,
+    ReservationService,
+    ServerCredentialService,
+    ServerService,
+    UserService
+};
+
 use Illuminate\Support\ServiceProvider;
 
 class DomainServiceProvider extends ServiceProvider

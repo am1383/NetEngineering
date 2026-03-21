@@ -2,24 +2,33 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Repositories\CpuRepositoryInterface;
-use App\Interfaces\Repositories\GpuRepositoryInterface;
-use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use App\Interfaces\Repositories\ServerCredentialRepositoryInterface;
-use App\Interfaces\Repositories\ServerRepositoryInterface;
-use App\Interfaces\Repositories\UserRepositoryInterface;
-use App\Models\Cpu;
-use App\Models\Gpu;
-use App\Models\Reservation;
-use App\Models\Server;
-use App\Models\ServerCredential;
-use App\Models\User;
-use App\Repositories\CpuRepository;
-use App\Repositories\GpuRepository;
-use App\Repositories\ReservationRepository;
-use App\Repositories\ServerCredentialRepository;
-use App\Repositories\ServerRepository;
-use App\Repositories\UserRepository;
+use App\Interfaces\Repositories\{
+    CpuRepositoryInterface,
+    GpuRepositoryInterface,
+    ReservationRepositoryInterface,
+    ServerCredentialRepositoryInterface,
+    ServerRepositoryInterface,
+    UserRepositoryInterface
+};
+
+use App\Models\{
+    Cpu,
+    Gpu,
+    Reservation,
+    Server,
+    ServerCredential,
+    User
+};
+
+use App\Repositories\{
+    CpuRepository,
+    GpuRepository,
+    ReservationRepository,
+    ServerCredentialRepository,
+    ServerRepository,
+    UserRepository
+};
+
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

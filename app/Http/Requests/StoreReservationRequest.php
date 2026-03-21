@@ -27,7 +27,7 @@ class StoreReservationRequest extends BaseRequest
             'server_uuid' => 'required|string|exists:servers,uuid',
             'start_time' => 'required|date|after:now|before:end_time',
             'end_time' => 'required|date|after:start_time',
-            'rent_type' => ['required', 'string',  new Enum(RentTypeEnum::class)],
+            'rent_type' => ['required', 'string', new Enum(RentTypeEnum::class)],
         ];
     }
 }

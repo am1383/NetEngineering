@@ -9,7 +9,9 @@ use Illuminate\Http\Response;
 
 final class ValidationResponse implements Responsable
 {
-    public function __construct(private MessageBag $errors) {}
+    public function __construct(
+        private MessageBag $errors
+    ) {}
 
     public function toResponse($request): JsonResponse
     {

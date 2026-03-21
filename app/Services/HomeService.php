@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
-use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use App\Interfaces\Repositories\ServerRepositoryInterface;
-use App\Interfaces\Repositories\UserRepositoryInterface;
+use App\Interfaces\Repositories\{
+    ReservationRepositoryInterface,
+    ServerRepositoryInterface,
+    UserRepositoryInterface,
+};
+
 use App\Interfaces\Services\HomeServiceInterface;
 
 class HomeService implements HomeServiceInterface

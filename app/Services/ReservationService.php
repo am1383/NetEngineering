@@ -8,9 +8,13 @@ use App\DTOs\Reservation\StoreReservationDTO;
 use App\Enums\RentTypeEnum;
 use App\Exceptions\ConfilictException;
 use App\Helpers\TimeHelper;
-use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use App\Interfaces\Repositories\ServerCredentialRepositoryInterface;
-use App\Interfaces\Repositories\ServerRepositoryInterface;
+
+use App\Interfaces\Repositories\{
+    ReservationRepositoryInterface,
+    ServerCredentialRepositoryInterface,
+    ServerRepositoryInterface,
+};
+
 use App\Interfaces\Services\ReservationServiceInterface;
 use App\Models\Reservation;
 use App\Models\Server;
@@ -83,7 +87,7 @@ class ReservationService implements ReservationServiceInterface
                     'rent_type' => $dto->rentType,
                     'total_price' => $dto->price,
                 ]),
-                function (Reservation $reservation) {
+                function (Reservation $reservation): void {
                     $this->serverCredentialRepository->store([
                         'reservation_id' => $reservation->id,
                     ]);
