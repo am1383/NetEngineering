@@ -9,7 +9,9 @@ use Illuminate\Http\Response;
 
 class RegisterController extends Controller
 {
-    public function __construct(private UserServiceInterface $userService) {}
+    public function __construct(
+        private UserServiceInterface $userService
+    ) {}
 
     public function __invoke(RegisterRequest $request): JsonResponse
     {
