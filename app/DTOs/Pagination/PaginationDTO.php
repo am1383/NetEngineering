@@ -5,8 +5,8 @@ namespace App\DTOs\Pagination;
 final class PaginationDTO
 {
     public function __construct(
-        public int $page,
-        public int $perPage
+        public readonly int $page,
+        public readonly int $perPage
     ) {}
 
     public static function fromRequest(array $data): self
