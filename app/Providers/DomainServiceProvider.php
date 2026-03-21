@@ -22,7 +22,7 @@ use App\Services\ServerService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class DomainServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
