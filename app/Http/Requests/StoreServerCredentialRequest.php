@@ -23,7 +23,7 @@ class StoreServerCredentialRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'user_name' => 'required|string|min:6',
+            'user_name' => 'required|string|min:6|unique:server_credentials,username',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()
