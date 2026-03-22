@@ -44,9 +44,9 @@ Route::prefix('v1')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::post('/users', [UserController::class, 'store'])
                 ->name('store.user');
-            Route::match(['PUT', 'PATCH'], '/user/profile', [UserController::class, 'update'])
+            Route::match(['PUT', 'PATCH'], '/profile', [UserController::class, 'update'])
                 ->name('profile.update');
-            Route::get('/user/profile', [UserController::class, 'show'])
+            Route::get('/profile', [UserController::class, 'show'])
                 ->name('profile.show');
         });
 
