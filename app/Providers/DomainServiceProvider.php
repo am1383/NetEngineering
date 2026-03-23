@@ -29,7 +29,7 @@ use App\Services\{
     ServerService,
     UserService
 };
-
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class DomainServiceProvider extends ServiceProvider
@@ -48,7 +48,7 @@ class DomainServiceProvider extends ServiceProvider
         $this->app->bind(CpuServiceInterface::class, CpuService::class);
         $this->app->bind(GpuServiceInterface::class, GpuService::class);
 
-        $this->app->bind(ReservationExport::class, function ($app): ReservationExport {
+        $this->app->bind(ReservationExport::class, function (Container $app): ReservationExport {
             return new ReservationExport(
                 $app->make(ReservationRepositoryInterface::class)
             );

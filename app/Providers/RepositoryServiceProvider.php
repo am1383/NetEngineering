@@ -28,7 +28,7 @@ use App\Repositories\{
     ServerRepository,
     UserRepository
 };
-
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -38,27 +38,27 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(UserRepositoryInterface::class, function ($app): UserRepository {
+        $this->app->singleton(UserRepositoryInterface::class, function (Container $app): UserRepository {
             return new UserRepository($app->make(User::class));
         });
 
-        $this->app->singleton(ServerRepositoryInterface::class, function ($app): ServerRepository {
+        $this->app->singleton(ServerRepositoryInterface::class, function (Container $app): ServerRepository {
             return new ServerRepository($app->make(Server::class));
         });
 
-        $this->app->singleton(ReservationRepositoryInterface::class, function ($app): ReservationRepository {
+        $this->app->singleton(ReservationRepositoryInterface::class, function (Container $app): ReservationRepository {
             return new ReservationRepository($app->make(Reservation::class));
         });
 
-        $this->app->singleton(ServerCredentialRepositoryInterface::class, function ($app): ServerCredentialRepository {
+        $this->app->singleton(ServerCredentialRepositoryInterface::class, function (Container $app): ServerCredentialRepository {
             return new ServerCredentialRepository($app->make(ServerCredential::class));
         });
 
-        $this->app->singleton(CpuRepositoryInterface::class, function ($app): CpuRepository {
+        $this->app->singleton(CpuRepositoryInterface::class, function (Container $app): CpuRepository {
             return new CpuRepository($app->make(Cpu::class));
         });
 
-        $this->app->singleton(GpuRepositoryInterface::class, function ($app): GpuRepository {
+        $this->app->singleton(GpuRepositoryInterface::class, function (Container $app): GpuRepository {
             return new GpuRepository($app->make(Gpu::class));
         });
     }
