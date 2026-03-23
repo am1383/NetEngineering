@@ -3,9 +3,13 @@
 namespace Tests\Feature;
 
 use App\Enums\RoleEnum;
-use App\Models\Reservation;
-use App\Models\Server;
-use App\Models\User;
+
+use App\Models\{
+    Reservation,
+    Server,
+    User
+};
+
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

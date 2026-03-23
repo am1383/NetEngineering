@@ -15,13 +15,13 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request): JsonResponse
     {
-        $data = $this->loginService->login(
+        $token = $this->loginService->login(
             $request->phone_number,
             $request->password
         );
 
         return $this->successResponse(
-            new LoginResource($data)
+            new LoginResource($token)
         );
     }
 }

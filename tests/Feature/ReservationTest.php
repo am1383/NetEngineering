@@ -3,8 +3,12 @@
 namespace Tests\Feature;
 
 use App\Enums\RentTypeEnum;
-use App\Models\Server;
-use App\Models\User;
+
+use App\Models\{
+    Server,
+    User
+};
+
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

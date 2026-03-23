@@ -2,10 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\Reservation;
-use App\Models\Server;
-use App\Models\ServerCredential;
-use App\Models\User;
+use App\Models\{
+    Reservation,
+    Server,
+    ServerCredential,
+    User
+};
+
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
@@ -76,7 +79,7 @@ class UserTest extends TestCase
         });
     }
 
-    private function createSeeders()
+    private function createSeeders(): void
     {
         $this->seed('DatabaseSeeder');
     }

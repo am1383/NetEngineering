@@ -3,8 +3,12 @@
 namespace App\Services;
 
 use App\DTOs\Pricing\ServerRentalPriceDTO;
-use App\DTOs\Reservation\ServerReservationDTO;
-use App\DTOs\Reservation\StoreReservationDTO;
+
+use App\DTOs\Reservation\{
+    ServerReservationDTO,
+    StoreReservationDTO,
+};
+
 use App\Enums\RentTypeEnum;
 use App\Exceptions\ConfilictException;
 use App\Helpers\TimeHelper;
@@ -16,8 +20,12 @@ use App\Interfaces\Repositories\{
 };
 
 use App\Interfaces\Services\ReservationServiceInterface;
-use App\Models\Reservation;
-use App\Models\Server;
+
+use App\Models\{
+    Reservation,
+    Server
+};
+
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;

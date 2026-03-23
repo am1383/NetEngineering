@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginService implements LoginServiceInterface
 {
-    public function login(string $phoneNumber, string $password): array
+    public function login(string $phoneNumber, string $password): string
     {
         $credentials = $this->createLoginCredentials(
             $phoneNumber,
@@ -18,11 +18,7 @@ class LoginService implements LoginServiceInterface
 
         $this->validateCredentials($credentials);
 
-        return [
-            'token' => $this->createToken(
-                auth()->user()
-            ),
-        ];
+        return $this->createToken(auth()->user());
     }
 
     private function validateCredentials(array $credentials): void
