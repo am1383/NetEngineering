@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ServerRequest;
 use App\Http\Resources\ServerResource;
-use App\Interfaces\Services\ReservationServiceInterface;
-use App\Interfaces\Services\ServerServiceInterface;
+
+use App\Interfaces\Services\{
+    ReservationServiceInterface,
+    ServerServiceInterface
+};
+
 use App\Models\Server;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
