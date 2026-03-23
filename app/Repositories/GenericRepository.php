@@ -6,7 +6,7 @@ use App\Interfaces\Repositories\GenericRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class GenericRepository implements GenericRepositoryInterface
+abstract class GenericRepository implements GenericRepositoryInterface
 {
     public function __construct(
         protected readonly Model $model
