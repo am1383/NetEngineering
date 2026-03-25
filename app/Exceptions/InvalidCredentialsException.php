@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 class InvalidCredentialsException extends \Exception
 {

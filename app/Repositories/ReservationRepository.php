@@ -3,8 +3,12 @@
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\{
+    Builder,
+    Model
+};
+
 use Illuminate\Support\Collection;
 
 class ReservationRepository extends GenericRepository implements ReservationRepositoryInterface

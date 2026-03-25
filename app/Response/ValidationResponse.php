@@ -2,15 +2,20 @@
 
 namespace App\Response;
 
-use Illuminate\Contracts\Support\MessageBag;
-use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+use Illuminate\Contracts\Support\{
+    MessageBag,
+    Responsable,
+};
+
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 final class ValidationResponse implements Responsable
 {
     public function __construct(
-        private MessageBag $errors
+        private readonly MessageBag $errors
     ) {}
 
     public function toResponse($request): JsonResponse
