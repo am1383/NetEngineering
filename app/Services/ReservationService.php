@@ -141,31 +141,31 @@ class ReservationService implements ReservationServiceInterface
     {
         return $reservations->reduce(
             function (Collection $carry, Reservation $reservation): Collection {
-                $start = Carbon::createFromTimestamp($reservation->start_time);
-                $end = Carbon::createFromTimestamp($reservation->end_time);
+                $startTime = Carbon::createFromTimestamp($reservation->start_time);
+                $endTime = Carbon::createFromTimestamp($reservation->end_time);
 
                 if ($carry->isEmpty()) {
                     return $carry->push([
-                        'start' => $start->toDateTimeString(),
-                        'end' => $end->toDateTimeString(),
+                        'start_datetime' => $startTime->toDateTimeString(),
+                        'end_datetime' => $endTime->toDateTimeString(),
                     ]);
                 }
 
                 $lastIndex = $this->getLastItemIndex($carry->count());
                 $last = $carry->get($lastIndex);
-                $lastEnd = Carbon::parse($last['end']);
+                $lastEnd = Carbon::parse($last['end_datetime']);
 
-                if ($start->lte($lastEnd)) {
-                    $last['end'] = max(
-                        $end->toDateTimeString(),
-                        $last['end']
+                if ($startTime->lte($lastEnd)) {
+                    $last['end_datetime'] = max(
+                        $endTime->toDateTimeString(),
+                        $last['end_datetime']
                     );
 
                     $carry->put($lastIndex, $last);
                 } else {
                     $carry->push([
-                        'start' => $start->toDateTimeString(),
-                        'end' => $end->toDateTimeString(),
+                        'start_datetime' => $startTime->toDateTimeString(),
+                        'end_datetime' => $endTime->toDateTimeString(),
                     ]);
                 }
 
