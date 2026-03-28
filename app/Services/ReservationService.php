@@ -151,7 +151,7 @@ class ReservationService implements ReservationServiceInterface
                     ]);
                 }
 
-                $lastIndex = $carry->count() - 1;
+                $lastIndex = $this->getLastItemIndex($carry->count());
                 $last = $carry->get($lastIndex);
                 $lastEnd = Carbon::parse($last['end']);
 
@@ -173,5 +173,10 @@ class ReservationService implements ReservationServiceInterface
             },
             collect()
         )->values();
+    }
+
+    private function getLastItemIndex(int $itemsCount): int
+    {
+        return $itemsCount - 1;
     }
 }
