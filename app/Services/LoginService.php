@@ -37,8 +37,8 @@ class LoginService implements LoginServiceInterface
         ];
     }
 
-    private function createToken(User $user, string $name = 'api'): string
+    private function createToken(User $user): string
     {
-        return $user->createToken($name)->accessToken;
+        return $user->createToken('api')->accessToken;
     }
 }
