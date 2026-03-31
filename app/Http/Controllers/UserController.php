@@ -35,11 +35,8 @@ class UserController extends Controller
 
     public function show(): JsonResponse
     {
-        $user = $this->userService
-            ->getUserInformation();
-
         return $this->successResponse(
-            new UserResource($user)
+            new UserResource(auth()->user())
         );
     }
 }

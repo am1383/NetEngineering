@@ -23,10 +23,4 @@ class UserService implements UserServiceInterface
         return $this->userRepository
             ->update($attributes, auth()->user());
     }
-
-    public function getUserInformation(): Authenticatable
-    {
-        return $this->userRepository
-            ->findOrFail(auth()->id());
-    }
 }
