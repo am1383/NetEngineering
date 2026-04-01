@@ -20,7 +20,7 @@ class GpuController extends Controller
 
         return $this->successResponse(GpuResource::collection(
             $this->gpuService
-                ->getAllGpu($dto->perPage, $dto->page),
-        ));
+                ->getAllGpu($dto->perPage, $dto->page))
+        );
     }
 }

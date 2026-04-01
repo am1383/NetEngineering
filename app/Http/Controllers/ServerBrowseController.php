@@ -15,8 +15,7 @@ class ServerBrowseController extends Controller
 
     public function index(ServerBrowseRequest $request): JsonResponse
     {
-        $servers = $this->serverService
-            ->getAvailableServers(
+        $servers = $this->serverService->getAvailableServers(
                 $request->query('gpu'),
                 $request->query('cpu')
             );

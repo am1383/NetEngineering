@@ -20,7 +20,7 @@ class CpuController extends Controller
 
         return $this->successResponse(CpuResource::collection(
             $this->cpuService
-                ->getAllCpu($dto->perPage, $dto->page),
-        ));
+                ->getAllCpu($dto->perPage, $dto->page))
+        );
     }
 }

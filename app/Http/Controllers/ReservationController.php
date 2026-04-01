@@ -33,15 +33,17 @@ class ReservationController extends Controller
 
     public function show(): JsonResponse
     {
-        return $this->successResponse(ReservationResource::collection(
+        return $this->successResponse(
+            ReservationResource::collection(
             $this->reservationService
-                ->getUserReservation()
-        ));
+                ->getUserReservation())
+        );
     }
 
     public function withoutCredential(): JsonResponse
     {
         return $this->successResponse($this->reservationService
-            ->getUserReserveWithoutCredential());
+            ->getUserReserveWithoutCredential()
+        );
     }
 }

@@ -19,6 +19,8 @@ class RegisterController extends Controller
             $request->validated()
         );
 
-        return $this->successResponse(status: Response::HTTP_CREATED);
+        return $this->successResponse(
+            status: Response::HTTP_CREATED
+        );
     }
 }

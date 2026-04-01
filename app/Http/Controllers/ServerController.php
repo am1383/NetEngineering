@@ -35,12 +35,14 @@ class ServerController extends Controller
     public function update(ServerRequest $request, Server $server): JsonResponse
     {
         return $this->successResponse($this->serverService
-            ->updateServer($request->validated(), $server));
+            ->updateServer($request->validated(), $server)
+        );
     }
 
     public function unavailable(Server $server): JsonResponse
     {
         return $this->successResponse($this->reservationService
-            ->getServerReservationsTime($server));
+            ->getServerReservationsTime($server)
+        );
     }
 }
