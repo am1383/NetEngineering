@@ -39,15 +39,17 @@ class ServerTest extends TestCase
     {
         $this->actingAsUser();
         $server = Server::factory()->create();
+        $userId = auth()->id();
+
         Reservation::factory()->create([
             'server_id' => $server->id,
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
             'start_time' => now()->addHour()->timestamp,
             'end_time' => now()->addHours(5)->timestamp,
         ]);
         Reservation::factory()->create([
             'server_id' => $server->id,
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
             'start_time' => now()->addHours(5)->timestamp,
             'end_time' => now()->addHours(10)->timestamp,
         ]);

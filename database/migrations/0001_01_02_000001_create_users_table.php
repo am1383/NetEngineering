@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\RoleType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,8 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('email')->unique();
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('role_id')->default(RoleType::USER->value)
+                ->constrained();
             $table->string('phone_number')->unique();
             $table->string('password');
 

@@ -9,7 +9,6 @@ use App\Models\{
     User
 };
 
-use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
@@ -23,14 +22,14 @@ class UserTest extends TestCase
 
     public function test_user_can_see_profile(): void
     {
-        $response = $this->getJson(route('show.profile'));
+        $response = $this->getJson(route('profile.show'));
 
         $response->assertOk()
             ->assertJsonStructure([
                 'data' => [
                     'name',
                     'email',
-                    'phone_number',
+                    'phone_number'
                 ],
             ]
         );
@@ -40,13 +39,13 @@ class UserTest extends TestCase
     {
         $name = fake()->name();
 
-        $response = $this->patchJson(route('update.profile'), [
+        $response = $this->patchJson(route('profile.update'), [
             'name' => $name,
         ]);
 
         $response->assertOk();
         $this->assertDatabaseHas('users', [
-            'id' => Auth::id(),
+            'id' => auth()->id(),
             'name' => $name,
         ]);
     }
@@ -55,7 +54,7 @@ class UserTest extends TestCase
     {
         $serverId = Server::factory()->create()->getKey();
         $reservation = Reservation::factory()->create([
-            'user_id' => Auth::id(),
+            'user_id' => auth()->id(),
             'server_id' => $serverId,
         ]);
         ServerCredential::factory()->create([

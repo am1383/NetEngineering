@@ -73,7 +73,7 @@ return [
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => ':attribute قبلا انتخاب شده است.',
     'url' => 'فرمت آدرس :attribute اشتباه است.',
-    'limit' => ':attribute نباید کوچک‌تر از :min باشد.',
+    'per_page' => ':attribute نباید کوچک‌تر از :min باشد.',
     'page' => ':attribute نامعتبر است.',
 
     /*
@@ -150,6 +150,6 @@ return [
         'category_id' => 'دسته بندی',
         'images' => 'تصاویر',
         'page' => 'صفحه',
-        'limit' => 'تعداد',
+        'per_page' => 'تعداد',
     ],
 ];

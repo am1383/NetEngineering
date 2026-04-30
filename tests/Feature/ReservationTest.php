@@ -47,7 +47,7 @@ class ReservationTest extends TestCase
             'server_id' => Server::factory()->create()->getKey(),
         ]);
  
-        $response = $this->getJson(route('show.reservation'));
+        $response = $this->getJson(route('reservations.show'));
 
         $response->assertOk()
             ->assertJsonCount(1, 'data');

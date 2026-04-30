@@ -23,7 +23,7 @@ class PaginationRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'per_page' => 'nullable|integer|min:1|max:15',
+            'per_page' => ['nullable', 'integer', 'min:1', 'max:'.config('pagination.max_per_page')],
             'page' => 'nullable|integer|min:1',
         ];
     }

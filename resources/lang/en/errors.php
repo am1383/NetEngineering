@@ -20,4 +20,5 @@ return [
     'unauthenticated' => 'You must be logged in to access this resource.',
     'unauthorized' => 'You are not authorized to access this resource.',
     'time_slot_unavailable' => 'The selected time slot is not available.',
+    'try_again_later' => 'Please try again later.'
 ];
