@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -14,14 +15,15 @@ class ServerCredentialController extends Controller
         private readonly ServerCredentialServiceInterface $serverCredentialService
     ) {}
 
-    public function setCredential(StoreServerCredentialRequest $request, Reservation $reservation): JsonResponse
+    public function setCredential(Reservation $reservation, StoreServerCredentialRequest $request): JsonResponse
     {
-        $this->serverCredentialService
-            ->assignServerCredential(new AssignServerCredentialDTO(
+        $this->serverCredentialService->assignServerCredential(
+            new AssignServerCredentialDTO(
                 $reservation->id,
-                $request->user_name,
+                $request->username,
                 $request->password,
-            ));
+            )
+        );
 
         return $this->successResponse();
     }

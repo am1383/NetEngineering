@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Enums;
 
-enum RoleEnum: int
+enum RoleType: int
 {
     case ADMIN = 1;
 

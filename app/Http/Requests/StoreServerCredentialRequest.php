@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -23,7 +24,7 @@ class StoreServerCredentialRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'user_name' => 'required|string|min:6|unique:server_credentials,username',
+            'username' => 'required|string|min:6|unique:server_credentials',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()

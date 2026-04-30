@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -9,8 +10,8 @@ class UserRequest extends BaseRequest
 {
     private const COMMON_RULES = [
         'name' => 'required|string|min:3|max:30',
-        'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users,phone_number',
-        'email' => 'nullable|email|unique:users,email',
+        'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users',
+        'email' => 'nullable|email|unique:users',
     ];
 
     public function rules(): array
@@ -32,8 +33,8 @@ class UserRequest extends BaseRequest
                     ->symbols(),
                 ],
                 'name' => 'nullable|string|min:3|max:30',
-                'phone_number' => 'nullable|string|regex:/^09\d{9}$/|unique:users,phone_number',
-                'email' => 'nullable|email|unique:users,email',
+                'phone_number' => 'nullable|string|regex:/^09\d{9}$/|unique:users',
+                'email' => 'nullable|email|unique:users',
             ],
 
             default => []

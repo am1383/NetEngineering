@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Interfaces\Repositories;
 
@@ -9,5 +10,5 @@ interface ServerRepositoryInterface extends GenericRepositoryInterface
 {
     public function fetchAvailableServers(?string $gpu, ?string $cpu): Collection;
 
-    public function findOrFailByUuid(string $serverUuid, array $columns = ['*']): Server;
+    public function findOrFailByUlid(string $ulid, array $columns = ['*']): Server;
 }

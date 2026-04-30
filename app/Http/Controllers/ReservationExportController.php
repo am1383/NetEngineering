@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -8,9 +9,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ReservationExportController
 {
-    public function __invoke(): BinaryFileResponse
+    public function __invoke(ReservationExport $export): BinaryFileResponse
     {
-        return Excel::download(app(ReservationExport::class),
-            'reservations.xlsx');
+        return Excel::download($export, 'reservations.xlsx');
     }
 }

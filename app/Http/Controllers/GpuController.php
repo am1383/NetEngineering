@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -19,8 +20,7 @@ class GpuController extends Controller
         $dto = PaginationDTO::fromRequest($request->validated());
 
         return $this->successResponse(GpuResource::collection(
-            $this->gpuService
-                ->getAllGpu($dto->perPage, $dto->page))
+            $this->gpuService->getAllGpu($dto))
         );
     }
 }

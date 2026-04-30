@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use App\Enums\RentTypeEnum;
+use App\Enums\RentType;
 use App\Http\Requests\Request as BaseRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -24,10 +25,10 @@ class StoreReservationRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'server_uuid' => 'required|string|exists:servers,uuid',
+            'server_ulid' => 'required|string|exists:servers,ulid',
             'start_time' => 'required|date|after:now|before:end_time',
             'end_time' => 'required|date|after:start_time',
-            'rent_type' => ['required', 'string', new Enum(RentTypeEnum::class)],
+            'rent_type' => ['required', 'string', new Enum(RentType::class)],
         ];
     }
 }

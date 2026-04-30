@@ -2,19 +2,16 @@
 
 namespace Tests\Feature;
 
+use App\Models\Gpu;
 use Tests\TestCase;
 
 class GpuTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed('GpuSeeder');
-    }
-
     public function test_get_gpus(): void
     {
-        $response = $this->get(route('index.gpu'));
+        Gpu::factory()->count(3)->create();
+
+        $response = $this->get(route('gpus.index'));
 
         $response->assertOk()
             ->assertJsonCount(3, 'data');

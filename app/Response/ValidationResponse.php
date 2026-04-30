@@ -1,16 +1,12 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Response;
 
-use Illuminate\Contracts\Support\{
-    MessageBag,
-    Responsable,
-};
-
-use Illuminate\Http\{
-    JsonResponse,
-    Response
-};
+use Illuminate\Contracts\Support\MessageBag;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 final class ValidationResponse implements Responsable
 {

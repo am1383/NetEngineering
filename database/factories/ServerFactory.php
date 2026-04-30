@@ -2,6 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\{
+    Cpu,
+    Gpu,
+    Ram
+};
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,14 +24,22 @@ class ServerFactory extends Factory
     {
         return [
             'slug' => fake()->slug(12),
-            'server_name' => fake()->name(),
-            'ram_id' => 1,
-            'gpu_id' => 1,
-            'storage' => 1024,
-            'os' => 'Windows',
+            'name' => fake()->name(),
+            'is_active' => true,
+            'ram_id' => Ram::factory()->create()->getKey(),
+            'gpu_id' => Gpu::factory()->create()->getKey(),
+            'storage' => fake()->numberBetween(1024, 2048),
+            'os' => fake()->randomElement(['Windows', 'Linux']),
             'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
             'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'cpu_id' => 1,
+            'cpu_id' => Cpu::factory()->create()->getKey(),
         ];
+    }
+
+    public function notActive(): static
+    {
+        return $this->state(fn (): array => [
+            'is_active' => false,
+        ]);
     }
 }

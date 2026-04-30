@@ -19,7 +19,5 @@ return [
     'method_not_allowed' => 'The selected method is not allowed.',
     'unauthenticated' => 'You must be logged in to access this resource.',
     'unauthorized' => 'You are not authorized to access this resource.',
-    'database_error' => 'An internal database error has occurred.',
-    'internal_server_error' => 'An internal server error has occurred.',
     'time_slot_unavailable' => 'The selected time slot is not available.',
 ];

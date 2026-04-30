@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Enums\RoleEnum;
-
 use App\Models\{
+    Ram,
     Reservation,
     Server,
     User
@@ -15,30 +14,23 @@ use Tests\TestCase;
 
 class ServerTest extends TestCase
 {
-    protected function setUp(): void
+    public function test_admin_can_update_reserve_server(): void
     {
-        parent::setUp();
-        $this->seed('DatabaseSeeder');
-    }
+        $this->actingAsAdmin();
+        $serverSlug = Server::factory()->create()->slug;
+        $ramId = Ram::factory()->create()->getKey();
 
-    public function test_admin_user_can_update_reserve_server(): void
-    {
-        $this->actingAsAdminUser();
-        $server = Server::factory()->create();
-        $payload = [
-            'ram_id' => 2,
-            'storage' => 512,
-        ];
-
-        $response = $this->patchJson(
-            route('update.server', $server->slug),
-            $payload
+        $response = $this->patchJson(route('servers.update', $serverSlug),
+            [
+                'ram_id' => $ramId,
+                'storage' => 512,
+            ]
         );
 
         $response->assertOk();
         $this->assertDatabaseHas('servers', [
-            'slug' => $server->slug,
-            'ram_id' => 2,
+            'slug' => $serverSlug,
+            'ram_id' => $ramId,
             'storage' => 512,
         ]);
     }
@@ -47,33 +39,41 @@ class ServerTest extends TestCase
     {
         $this->actingAsUser();
         $server = Server::factory()->create();
-        $serverId = $server->id;
         Reservation::factory()->create([
-            'server_id' => $serverId,
+            'server_id' => $server->id,
             'user_id' => auth()->id(),
             'start_time' => now()->addHour()->timestamp,
             'end_time' => now()->addHours(5)->timestamp,
         ]);
         Reservation::factory()->create([
-            'server_id' => $serverId,
+            'server_id' => $server->id,
             'user_id' => auth()->id(),
-            'start_time' => now()->addHour(5)->timestamp,
+            'start_time' => now()->addHours(5)->timestamp,
             'end_time' => now()->addHours(10)->timestamp,
         ]);
 
-        $response = $this->getJson(
-            route('unavailabe.server',
-                $server->slug
-            ));
+        $response = $this->getJson(route('servers.unavailable',
+            $server->slug
+        ));
 
-        $response->assertOk();
+        $response->assertOk()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'start_datetime',
+                        'end_datetime',
+                    ],
+                ],
+            ]);
     }
 
     public function test_get_available_servers(): void
     {
         $this->actingAsUser();
+        Server::factory()->count(3)->create();
+        Server::factory()->notActive()->create();
 
-        $response = $this->getJson(route('index.server'));
+        $response = $this->getJson(route('servers.index'));
 
         $response->assertOk()
             ->assertJsonCount(3, 'data');
@@ -81,17 +81,15 @@ class ServerTest extends TestCase
 
     private function actingAsUser(): void
     {
-        $user = User::factory()->create();
-
-        Passport::actingAs($user);
+        Passport::actingAs(User::factory()->user()
+            ->create()
+        );
     }
 
-    private function actingAsAdminUser(): void
+    private function actingAsAdmin(): void
     {
-        $adminUser = User::factory()->create([
-            'role_id' => RoleEnum::ADMIN->value,
-        ]);
-
-        Passport::actingAs($adminUser);
+        Passport::actingAs(User::factory()->admin()
+            ->create()
+        );
     }
 }

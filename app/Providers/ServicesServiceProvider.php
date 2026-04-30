@@ -1,12 +1,7 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Providers;
-
-use App\Exports\ReservationExport;
-
-use App\Interfaces\Repositories\{
-    ReservationRepositoryInterface
-};
 
 use App\Interfaces\Services\{
     CpuServiceInterface,
@@ -30,13 +25,17 @@ use App\Services\{
     UserService
 };
 
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
-class DomainServiceProvider extends ServiceProvider
+class ServicesServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * This provider is deferred.
+     */
+    protected $defer = true;
+
+    /**
+     * Register application service bindings.
      */
     public function register(): void
     {
@@ -48,12 +47,6 @@ class DomainServiceProvider extends ServiceProvider
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(CpuServiceInterface::class, CpuService::class);
         $this->app->bind(GpuServiceInterface::class, GpuService::class);
-
-        $this->app->bind(ReservationExport::class, function (Container $app): ReservationExport {
-            return new ReservationExport(
-                $app->make(ReservationRepositoryInterface::class)
-            );
-        });
     }
 
     /**
@@ -62,5 +55,22 @@ class DomainServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+    }
+
+    /**
+     * Services provided by this deferred provider.
+     */
+    public function provides(): array
+    {
+        return [
+            LoginServiceInterface::class,
+            HomeServiceInterface::class,
+            ReservationServiceInterface::class,
+            ServerCredentialServiceInterface::class,
+            ServerServiceInterface::class,
+            UserServiceInterface::class,
+            CpuServiceInterface::class,
+            GpuServiceInterface::class,
+        ];
     }
 }

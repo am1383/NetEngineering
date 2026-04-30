@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -9,14 +10,14 @@ use App\DTOs\Reservation\{
     StoreReservationDTO,
 };
 
-use App\Enums\RentTypeEnum;
+use App\Enums\RentType;
 use App\Exceptions\ConfilictException;
 use App\Helpers\TimeHelper;
 
 use App\Interfaces\Repositories\{
     ReservationRepositoryInterface,
     ServerCredentialRepositoryInterface,
-    ServerRepositoryInterface,
+    ServerRepositoryInterface
 };
 
 use App\Interfaces\Services\ReservationServiceInterface;
@@ -41,20 +42,19 @@ class ReservationService implements ReservationServiceInterface
     public function storeReservation(StoreReservationDTO $dto): Reservation
     {
         $server = $this->serverRepository
-            ->findOrFailByUuid(
-                $dto->serverUuid,
-                ['id', 'price_per_day', 'price_per_hour']
-            );
+            ->findOrFailByUlid($dto->serverUlid, [
+                'id', 'price_per_day', 'price_per_hour'
+            ]);
 
         $startTimestamp = TimeHelper::datetimeToTimestamp($dto->startTime);
         $endTimestamp = TimeHelper::datetimeToTimestamp($dto->endTime);
 
         $this->hasConflict($server->id, $startTimestamp, $endTimestamp);
 
-        $hours = $this->getDurationInHours($startTimestamp, $endTimestamp);
-        $price = $this->calculateRentalPrice(new ServerRentalPriceDTO(
+        $durationHours = $this->getDurationInHours($startTimestamp, $endTimestamp);
+        $rentalPrice = $this->calculateRentalPrice(new ServerRentalPriceDTO(
             $dto->rentType,
-            $hours,
+            $durationHours,
             $server->price_per_hour,
             $server->price_per_day
         ));
@@ -64,22 +64,15 @@ class ReservationService implements ReservationServiceInterface
             $startTimestamp,
             $endTimestamp,
             $dto->rentType,
-            $price
+            $rentalPrice
         ));
     }
 
     private function hasConflict(int $serverId, int $startTime, int $endTime): void
     {
-        $hasConflict = $this->reservationRepository
-            ->hasConflict(
-                $serverId,
-                $startTime,
-                $endTime
-            );
-
-        throw_if(
-            $hasConflict,
-            ConfilictException::class
+        throw_if($this->reservationRepository->hasConflict(
+            $serverId, $startTime, $endTime
+            ), ConfilictException::class
         );
     }
 
@@ -87,20 +80,18 @@ class ReservationService implements ReservationServiceInterface
     {
         return DB::transaction(function () use ($dto): Reservation {
             return tap(
-                $this->reservationRepository->store([
+                $this->reservationRepository->create([
                     'user_id' => auth()->id(),
                     'server_id' => $dto->serverId,
                     'start_time' => $dto->startTime,
                     'end_time' => $dto->endTime,
                     'rent_type' => $dto->rentType,
                     'total_price' => $dto->price,
-                ]),
-                function (Reservation $reservation): void {
-                    $this->serverCredentialRepository->store([
+                ]), function (Reservation $reservation): void {
+                    $this->serverCredentialRepository->create([
                         'reservation_id' => $reservation->id,
-                    ]);
-                }
-            );
+                ]);
+            });
         });
     }
 
@@ -112,7 +103,7 @@ class ReservationService implements ReservationServiceInterface
 
     private function calculateRentalPrice(ServerRentalPriceDTO $dto): float
     {
-        return $dto->rentType === RentTypeEnum::HOURLY_RENT
+        return $dto->rentType === RentType::HOURLY_RENT->value
             ? $dto->hours * $dto->pricePerHour
             : ceil($dto->hours / Carbon::HOURS_PER_DAY) * $dto->pricePerDay;
     }
@@ -126,13 +117,13 @@ class ReservationService implements ReservationServiceInterface
     public function getUserReservation(): Collection
     {
         return $this->reservationRepository
-            ->fetchUserReservations();
+            ->fetchUserReservations(auth()->user());
     }
 
     public function getServerReservationsTime(Server $server): Collection
     {
         $reservations = $this->reservationRepository
-            ->fetchServerReservations($server->id);
+            ->fetchServerReservations($server);
 
         return $this->mergeUnavailableRanges($reservations);
     }

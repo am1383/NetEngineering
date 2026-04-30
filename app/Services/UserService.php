@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -14,13 +15,12 @@ class UserService implements UserServiceInterface
 
     public function createUser(array $attributes): Authenticatable
     {
-        return $this->userRepository
-            ->store($attributes);
+        return $this->userRepository->create($attributes);
     }
 
     public function updateUser(array $attributes): bool
     {
         return $this->userRepository
-            ->update($attributes, auth()->user());
+            ->updateOrFail(auth()->user(), $attributes);
     }
 }

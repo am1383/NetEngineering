@@ -2,27 +2,32 @@
 
 namespace Database\Factories;
 
-use App\Enums\RoleEnum;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
             'name' => fake()->name(),
-            'role_id' => RoleEnum::USER->value,
             'email' => fake()->unique()->safeEmail(),
             'phone_number' => fake()->regexify('09[0-9]{9}'),
             'password' => fake()->password(8),
         ];
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (): array => [
+            'role_id' => Role::factory()->admin(),
+        ]);
+    }
+
+    public function user(): static
+    {
+        return $this->state(fn (): array => [
+            'role_id' => Role::factory()->user(),
+        ]);
     }
 }

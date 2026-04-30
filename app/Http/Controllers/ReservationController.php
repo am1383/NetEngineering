@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -6,8 +7,11 @@ use App\DTOs\Reservation\StoreReservationDTO;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Resources\ReservationResource;
 use App\Interfaces\Services\ReservationServiceInterface;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 class ReservationController extends Controller
 {
@@ -19,25 +23,22 @@ class ReservationController extends Controller
     {
         $reservation = $this->reservationService
             ->storeReservation(new StoreReservationDTO(
-                $request->server_uuid,
+                $request->server_ulid,
                 $request->start_time,
                 $request->end_time,
                 $request->rent_type
             ));
 
-        return $this->successResponse(
-            new ReservationResource($reservation),
-            status: Response::HTTP_CREATED
+        return $this->successResponse(new ReservationResource($reservation),
+            Response::HTTP_CREATED
         );
     }
 
     public function show(): JsonResponse
     {
-        return $this->successResponse(
-            ReservationResource::collection(
-            $this->reservationService
-                ->getUserReservation())
-        );
+        return $this->successResponse(ReservationResource::collection(
+            $this->reservationService->getUserReservation()
+        ));
     }
 
     public function withoutCredential(): JsonResponse

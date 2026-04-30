@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     GpuController,
     HomeController,
     LoginController,
+    ProfileController,
     RegisterController,
     ReservationController,
     ReservationExportController,
@@ -23,45 +24,45 @@ Route::prefix('v1')->group(function () {
         ->name('register');
 
     Route::get('/servers/{server}/unavailable', [ServerController::class, 'unavailable'])
-        ->name('unavailabe.server');
+        ->name('servers.unavailable');
     Route::get('/status', HomeController::class)
         ->name('home.status');
     Route::get('/gpus', [GpuController::class, 'index'])
-        ->name('index.gpu');
+        ->name('gpus.index');
     Route::get('/cpus', [CpuController::class, 'index'])
-        ->name('index.cpu');
+        ->name('cpus.index');
 
     Route::middleware('auth:api')->group(function () {
         Route::get('/servers', [ServerBrowseController::class, 'index'])
-            ->name('index.server');
+            ->name('servers.index');
         Route::get('/reservation/without-credential', [ReservationController::class, 'withoutCredential'])
-            ->name('without.credential');
+            ->name('credential.without');
         Route::get('/my-reservations', [ReservationController::class, 'show'])
             ->name('show.reservation');
         Route::post('/reserves', [ReservationController::class, 'store'])
-            ->name('store.reserve');
+            ->name('reserves.store');
 
         Route::controller(UserController::class)->group(function () {
             Route::post('/users', [UserController::class, 'store'])
-                ->name('store.user');
-            Route::match(['PUT', 'PATCH'], '/profile', [UserController::class, 'update'])
-                ->name('profile.update');
-            Route::get('/profile', [UserController::class, 'show'])
-                ->name('profile.show');
+                ->name('users.store');
+            Route::match(['PUT', 'PATCH'], '/profile', [ProfileController::class, 'update'])
+                ->name('update.profile');
+            Route::get('/profile', [ProfileController::class, 'show'])
+                ->name('show.profile');
         });
 
         Route::middleware('admin')->group(function () {
             Route::prefix('/admin')->group(function () {
                 Route::get('/export-reservations', ReservationExportController::class)
-                    ->name('export.reservation');
+                    ->name('reservations.export');
                 Route::controller(ServerController::class)->group(function () {
                     Route::post('/servers', 'store')
-                        ->name('store.server');
+                        ->name('servers.store');
                     Route::patch('/servers/{server}', 'update')
-                        ->name('update.server');
+                        ->name('servers.update');
                 });
                 Route::put('/reservations/{reservation}/credential', [ServerCredentialController::class, 'setCredential'])
-                    ->name('put.server.credential');
+                    ->name('server-credentials.put');
             });
         });
     });

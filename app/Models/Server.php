@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Models;
 
@@ -39,8 +40,8 @@ class Server extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (Model $model): void {
-            $model->uuid = Str::uuid();
+        static::creating(function (Server $server): void {
+            $server->ulid = Str::ulid();
         });
     }
 

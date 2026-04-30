@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -14,7 +15,7 @@ class HomeController extends Controller
     public function __invoke(): JsonResponse
     {
         return $this->successResponse($this->homeService
-            ->getStatus()
+            ->getOverviewCounts()
         );
     }
 }

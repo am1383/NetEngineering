@@ -1,13 +1,11 @@
-<?php
+<?php 
+declare(strict_types=1); 
 
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\GenericRepositoryInterface;
-
-use Illuminate\Database\Eloquent\{
-    Builder,
-    Model
-};
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class GenericRepository implements GenericRepositoryInterface
 {
@@ -20,18 +18,18 @@ abstract class GenericRepository implements GenericRepositoryInterface
         return $this->model->count($columns);
     }
 
-    public function queryFetchAll(array $columns = ['*']): Builder
+    public function fetchAll(array $columns = ['*']): Builder
     {
         return $this->model->select($columns);
     }
 
-    public function store(array $attributes): Model
+    public function create(array $attributes): Model
     {
         return $this->model->create($attributes);
     }
 
-    public function update(array $attributes, Model $model): bool
+    public function updateOrFail(Model $model, array $attributes): bool
     {
-        return $model->update($attributes);
+        return $model->updateOrFail($attributes);
     }
 }

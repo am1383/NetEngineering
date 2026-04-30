@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->foreignId('cpu_id')->constrained();
             $table->string('slug');
-            $table->string('server_name');
-            $table->uuid('uuid')->unique()->index();
+            $table->string('name');
+            $table->ulid('ulid')->unique()->index();
             $table->foreignId('gpu_id')->constrained();
             $table->foreignId('ram_id')->constrained();
             $table->integer('storage');

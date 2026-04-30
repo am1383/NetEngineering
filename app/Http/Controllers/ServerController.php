@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1); 
 
 namespace App\Http\Controllers;
 
@@ -26,16 +27,15 @@ class ServerController extends Controller
         $server = $this->serverService
             ->createServer($request->validated());
 
-        return $this->successResponse(
-            new ServerResource($server),
-            status: Response::HTTP_CREATED
+        return $this->successResponse(new ServerResource($server),
+            Response::HTTP_CREATED
         );
     }
 
-    public function update(ServerRequest $request, Server $server): JsonResponse
+    public function update(Server $server, ServerRequest $request): JsonResponse
     {
         return $this->successResponse($this->serverService
-            ->updateServer($request->validated(), $server)
+            ->updateServer($server, $request->validated())
         );
     }
 

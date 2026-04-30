@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CpuSeeder::class,
             RamSeeder::class,
             GpuSeeder::class,
-            AdminUserSeeder::class,
+            AdminSeeder::class,
             UserSeeder::class,
             ServerSeeder::class,
             ReservationSeeder::class,

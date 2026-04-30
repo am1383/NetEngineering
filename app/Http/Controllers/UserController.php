@@ -1,12 +1,16 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Services\UserServiceInterface;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 class UserController extends Controller
 {
@@ -19,23 +23,8 @@ class UserController extends Controller
         $user = $this->userService
             ->createUser($request->validated());
 
-        return $this->successResponse(
-            new UserResource($user),
-            status: Response::HTTP_CREATED
-        );
-    }
-
-    public function update(UserRequest $request): JsonResponse
-    {
-        return $this->successResponse($this->userService
-            ->updateUser($request->validated())
-        );
-    }
-
-    public function show(): JsonResponse
-    {
-        return $this->successResponse(
-            new UserResource(auth()->user())
+        return $this->successResponse(new UserResource($user),
+            Response::HTTP_CREATED
         );
     }
 }

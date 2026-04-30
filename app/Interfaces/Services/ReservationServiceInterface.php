@@ -1,10 +1,15 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Interfaces\Services;
 
 use App\DTOs\Reservation\StoreReservationDTO;
-use App\Models\Reservation;
-use App\Models\Server;
+
+use App\Models\{
+    Reservation,
+    Server
+};
+
 use Illuminate\Support\Collection;
 
 interface ReservationServiceInterface

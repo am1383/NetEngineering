@@ -1,15 +1,12 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\ServerRepositoryInterface;
 use App\Models\Server;
-
-use Illuminate\Database\Eloquent\{
-    Builder,
-    Model
-};
-
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class ServerRepository extends GenericRepository implements ServerRepositoryInterface
@@ -18,10 +15,10 @@ class ServerRepository extends GenericRepository implements ServerRepositoryInte
         protected readonly Model $model
     ) {}
 
-    public function findOrFailByUuid(string $serverUuid, array $columns = ['*']): Server
+    public function findOrFailByUlid(string $ulid, array $columns = ['*']): Server
     {
-        return $this->model->select($columns)
-            ->where('uuid', $serverUuid)
+        return $this->fetchAll($columns)
+            ->where('ulid', $ulid)
             ->firstOrFail();
     }
 

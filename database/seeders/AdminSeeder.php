@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
+use App\Enums\RoleType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class AdminUserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,9 +20,8 @@ class AdminUserSeeder extends Seeder
             [
                 'name' => 'System Admin',
                 'phone_number' => '+989183121519',
-                'password' => fake()->password(8),
-                'role_id' => Role::where('name', 'user')
-                    ->value('id'),
+                'password' => '1451383@Sm',
+                'role_id' => RoleType::ADMIN->value
             ]
         );
     }

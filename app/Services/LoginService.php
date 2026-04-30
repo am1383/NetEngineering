@@ -1,43 +1,36 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
+use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Interfaces\Services\LoginServiceInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginService implements LoginServiceInterface
 {
-    public function login(string $phoneNumber, string $password): string
+    public function __construct(
+        private readonly UserRepositoryInterface $userRepository
+    ) {}
+
+    public function login(string $phoneNumber, string $password): array
     {
-        $credentials = $this->createLoginCredentials(
-            $phoneNumber,
-            $password
-        );
+        $user = $this->userRepository
+            ->findUserByPhoneNumber($phoneNumber);
 
-        $this->validateCredentials($credentials);
-
-        return $this->createToken(auth()->user());
-    }
-
-    private function validateCredentials(array $credentials): void
-    {
         throw_unless(
-            Auth::attempt($credentials),
+            $user and Hash::check($password, $user->password),
             InvalidCredentialsException::class
         );
-    }
 
-    private function createLoginCredentials(string $phoneNumber, string $password): array
-    {
         return [
-            'phone_number' => $phoneNumber,
-            'password' => $password,
+            'token' => $this->createAccessToken($user)
         ];
     }
 
-    private function createToken(User $user): string
+    private function createAccessToken(User $user): string
     {
         return $user->createToken('api')->accessToken;
     }

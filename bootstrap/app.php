@@ -1,6 +1,7 @@
-<?php
+<?php 
+declare(strict_types=1);
 
-use App\Http\Middleware\IsAdminMiddleware;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin' => IsAdminMiddleware::class,
+            'admin' => EnsureAdmin::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
@@ -48,13 +49,13 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function (QueryException $e, $request): JsonResponse {
             return response()->json([
-                'message' => __('errors.internal_server_error'),
+                'message' => __('errors.try_again_later'),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         });
 
         $exceptions->render(function (\Throwable $e, $request): JsonResponse {
             return response()->json([
-                'message' => __('errors.internal_server_error'),
+                'message' => __('errors.try_again_later'),
                 'error' => config('app.debug') ? $e->getMessage() : null,
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         });

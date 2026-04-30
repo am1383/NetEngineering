@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -8,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsAdminMiddleware
+class EnsureAdmin
 {
     /**
      * Handle an incoming request.

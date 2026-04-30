@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Exports;
 
@@ -16,12 +17,12 @@ class ReservationExport implements FromQuery, WithHeadings
     public function query(): Builder
     {
         return $this->reservationRepository
-            ->queryFetchReservationExport();
+            ->fetchReservationExport();
     }
 
     public function headings(): array
     {
-        return ['user_name', 'server_name', 'start_time',
+        return ['username', 'name', 'start_time',
             'end_time', 'rent_type', 'total_price', 'status',
         ];
     }

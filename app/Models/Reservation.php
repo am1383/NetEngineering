@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\StatusEnum;
+use App\Enums\TransactionStatus;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,12 +29,9 @@ class Reservation extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (Model $model): void {
-            $model->uuid = Str::uuid();
-        });
-
-        static::creating(function (Model $model): void {
-            $model->ip = fake()->ipv4();
+        static::creating(function (Reservation $reservation): void {
+            $reservation->ulid = Str::ulid();
+            $reservation->ip = fake()->ipv4();
         });
     }
 
@@ -52,13 +50,13 @@ class Reservation extends Model
         return $this->hasOne(ServerCredential::class, 'reservation_id');
     }
 
-    public function scopePaid(Builder $query): Builder
+    public function scopePaidStatus(Builder $query): Builder
     {
-        return $query->where('status', StatusEnum::PAID);
+        return $query->where('status', TransactionStatus::PAID->value);
     }
 
     public function getRouteKeyName(): string
     {
-        return 'uuid';
+        return 'ulid';
     }
 }

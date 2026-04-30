@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -15,13 +16,8 @@ class ServerBrowseController extends Controller
 
     public function index(ServerBrowseRequest $request): JsonResponse
     {
-        $servers = $this->serverService->getAvailableServers(
-                $request->query('gpu'),
-                $request->query('cpu')
-            );
-
-        return $this->successResponse(
-            ServerResource::collection($servers)
-        );
+        return $this->successResponse(ServerResource::collection($this->serverService
+            ->getAvailableServers($request->query('gpu'), $request->query('cpu'))
+        ));
     }
 }

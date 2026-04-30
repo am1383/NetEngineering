@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Interfaces\Repositories;
 
@@ -9,11 +10,9 @@ interface GenericRepositoryInterface
 {
     public function count(string $columns = '*'): int;
 
-    public function queryFetchAll(array $columns = ['*']): Builder;
+    public function fetchAll(array $columns = ['*']): Builder;
 
-    public function findOrFail(int $id): Model;
+    public function create(array $attributes): Model;
 
-    public function store(array $attributes): Model;
-
-    public function update(array $attributes, Model $model): bool;
+    public function updateOrFail(Model $model, array $attributes): bool;
 }

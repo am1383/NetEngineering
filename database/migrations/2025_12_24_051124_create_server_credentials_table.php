@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('server_credentials', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
             $table->string('username')->nullable();
             $table->string('password')->nullable();
+            
             $table->timestamps();
         });
     }

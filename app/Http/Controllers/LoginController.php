@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -15,13 +16,8 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request): JsonResponse
     {
-        $token = $this->loginService->login(
-            $request->phone_number,
-            $request->password
-        );
-
-        return $this->successResponse(
-            new LoginResource($token)
+        return $this->successResponse($this->loginService
+            ->login($request->phone_number, $request->password)
         );
     }
 }

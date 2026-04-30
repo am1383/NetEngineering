@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Enums\RoleEnum;
-
 use App\Models\{
     Reservation,
     Server,
@@ -18,24 +16,23 @@ class ServerCredentialTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->createSeeders();
-        $this->actingAsAdminUser();
+        $this->actingAsAdmin();
     }
 
     public function test_admin_can_set_credential(): void
     {
-        $serverId = Server::factory()->create()->id;
-        $userId = User::factory()->create()->id;
-        $reservation = $this->createReservation($userId, $serverId);
-        $payload = [
-            'user_name' => fake()->userName(),
-            'password' => 'Test@123',
-        ];
+        $serverId = Server::factory()->create()->getKey();
+        $userId = User::factory()->user()->create()->getKey();
+        $reservation = Reservation::factory()->create([
+            'server_id' => $serverId,
+            'user_id' => $userId,
+        ]);
 
         $response = $this->putJson(
-            route('put.server.credential', $reservation->uuid),
-            $payload
-        );
+            route('server-credentials.put', $reservation->ulid), [
+                'username' => fake()->userName(),
+                'password' => 'Test@123',
+            ]);
 
         $response->assertOk();
         $this->assertDatabaseHas('server_credentials', [
@@ -43,28 +40,10 @@ class ServerCredentialTest extends TestCase
         ]);
     }
 
-    private function createReservation(int $userId, int $serverId): Reservation
+    private function actingAsAdmin(): void
     {
-        return Reservation::factory()->create([
-            'server_id' => $serverId,
-            'user_id' => $userId,
-        ]);
-    }
-
-    private function actingAsAdminUser(): void
-    {
-        $adminUser = User::factory()->create([
-            'role_id' => RoleEnum::ADMIN->value,
-        ]);
-
-        Passport::actingAs($adminUser);
-    }
-
-    private function createSeeders(): void
-    {
-        $this->seed('RoleSeeder');
-        $this->seed('CpuSeeder');
-        $this->seed('RamSeeder');
-        $this->seed('GpuSeeder');
+        Passport::actingAs(User::factory()->admin()
+            ->create()
+        );
     }
 }

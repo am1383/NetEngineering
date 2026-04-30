@@ -1,8 +1,10 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Interfaces\Services\UserServiceInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -15,12 +17,8 @@ class RegisterController extends Controller
 
     public function __invoke(RegisterRequest $request): JsonResponse
     {
-        $this->userService->createUser(
-            $request->validated()
-        );
-
-        return $this->successResponse(
-            status: Response::HTTP_CREATED
+        return $this->successResponse(new UserResource($this->userService
+            ->createUser($request->validated())), Response::HTTP_CREATED
         );
     }
 }

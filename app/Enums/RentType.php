@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Enums;
 
-enum RentTypeEnum: string
+enum RentType: string
 {
     case HOURLY_RENT = 'hourly';
 

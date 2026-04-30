@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1); 
 
 namespace App\Interfaces\Services;
 
 interface HomeServiceInterface
 {
-    public function getStatus(): array;
+    public function getOverviewCounts(): array;
 }

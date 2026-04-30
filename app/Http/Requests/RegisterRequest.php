@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -24,8 +25,8 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users,phone_number',
-            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()

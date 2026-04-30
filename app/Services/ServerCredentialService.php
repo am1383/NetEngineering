@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -14,7 +15,6 @@ class ServerCredentialService implements ServerCredentialServiceInterface
 
     public function assignServerCredential(AssignServerCredentialDTO $dto): void
     {
-        $this->serverCredentialRepository
-            ->assignCredentials($dto);
+        $this->serverCredentialRepository->assignCredentials($dto);
     }
 }

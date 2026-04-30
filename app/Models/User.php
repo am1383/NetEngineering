@@ -1,8 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Enums\RoleEnum;
+use App\Enums\RoleType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -51,7 +52,7 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::creating(function (User $user): void {
-            $user->role_id ??= RoleEnum::USER->value;
+            $user->role_id ??= RoleType::USER->value;
         });
     }
 

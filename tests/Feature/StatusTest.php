@@ -2,18 +2,25 @@
 
 namespace Tests\Feature;
 
+use App\Models\{
+    Reservation,
+    Server,
+    User
+};
+
 use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed('DatabaseSeeder');
-    }
-
     public function test_get_status(): void
     {
+        $userId = User::factory()->user()->create()->getKey();
+        $serverId = Server::factory()->create()->getKey();
+        Reservation::factory()->create([
+            'user_id' => $userId,
+            'server_id' => $serverId,
+        ]);
+
         $response = $this->getJson(route('home.status'));
 
         $response->assertOk()
@@ -24,8 +31,8 @@ class StatusTest extends TestCase
                     'reservations',
                 ],
             ])
-            ->assertJsonPath('data.users', 3)
-            ->assertJsonPath('data.servers', 3)
+            ->assertJsonPath('data.users', 1)
+            ->assertJsonPath('data.servers', 1)
             ->assertJsonPath('data.reservations', 1);
     }
 }

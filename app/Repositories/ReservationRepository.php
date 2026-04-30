@@ -1,14 +1,13 @@
-<?php
+<?php 
+declare(strict_types=1); 
 
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\ReservationRepositoryInterface;
-
-use Illuminate\Database\Eloquent\{
-    Builder,
-    Model
-};
-
+use App\Models\Server;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class ReservationRepository extends GenericRepository implements ReservationRepositoryInterface
@@ -19,28 +18,26 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
 
     public function hasConflict(int $serverId, int $startTime, int $endTime): bool
     {
-        return $this->model
-            ->where('server_id', $serverId)
+        return $this->model->where('server_id', $serverId)
             ->where('start_time', '<', $endTime)
             ->where('end_time', '>', $startTime)
             ->exists();
     }
 
-    public function fetchUserReservations(): Collection
+    public function fetchUserReservations(User $user): Collection
     {
-        return auth()->user()->reservations()
+        return $user->reservations()
             ->with(['server', 'credential'])
             ->get();
     }
 
-    public function queryFetchReservationExport(): Builder
+    public function fetchReservationExport(): Builder
     {
-        return $this->model
-            ->join('users', 'users.id', '=', 'reservations.user_id')
-            ->join('servers', 'servers.id', '=', 'reservations.server_id')
+        return $this->model->join('users', 'users.id', 'reservations.user_id')
+            ->join('servers', 'servers.id', 'reservations.server_id')
             ->select([
-                'users.name as user_name',
-                'servers.server_name as server_name',
+                'users.name as username',
+                'servers.name as name',
                 'reservations.start_time',
                 'reservations.end_time',
                 'reservations.rent_type',
@@ -49,15 +46,15 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
             ]);
     }
 
-    public function paidCount(): int
+    public function statusPaidCount(): int
     {
-        return $this->model->paid()
+        return $this->model->paidStatus()
             ->count();
     }
 
     public function fetchUserReserveWithoutCredential(): Collection
     {
-        return $this->model->where('user_id', auth()->id())
+        return auth()->user()->reservations()
             ->whereHas('credential', function (Builder $query): void {
                 $query->whereNull('username')
                     ->whereNull('password');
@@ -67,11 +64,10 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
             ->pluck('server.name');
     }
 
-    public function fetchServerReservations(int $serverId): Collection
+    public function fetchServerReservations(Server $server): Collection
     {
-        return $this->model->select(['start_time', 'end_time'])
-            ->where('server_id', $serverId)
-            ->orderBy('start_time')
+        return $server->reservations()->select(['start_time', 'end_time'])
+            ->latest('start_time')
             ->get();
     }
 }

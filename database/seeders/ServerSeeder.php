@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Server;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
+use Str;
 
 class ServerSeeder extends Seeder
 {
@@ -14,53 +13,45 @@ class ServerSeeder extends Seeder
      */
     public function run(): void
     {
-        $now = Carbon::now();
-
         Server::insert([
             [
                 'slug' => 'ryzen-9-5900x',
-                'server_name' => 'Server Number One',
-                'uuid' => Str::uuid(),
+                'name' => 'Server Number One',
+                'ulid' => Str::ulid(),
                 'cpu_id' => 1,
                 'gpu_id' => 1,
                 'ram_id' => 1,
                 'storage' => 512,
-                'os' => 'Windows 11',
+                'os' => 'Windows',
                 'price_per_hour' => 20000,
                 'price_per_day' => 300000,
                 'is_active' => true,
-                'created_at' => $now,
-                'updated_at' => $now,
             ],
             [
                 'slug' => 'ryzen-7-7800x3d',
-                'server_name' => 'Server Number Two',
-                'uuid' => Str::uuid(),
+                'name' => 'Server Number Two',
+                'ulid' => Str::ulid(),
                 'cpu_id' => 2,
                 'gpu_id' => 2,
                 'ram_id' => 2,
                 'storage' => 1024,
-                'os' => 'Ubuntu 22.04',
-                'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-                'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
+                'os' => 'Linux',
+                'price_per_hour' => 10000,
+                'price_per_day' => 50000,
                 'is_active' => true,
-                'created_at' => $now,
-                'updated_at' => $now,
             ],
             [
                 'slug' => 'intel-i9-13900k',
-                'server_name' => 'Server Number Three',
-                'uuid' => Str::uuid(),
+                'name' => 'Server Number Three',
+                'ulid' => Str::ulid(),
                 'cpu_id' => 1,
                 'gpu_id' => 1,
                 'ram_id' => 1,
                 'storage' => 256,
-                'os' => 'Windows 10',
-                'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
-                'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
+                'os' => 'Windows',
+                'price_per_hour' => 10000,
+                'price_per_day' => 50000,
                 'is_active' => true,
-                'created_at' => $now,
-                'updated_at' => $now,
             ],
         ]);
     }

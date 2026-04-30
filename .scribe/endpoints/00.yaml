@@ -159,14 +159,14 @@ endpoints:
         name: server_slug
         description: 'The slug of the server.'
         required: true
-        example: ryzen-9-5900x
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      server_slug: ryzen-9-5900x
+      server_slug: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -175,8 +175,8 @@ endpoints:
     responses:
       -
         custom: []
-        status: 200
-        content: '{"success":true,"message":"","data":[{"start":"2026-02-17 06:50:52","end":"2026-02-17 11:50:52"}]}'
+        status: 500
+        content: '{"message":"errors.try_again_later","error":null}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -216,7 +216,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"success":true,"message":"","data":{"users":3,"servers":3,"reservations":1}}'
+        content: '{"success":true,"message":"","data":{"users":0,"servers":0,"reservations":0}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -520,12 +520,12 @@ endpoints:
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      server_uuid:
+      server_ulid:
         custom: []
-        name: server_uuid
-        description: 'The <code>uuid</code> of an existing record in the servers table.'
+        name: server_ulid
+        description: 'The <code>ulid</code> of an existing record in the servers table.'
         required: true
-        example: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -536,7 +536,7 @@ endpoints:
         name: start_time
         description: 'Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>.'
         required: true
-        example: '2022-03-20'
+        example: '2022-05-24'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -547,7 +547,7 @@ endpoints:
         name: end_time
         description: 'Must be a valid date. Must be a date after <code>start_time</code>.'
         required: true
-        example: '2052-03-20'
+        example: '2052-05-23'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -567,9 +567,9 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      server_uuid: 6ff8f7f6-1eb3-3525-be4a-3932c805afed
-      start_time: '2022-03-20'
-      end_time: '2052-03-20'
+      server_ulid: architecto
+      start_time: '2022-05-24'
+      end_time: '2052-05-23'
       rent_type: architecto
     fileParameters: []
     responses: []
@@ -662,7 +662,7 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: api/v1/user/profile
+    uri: api/v1/profile
     metadata:
       custom: []
       groupName: Endpoints
@@ -740,7 +740,7 @@ endpoints:
     custom: []
     httpMethods:
       - GET
-    uri: api/v1/user/profile
+    uri: api/v1/profile
     metadata:
       custom: []
       groupName: Endpoints
@@ -875,22 +875,29 @@ endpoints:
       storage:
         custom: []
         name: storage
-        description: 'Must be at least 128.'
+        description: ''
         required: true
-        example: 90
+        example: 1024
         type: integer
-        enumValues: []
+        enumValues:
+          - 128
+          - 256
+          - 512
+          - 1024
+          - 2048
         exampleWasSpecified: false
         nullable: false
         deprecated: false
       os:
         custom: []
         name: os
-        description: 'Must not be greater than 50 characters.'
+        description: ''
         required: true
-        example: g
+        example: Linux
         type: string
-        enumValues: []
+        enumValues:
+          - Windows
+          - Linux
         exampleWasSpecified: false
         nullable: false
         deprecated: false
@@ -899,7 +906,7 @@ endpoints:
         name: price_per_hour
         description: 'Must be at least 0.'
         required: true
-        example: 12
+        example: 39
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -910,7 +917,7 @@ endpoints:
         name: price_per_day
         description: 'Must be at least 0.'
         required: true
-        example: 77
+        example: 84
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -931,10 +938,10 @@ endpoints:
       cpu_id: 16
       gpu_id: 16
       ram_id: 16
-      storage: 90
-      os: g
-      price_per_hour: 12
-      price_per_day: 77
+      storage: 1024
+      os: Linux
+      price_per_hour: 39
+      price_per_day: 84
       is_active: true
     fileParameters: []
     responses: []
@@ -947,7 +954,7 @@ endpoints:
     custom: []
     httpMethods:
       - PATCH
-    uri: 'api/v1/admin/servers/{server_slug}'
+    uri: 'api/v1/admin/servers/{slug}'
     metadata:
       custom: []
       groupName: Endpoints
@@ -962,19 +969,19 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      server_slug:
+      slug:
         custom: []
-        name: server_slug
+        name: slug
         description: 'The slug of the server.'
         required: true
-        example: ryzen-9-5900x
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      server_slug: ryzen-9-5900x
+      slug: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -1014,22 +1021,29 @@ endpoints:
       storage:
         custom: []
         name: storage
-        description: 'Must be at least 128.'
+        description: ''
         required: false
-        example: 90
+        example: 256
         type: integer
-        enumValues: []
+        enumValues:
+          - 128
+          - 256
+          - 512
+          - 1024
+          - 2048
         exampleWasSpecified: false
         nullable: true
         deprecated: false
       os:
         custom: []
         name: os
-        description: 'Must not be greater than 50 characters.'
+        description: ''
         required: false
-        example: g
+        example: Linux
         type: string
-        enumValues: []
+        enumValues:
+          - Windows
+          - Linux
         exampleWasSpecified: false
         nullable: true
         deprecated: false
@@ -1038,7 +1052,7 @@ endpoints:
         name: price_per_hour
         description: 'Must be at least 0.'
         required: false
-        example: 12
+        example: 39
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -1049,7 +1063,7 @@ endpoints:
         name: price_per_day
         description: 'Must be at least 0.'
         required: false
-        example: 77
+        example: 84
         type: number
         enumValues: []
         exampleWasSpecified: false
@@ -1060,7 +1074,7 @@ endpoints:
         name: is_active
         description: ''
         required: false
-        example: false
+        example: true
         type: boolean
         enumValues: []
         exampleWasSpecified: false
@@ -1070,11 +1084,11 @@ endpoints:
       cpu_id: 16
       gpu_id: 16
       ram_id: 16
-      storage: 90
-      os: g
-      price_per_hour: 12
-      price_per_day: 77
-      is_active: false
+      storage: 256
+      os: Linux
+      price_per_hour: 39
+      price_per_day: 84
+      is_active: true
     fileParameters: []
     responses: []
     responseFields: []
@@ -1086,7 +1100,7 @@ endpoints:
     custom: []
     httpMethods:
       - PUT
-    uri: 'api/v1/admin/reservations/{reservation_uuid}/credential'
+    uri: 'api/v1/admin/reservations/{reservation_ulid}/credential'
     metadata:
       custom: []
       groupName: Endpoints
@@ -1101,25 +1115,25 @@ endpoints:
       Content-Type: application/json
       Accept: application/json
     urlParameters:
-      reservation_uuid:
+      reservation_ulid:
         custom: []
-        name: reservation_uuid
+        name: reservation_ulid
         description: ''
         required: true
-        example: 847a9d66-a5ec-4b8e-8059-3b29c975be2d
+        example: architecto
         type: string
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      reservation_uuid: 847a9d66-a5ec-4b8e-8059-3b29c975be2d
+      reservation_ulid: architecto
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
-      user_name:
+      username:
         custom: []
-        name: user_name
+        name: username
         description: 'Must be at least 6 characters.'
         required: true
         example: bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw
@@ -1140,7 +1154,7 @@ endpoints:
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      user_name: bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw
+      username: bngzmiyvdljnikhwaykcmyuwpwlvqwrsitcpscqldzsnrw
       password: architecto
     fileParameters: []
     responses: []

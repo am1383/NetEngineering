@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -15,7 +16,7 @@ class ReservationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'uuid' => $this->uuid,
+            'id' => $this->ulid,
             'ip' => $this->ip,
             'rent_type' => $this->rent_type,
             'start_time' => $this->start_time,

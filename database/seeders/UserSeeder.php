@@ -1,9 +1,8 @@
-
 <?php
 
 namespace Database\Seeders;
 
-use App\Models\Role;
+use App\Enums\RoleType;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -19,17 +18,15 @@ class UserSeeder extends Seeder
             'email' => 'user@example.com',
             'phone_number' => '09183121516',
             'password' => 'Password@123',
-            'role_id' => Role::where('name', 'user')
-                ->value('id'),
+            'role_id' => RoleType::USER->value,
         ]);
 
         User::create([
             'name' => 'Test admin user',
-            'email' => 'am205379@gmail.com',
+            'email' => 'admin@.com',
             'phone_number' => '09183121517',
             'password' => 'Password@123',
-            'role_id' => Role::where('name', 'admin')
-                ->value('id'),
+            'role_id' => RoleType::ADMIN->value,
         ]);
     }
 }

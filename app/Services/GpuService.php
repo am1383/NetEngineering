@@ -1,7 +1,9 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
+use App\DTOs\Pagination\PaginationDTO;
 use App\Interfaces\Repositories\GpuRepositoryInterface;
 use App\Interfaces\Services\GpuServiceInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12,10 +14,9 @@ class GpuService implements GpuServiceInterface
         private readonly GpuRepositoryInterface $gpuRepository
     ) {}
 
-    public function getAllGpu(int $perPage, int $page): LengthAwarePaginator
+    public function getAllGpu(PaginationDTO $dto): LengthAwarePaginator
     {
-        return $this->gpuRepository
-            ->queryFetchAll()
-            ->paginate(perPage: $perPage, page: $page);
+        return $this->gpuRepository->fetchAll()
+            ->paginate(perPage: $dto->perPage, page: $dto->page);
     }
 }

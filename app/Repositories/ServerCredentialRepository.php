@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -20,6 +21,7 @@ class ServerCredentialRepository extends GenericRepository implements ServerCred
             [
                 'username' => $dto->userName,
                 'password' => $dto->password,
-            ]);
+            ]
+        );
     }
 }

@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Services;
 
@@ -15,19 +16,16 @@ class ServerService implements ServerServiceInterface
 
     public function createServer(array $attributes): Server
     {
-        return $this->serverRepository
-            ->store($attributes);
+        return $this->serverRepository->create($attributes);
     }
 
-    public function updateServer(array $attributes, Server $server): bool
+    public function updateServer(Server $server, array $attributes): bool
     {
-        return $this->serverRepository
-            ->update($attributes, $server);
+        return $this->serverRepository->updateOrFail($server, $attributes);
     }
 
     public function getAvailableServers(?string $gpu, ?string $cpu): Collection
     {
-        return $this->serverRepository
-            ->fetchAvailableServers($gpu, $cpu);
+        return $this->serverRepository->fetchAvailableServers($gpu, $cpu);
     }
 }

@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -19,8 +20,7 @@ class CpuController extends Controller
         $dto = PaginationDTO::fromRequest($request->validated());
 
         return $this->successResponse(CpuResource::collection(
-            $this->cpuService
-                ->getAllCpu($dto->perPage, $dto->page))
+            $this->cpuService->getAllCpu($dto))
         );
     }
 }

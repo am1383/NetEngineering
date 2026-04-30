@@ -1,4 +1,5 @@
-<?php
+<?php 
+declare(strict_types=1);
 
 namespace App\Http\Resources;
 
@@ -15,8 +16,8 @@ class ServerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'uuid' => $this->uuid,
-            'name' => $this->server_name,
+            'id' => $this->ulid,
+            'name' => $this->name,
             'cpu' => $this->whenLoaded('cpu', function (): array {
                 return [
                     'name' => $this->cpu->model,

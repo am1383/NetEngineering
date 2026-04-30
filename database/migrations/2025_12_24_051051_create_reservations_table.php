@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\RentTypeEnum;
-use App\Enums\StatusEnum;
+use App\Enums\RentType;
+use App\Enums\TransactionStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,19 +17,19 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->uuid('uuid')->unique()->index();
+            $table->ulid('ulid')->unique()->index();
             $table->foreignId('server_id')->constrained()->cascadeOnDelete();
             $table->string('ip', 45);
             $table->unsignedBigInteger('start_time');
             $table->unsignedBigInteger('end_time');
             $table->enum(
                 'rent_type',
-                array_column(RentTypeEnum::cases(), 'value'));
+                array_column(RentType::cases(), 'value'));
             $table->decimal('total_price', 10, 2);
             $table->enum(
                 'status',
-                array_column(StatusEnum::cases(), 'value')
-            )->default(StatusEnum::PENDING->value);
+                array_column(TransactionStatus::cases(), 'value')
+            )->default(TransactionStatus::PENDING->value);
 
             $table->timestamps();
         });
