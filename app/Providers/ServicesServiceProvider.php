@@ -9,7 +9,7 @@ use App\Interfaces\Services\{
     HomeServiceInterface,
     LoginServiceInterface,
     ReservationServiceInterface,
-    ServerCredentialServiceInterface,
+    ReservationCredentialServiceInterface,
     ServerServiceInterface,
     UserServiceInterface
 };
@@ -20,7 +20,7 @@ use App\Services\{
     HomeService,
     LoginService,
     ReservationService,
-    ServerCredentialService,
+    ReservationCredentialService,
     ServerService,
     UserService
 };
@@ -42,7 +42,7 @@ class ServicesServiceProvider extends ServiceProvider
         $this->app->bind(LoginServiceInterface::class, LoginService::class);
         $this->app->bind(HomeServiceInterface::class, HomeService::class);
         $this->app->bind(ReservationServiceInterface::class, ReservationService::class);
-        $this->app->bind(ServerCredentialServiceInterface::class, ServerCredentialService::class);
+        $this->app->bind(ReservationCredentialServiceInterface::class, ReservationCredentialService::class);
         $this->app->bind(ServerServiceInterface::class, ServerService::class);
         $this->app->bind(UserServiceInterface::class, UserService::class);
         $this->app->bind(CpuServiceInterface::class, CpuService::class);
@@ -66,11 +66,11 @@ class ServicesServiceProvider extends ServiceProvider
             LoginServiceInterface::class,
             HomeServiceInterface::class,
             ReservationServiceInterface::class,
-            ServerCredentialServiceInterface::class,
+            ReservationCredentialServiceInterface::class,
             ServerServiceInterface::class,
             UserServiceInterface::class,
             CpuServiceInterface::class,
-            GpuServiceInterface::class,
+            GpuServiceInterface::class
         ];
     }
 }

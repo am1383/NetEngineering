@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
+
+use App\Enums\RoleType;
 
 use App\Models\{
     Reservation,
     Server,
-    ServerCredential,
-    User
+    ReservationCredential
 };
 
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -50,6 +51,25 @@ class UserTest extends TestCase
         ]);
     }
 
+    public function test_user_cannot_create_admin(): void
+    {
+        $email = fake()->safeEmail();
+
+        $response = $this->postJson(route('users.store'), [
+            'email' => $email,
+            'phone_number' => fake()->regexify('09[0-9]{9}'),
+            'password' => 'Test@123',
+            'role_id' => RoleType::ADMIN->value,
+            'name' => fake()->name()
+        ]);
+
+        $response->assertCreated();
+        $this->assertDatabaseHas('users', [
+            'email' => $email,
+            'role_id' => RoleType::USER->value
+        ]);
+    }
+
     public function test_user_can_get_without_credential_reservation(): void
     {
         $serverId = Server::factory()->create()->getKey();
@@ -57,7 +77,7 @@ class UserTest extends TestCase
             'user_id' => auth()->id(),
             'server_id' => $serverId,
         ]);
-        ServerCredential::factory()->create([
+        ReservationCredential::factory()->create([
             'reservation_id' => $reservation->id,
         ]);
 
@@ -65,12 +85,5 @@ class UserTest extends TestCase
 
         $response->assertOk()
             ->assertJsonCount(1, 'data');
-    }
-
-    private function actingAsUser(): void
-    {
-        Passport::actingAs(User::factory()->user()
-            ->create()
-        );
     }
 }

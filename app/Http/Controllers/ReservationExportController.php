@@ -11,6 +11,6 @@ class ReservationExportController
 {
     public function __invoke(ReservationExport $export): BinaryFileResponse
     {
-        return Excel::download($export, 'reservations.xlsx');
+        return Excel::download($export, config('export.reservation_file'));
     }
 }

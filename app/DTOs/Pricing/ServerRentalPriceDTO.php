@@ -8,7 +8,7 @@ final class ServerRentalPriceDTO
     public function __construct(
         public readonly string $rentType,
         public readonly float $hours,
-        public readonly int $pricePerHour,
-        public readonly int $pricePerDay
+        public readonly float $pricePerHour,
+        public readonly float $pricePerDay
     ) {}
 }

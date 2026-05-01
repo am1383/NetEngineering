@@ -1,0 +1,27 @@
+<?php 
+declare(strict_types=1);
+
+namespace App\Repositories;
+
+use App\DTOs\ReservationCredential\AssignReservationCredentialDTO;
+use App\Interfaces\Repositories\ReservationCredentialRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
+
+class ReservationCredentialRepository extends GenericRepository implements ReservationCredentialRepositoryInterface
+{
+    public function __construct(
+        protected readonly Model $model
+    ) {}
+
+    public function assignReservationCredential(AssignReservationCredentialDTO $dto): void
+    {
+        $this->model->updateOrCreate([
+            'reservation_id' => $dto->reservationId
+        ],
+            [
+                'username' => $dto->userName,
+                'password' => $dto->password
+            ]
+        );
+    }
+}

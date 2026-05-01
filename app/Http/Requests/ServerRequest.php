@@ -15,7 +15,7 @@ class ServerRequest extends BaseRequest
         'os' => 'required|string|in:Windows,Linux',
         'price_per_hour' => 'required|numeric|min:0',
         'price_per_day' => 'required|numeric|min:0',
-        'is_active' => 'required|boolean',
+        'is_active' => 'required|boolean'
     ];
 
     public function rules(): array
@@ -31,7 +31,7 @@ class ServerRequest extends BaseRequest
                 'os' => 'nullable|string|in:Windows,Linux',
                 'price_per_hour' => 'nullable|numeric|min:0',
                 'price_per_day' => 'nullable|numeric|min:0',
-                'is_active' => 'nullable|boolean',
+                'is_active' => 'nullable|boolean'
             ],
             default => []
         };

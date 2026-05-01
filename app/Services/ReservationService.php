@@ -7,7 +7,7 @@ use App\DTOs\Pricing\ServerRentalPriceDTO;
 
 use App\DTOs\Reservation\{
     ServerReservationDTO,
-    StoreReservationDTO,
+    StoreReservationDTO
 };
 
 use App\Enums\RentType;
@@ -16,7 +16,7 @@ use App\Helpers\TimeHelper;
 
 use App\Interfaces\Repositories\{
     ReservationRepositoryInterface,
-    ServerCredentialRepositoryInterface,
+    ReservationCredentialRepositoryInterface,
     ServerRepositoryInterface
 };
 
@@ -36,7 +36,7 @@ class ReservationService implements ReservationServiceInterface
     public function __construct(
         private readonly ServerRepositoryInterface $serverRepository,
         private readonly ReservationRepositoryInterface $reservationRepository,
-        private readonly ServerCredentialRepositoryInterface $serverCredentialRepository
+        private readonly ReservationCredentialRepositoryInterface $reservationCredentialRepository
     ) {}
 
     public function storeReservation(StoreReservationDTO $dto): Reservation
@@ -86,10 +86,10 @@ class ReservationService implements ReservationServiceInterface
                     'start_time' => $dto->startTime,
                     'end_time' => $dto->endTime,
                     'rent_type' => $dto->rentType,
-                    'total_price' => $dto->price,
+                    'total_price' => $dto->price
                 ]), function (Reservation $reservation): void {
-                    $this->serverCredentialRepository->create([
-                        'reservation_id' => $reservation->id,
+                    $this->reservationCredentialRepository->create([
+                        'reservation_id' => $reservation->id
                 ]);
             });
         });
@@ -108,13 +108,13 @@ class ReservationService implements ReservationServiceInterface
             : ceil($dto->hours / Carbon::HOURS_PER_DAY) * $dto->pricePerDay;
     }
 
-    public function getUserReserveWithoutCredential(): Collection
+    public function getUserReservationsWithoutCredential(): Collection
     {
         return $this->reservationRepository
-            ->fetchUserReserveWithoutCredential();
+            ->fetchUserReservationsWithoutCredential(auth()->user());
     }
 
-    public function getUserReservation(): Collection
+    public function getUserReservations(): Collection
     {
         return $this->reservationRepository
             ->fetchUserReservations(auth()->user());
@@ -138,7 +138,7 @@ class ReservationService implements ReservationServiceInterface
                 if ($carry->isEmpty()) {
                     return $carry->push([
                         'start_datetime' => $startTime->toDateTimeString(),
-                        'end_datetime' => $endTime->toDateTimeString(),
+                        'end_datetime' => $endTime->toDateTimeString()
                     ]);
                 }
 
@@ -156,7 +156,7 @@ class ReservationService implements ReservationServiceInterface
                 } else {
                     $carry->push([
                         'start_datetime' => $startTime->toDateTimeString(),
-                        'end_datetime' => $endTime->toDateTimeString(),
+                        'end_datetime' => $endTime->toDateTimeString()
                     ]);
                 }
 

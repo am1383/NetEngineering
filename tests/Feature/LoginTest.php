@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -57,8 +58,7 @@ class LoginTest extends TestCase
                         'phone_number',
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 
     public function test_login_fails_when_password_is_missing(): void
@@ -76,8 +76,7 @@ class LoginTest extends TestCase
                         'password',
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 
     public function test_login_fails_when_phone_number_format_is_invalid(): void
@@ -96,8 +95,7 @@ class LoginTest extends TestCase
                         'phone_number',
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 
     public function test_login_fails_with_wrong_password(): void
@@ -134,8 +132,7 @@ class LoginTest extends TestCase
                         'password'
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 
     private function setupPassportClient(): void

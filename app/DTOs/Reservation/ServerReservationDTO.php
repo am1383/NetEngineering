@@ -10,6 +10,6 @@ final class ServerReservationDTO
         public readonly int $startTime,
         public readonly int $endTime,
         public readonly string $rentType,
-        public readonly float $price,
+        public readonly float $price
     ) {}
 }

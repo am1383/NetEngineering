@@ -20,7 +20,7 @@ class GpuResource extends JsonResource
             'brand' => $this->brand,
             'slug' => $this->slug,
             'vram' => $this->vram,
-            'chipset' => $this->chipset,
+            'chipset' => $this->chipset
         ];
     }
 }

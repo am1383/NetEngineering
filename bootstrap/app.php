@@ -12,6 +12,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -23,37 +24,37 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (ModelNotFoundException $e, $request): JsonResponse {
+        $exceptions->renderable(function (ModelNotFoundException|NotFoundHttpException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.not_found'),
             ], Response::HTTP_NOT_FOUND);
         });
 
-        $exceptions->render(function (MethodNotAllowedHttpException $e, $request): JsonResponse {
+        $exceptions->renderable(function (MethodNotAllowedHttpException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.method_not_allowed'),
             ], Response::HTTP_METHOD_NOT_ALLOWED);
         });
 
-        $exceptions->render(function (AuthenticationException $e, $request): JsonResponse {
+        $exceptions->renderable(function (AuthenticationException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.unauthenticated'),
             ], Response::HTTP_UNAUTHORIZED);
         });
 
-        $exceptions->render(function (AuthorizationException $e, $request): JsonResponse {
+        $exceptions->renderable(function (AuthorizationException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.unauthorized'),
             ], Response::HTTP_UNAUTHORIZED);
         });
 
-        $exceptions->render(function (QueryException $e, $request): JsonResponse {
+        $exceptions->renderable(function (QueryException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.try_again_later'),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         });
 
-        $exceptions->render(function (\Throwable $e, $request): JsonResponse {
+        $exceptions->renderable(function (\Throwable $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.try_again_later'),
                 'error' => config('app.debug') ? $e->getMessage() : null,

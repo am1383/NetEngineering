@@ -11,7 +11,7 @@ use App\Http\Controllers\{
     ReservationExportController,
     ServerBrowseController,
     ServerController,
-    ServerCredentialController,
+    ReservationCredentialController,
     UserController
 };
 
@@ -38,8 +38,8 @@ Route::middleware('throttle:60,1')->group(function () {
                 ->name('servers.index');
             Route::get('/reservations/without-credential', [ReservationController::class, 'withoutCredential'])
                 ->name('credential.without');
-            Route::get('/my-reservations', [ReservationController::class, 'show'])
-                ->name('reservations.show');
+            Route::get('/my-reservations', [ReservationController::class, 'index'])
+                ->name('reservations.index');
             Route::post('/reserves', [ReservationController::class, 'store'])
                 ->name('reserves.store');
 
@@ -62,8 +62,8 @@ Route::middleware('throttle:60,1')->group(function () {
                         Route::patch('/servers/{server}', 'update')
                             ->name('servers.update');
                     });
-                    Route::put('/reservations/{reservation}/credential', [ServerCredentialController::class, 'setCredential'])
-                        ->name('server-credentials.put');
+                    Route::put('/reservations/{reservation}/credential', [ReservationCredentialController::class, 'setCredential'])
+                        ->name('reservation-credentials.put');
                 });
             });
         });

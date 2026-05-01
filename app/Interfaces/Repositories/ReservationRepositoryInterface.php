@@ -10,15 +10,15 @@ use Illuminate\Support\Collection;
 
 interface ReservationRepositoryInterface extends GenericRepositoryInterface
 {
-    public function statusPaidCount(): int;
+    public function paidStatusCount(): int;
 
     public function hasConflict(int $serverId, int $startTime, int $endTime): bool;
 
     public function fetchUserReservations(User $user): Collection;
 
-    public function fetchUserReserveWithoutCredential(): Collection;
+    public function fetchUserReservationsWithoutCredential(User $user): Collection;
 
     public function fetchServerReservations(Server $server): Collection;
 
-    public function fetchReservationExport(): Builder;
+    public function reservationExportQuery(): Builder;
 }

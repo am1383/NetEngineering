@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ServerCredential extends Model
+class ReservationCredential extends Model
 {
     use HasFactory;
 
@@ -25,7 +25,7 @@ class ServerCredential extends Model
 
     public function credential(): HasOne
     {
-        return $this->hasOne(ServerCredential::class, 'reservation_id');
+        return $this->hasOne(ReservationCredential::class, 'reservation_id');
     }
 
     public function reservation(): BelongsTo

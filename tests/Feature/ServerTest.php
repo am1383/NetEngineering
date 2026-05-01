@@ -1,15 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
 use App\Models\{
     Ram,
     Reservation,
-    Server,
-    User
+    Server
 };
 
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ServerTest extends TestCase
@@ -44,14 +43,10 @@ class ServerTest extends TestCase
         Reservation::factory()->create([
             'server_id' => $server->id,
             'user_id' => $userId,
-            'start_time' => now()->addHour()->timestamp,
-            'end_time' => now()->addHours(5)->timestamp,
         ]);
         Reservation::factory()->create([
             'server_id' => $server->id,
             'user_id' => $userId,
-            'start_time' => now()->addHours(5)->timestamp,
-            'end_time' => now()->addHours(10)->timestamp,
         ]);
 
         $response = $this->getJson(route('servers.unavailable',
@@ -79,19 +74,5 @@ class ServerTest extends TestCase
 
         $response->assertOk()
             ->assertJsonCount(3, 'data');
-    }
-
-    private function actingAsUser(): void
-    {
-        Passport::actingAs(User::factory()->user()
-            ->create()
-        );
-    }
-
-    private function actingAsAdmin(): void
-    {
-        Passport::actingAs(User::factory()->admin()
-            ->create()
-        );
     }
 }

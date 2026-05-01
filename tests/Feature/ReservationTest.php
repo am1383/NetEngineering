@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -6,12 +7,9 @@ use App\Enums\RentType;
 
 use App\Models\{
     Reservation,
-    Server,
-    User
+    Server
 };
 
-use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ReservationTest extends TestCase
@@ -43,20 +41,13 @@ class ReservationTest extends TestCase
     public function test_get_user_reservation(): void
     {
         Reservation::factory()->create([
-            'user_id' => Auth::id(),
+            'user_id' => auth()->id(),
             'server_id' => Server::factory()->create()->getKey(),
         ]);
  
-        $response = $this->getJson(route('reservations.show'));
+        $response = $this->getJson(route('reservations.index'));
 
         $response->assertOk()
             ->assertJsonCount(1, 'data');
-    }
-
-    private function actingAsUser(): void
-    {
-        Passport::actingAs(User::factory()->user()
-            ->create()
-        );
     }
 }

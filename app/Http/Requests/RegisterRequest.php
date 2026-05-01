@@ -31,8 +31,8 @@ class RegisterRequest extends BaseRequest
                 ->letters()
                 ->mixedCase()
                 ->numbers()
-                ->symbols(),
-            ],
+                ->symbols()
+            ]
         ];
     }
 }

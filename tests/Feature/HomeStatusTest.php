@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -10,15 +11,13 @@ use App\Models\{
 
 use Tests\TestCase;
 
-class StatusTest extends TestCase
+class HomeStatusTest extends TestCase
 {
-    public function test_get_status(): void
+    public function test_get_status_overview_counts(): void
     {
-        $userId = User::factory()->user()->create()->getKey();
-        $serverId = Server::factory()->create()->getKey();
         Reservation::factory()->create([
-            'user_id' => $userId,
-            'server_id' => $serverId,
+            'user_id' => User::factory()->user()->create()->getKey(),
+            'server_id' => Server::factory()->create()->getKey()
         ]);
 
         $response = $this->getJson(route('home.status'));

@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\LoginResource;
 use App\Interfaces\Services\LoginServiceInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {

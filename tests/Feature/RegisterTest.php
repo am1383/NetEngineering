@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -50,8 +51,7 @@ class RegisterTest extends TestCase
                         'password',
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 
     public function test_user_registration_fails_with_existing_email(): void
@@ -72,7 +72,6 @@ class RegisterTest extends TestCase
                         'email',
                     ],
                 ],
-            ]
-        );
+            ]);
     }
 }

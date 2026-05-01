@@ -6,8 +6,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\Services\UserServiceInterface;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 class RegisterController extends Controller
 {
@@ -17,8 +20,9 @@ class RegisterController extends Controller
 
     public function __invoke(RegisterRequest $request): JsonResponse
     {
-        return $this->successResponse(new UserResource($this->userService
-            ->createUser($request->validated())), Response::HTTP_CREATED
+        return $this->successResponse(new UserResource(
+            $this->userService->createUser($request->validated())),
+            Response::HTTP_CREATED
         );
     }
 }

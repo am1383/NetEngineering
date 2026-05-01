@@ -29,8 +29,8 @@ class LoginRequest extends BaseRequest
                 ->letters()
                 ->mixedCase()
                 ->numbers()
-                ->symbols(),
-            ],
+                ->symbols()
+            ]
         ];
     }
 }

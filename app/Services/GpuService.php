@@ -17,6 +17,6 @@ class GpuService implements GpuServiceInterface
     public function getAllGpu(PaginationDTO $dto): LengthAwarePaginator
     {
         return $this->gpuRepository->fetchAll()
-            ->paginate(perPage: $dto->perPage, page: $dto->page);
+            ->paginate($dto->perPage, page: $dto->page);
     }
 }

@@ -11,7 +11,7 @@ class UserRequest extends BaseRequest
     private const COMMON_RULES = [
         'name' => 'required|string|min:3|max:30',
         'phone_number' => 'required|string|regex:/^09\d{9}$/|unique:users',
-        'email' => 'nullable|email|unique:users',
+        'email' => 'nullable|email|unique:users'
     ];
 
     public function rules(): array
@@ -22,19 +22,19 @@ class UserRequest extends BaseRequest
                     ->letters()
                     ->mixedCase()
                     ->numbers()
-                    ->symbols(),
-                ],
+                    ->symbols()
+                ]
             ],
             'PUT', 'PATCH' => [
                 'password' => ['nullable', Password::min(8)
                     ->letters()
                     ->mixedCase()
                     ->numbers()
-                    ->symbols(),
+                    ->symbols()
                 ],
                 'name' => 'nullable|string|min:3|max:30',
                 'phone_number' => 'nullable|string|regex:/^09\d{9}$/|unique:users',
-                'email' => 'nullable|email|unique:users',
+                'email' => 'nullable|email|unique:users'
             ],
 
             default => []

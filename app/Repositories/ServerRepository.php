@@ -5,8 +5,12 @@ namespace App\Repositories;
 
 use App\Interfaces\Repositories\ServerRepositoryInterface;
 use App\Models\Server;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\{
+    Builder,
+    Model
+};
+
 use Illuminate\Support\Collection;
 
 class ServerRepository extends GenericRepository implements ServerRepositoryInterface

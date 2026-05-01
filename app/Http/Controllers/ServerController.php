@@ -12,14 +12,17 @@ use App\Interfaces\Services\{
 };
 
 use App\Models\Server;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
+
+use Illuminate\Http\{
+    JsonResponse,
+    Response
+};
 
 class ServerController extends Controller
 {
     public function __construct(
         private readonly ServerServiceInterface $serverService,
-        private readonly ReservationServiceInterface $reservationService,
+        private readonly ReservationServiceInterface $reservationService
     ) {}
 
     public function store(ServerRequest $request): JsonResponse

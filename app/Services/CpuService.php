@@ -17,6 +17,6 @@ class CpuService implements CpuServiceInterface
     public function getAllCpu(PaginationDTO $dto): LengthAwarePaginator
     {
         return $this->cpuRepository->fetchAll()
-            ->paginate(perPage: $dto->perPage, page: $dto->page);
+            ->paginate($dto->perPage, page: $dto->page);
     }
 }

@@ -25,14 +25,14 @@ class ReservationResource extends JsonResource
             'total_price' => $this->total_price,
             'username' => $this->whenLoaded('credential', function (): array {
                 return [
-                    'name' => $this->credential->username,
+                    'name' => $this->credential->username
                 ];
             }),
             'password' => $this->whenLoaded('credential', function (): array {
                 return [
-                    'password' => $this->credential->password,
+                    'password' => $this->credential->password
                 ];
-            }),
+            })
         ];
     }
 }

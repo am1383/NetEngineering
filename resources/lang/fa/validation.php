@@ -26,7 +26,7 @@ return [
         'numeric' => ':attribute باید بین :min و :max باشد.',
         'file' => ':attribute باید بین :min و :max کیلوبایت باشد.',
         'string' => ':attribute باید بین :min و :max کاراکتر باشد.',
-        'array' => ':attribute باید بین :min و :max آیتم باشد.',
+        'array' => ':attribute باید بین :min و :max آیتم باشد.'
     ],
     'boolean' => 'The :attribute field must be true or false',
     'confirmed' => ':attribute با تاییدیه مطابقت ندارد.',
@@ -45,14 +45,14 @@ return [
         'numeric' => ':attribute نباید بزرگتر از :max باشد.',
         'file' => ':attribute نباید بزرگتر از :max کیلوبایت باشد.',
         'string' => ':attribute نباید بیشتر از :max کاراکتر باشد.',
-        'array' => ':attribute نباید بیشتر از :max آیتم باشد.',
+        'array' => ':attribute نباید بیشتر از :max آیتم باشد.'
     ],
     'mimes' => ':attribute باید یکی از فرمت های :values باشد.',
     'min' => [
         'numeric' => 'مبلغ کل فاکتور نباید کوچک‌تر از :min '.(config('currency.unit') === 'IRT' ? 'تومان' : 'ریال').' باشد.',
         'file' => ':attribute نباید کوچکتر از :min کیلوبایت باشد.',
         'string' => ':attribute نباید کمتر از :min کاراکتر باشد.',
-        'array' => ':attribute نباید کمتر از :min آیتم باشد.',
+        'array' => ':attribute نباید کمتر از :min آیتم باشد.'
     ],
     'not_in' => ':attribute انتخاب شده، معتبر نیست.',
     'numeric' => ':attribute باید شامل عدد باشد.',
@@ -68,7 +68,7 @@ return [
         'numeric' => ':attribute باید برابر با :size باشد.',
         'file' => ':attribute باید برابر با :size کیلوبایت باشد.',
         'string' => ':attribute باید برابر با :size کاراکتر باشد.',
-        'array' => ':attribute باسد شامل :size آیتم باشد.',
+        'array' => ':attribute باسد شامل :size آیتم باشد.'
     ],
     'timezone' => 'The :attribute must be a valid zone.',
     'unique' => ':attribute قبلا انتخاب شده است.',
@@ -150,6 +150,6 @@ return [
         'category_id' => 'دسته بندی',
         'images' => 'تصاویر',
         'page' => 'صفحه',
-        'per_page' => 'تعداد',
-    ],
+        'per_page' => 'تعداد'
+    ]
 ];

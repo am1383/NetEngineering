@@ -5,8 +5,11 @@ namespace App\Exports;
 
 use App\Interfaces\Repositories\ReservationRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+
+use Maatwebsite\Excel\Concerns\{
+    FromQuery,
+    WithHeadings
+};
 
 class ReservationExport implements FromQuery, WithHeadings
 {
@@ -17,13 +20,13 @@ class ReservationExport implements FromQuery, WithHeadings
     public function query(): Builder
     {
         return $this->reservationRepository
-            ->fetchReservationExport();
+            ->reservationExportQuery();
     }
 
     public function headings(): array
     {
         return ['username', 'name', 'start_time',
-            'end_time', 'rent_type', 'total_price', 'status',
+            'end_time', 'rent_type', 'total_price', 'status'
         ];
     }
 }

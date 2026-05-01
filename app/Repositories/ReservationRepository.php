@@ -4,8 +4,12 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Interfaces\Repositories\ReservationRepositoryInterface;
-use App\Models\Server;
-use App\Models\User;
+
+use App\Models\{
+    Server,
+    User
+};
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -31,7 +35,7 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
             ->get();
     }
 
-    public function fetchReservationExport(): Builder
+    public function reservationExportQuery(): Builder
     {
         return $this->model->join('users', 'users.id', 'reservations.user_id')
             ->join('servers', 'servers.id', 'reservations.server_id')
@@ -42,22 +46,21 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
                 'reservations.end_time',
                 'reservations.rent_type',
                 'reservations.total_price',
-                'reservations.status',
+                'reservations.status'
             ]);
     }
 
-    public function statusPaidCount(): int
+    public function paidStatusCount(): int
     {
         return $this->model->paidStatus()
             ->count();
     }
 
-    public function fetchUserReserveWithoutCredential(): Collection
+    public function fetchUserReservationsWithoutCredential(User $user): Collection
     {
-        return auth()->user()->reservations()
+        return $user->reservations()
             ->whereHas('credential', function (Builder $query): void {
-                $query->whereNull('username')
-                    ->whereNull('password');
+                $query->whereNull('username')->whereNull('password');
             })
             ->with('server')
             ->get()

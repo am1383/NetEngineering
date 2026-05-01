@@ -1,13 +1,13 @@
 <?php 
 declare(strict_types=1);
 
-namespace App\DTOs\ServerCredential;
+namespace App\DTOs\ReservationCredential;
 
-final class AssignServerCredentialDTO
+final class AssignReservationCredentialDTO
 {
     public function __construct(
         public readonly int $reservationId,
         public readonly string $userName,
-        public readonly string $password,
+        public readonly string $password
     ) {}
 }

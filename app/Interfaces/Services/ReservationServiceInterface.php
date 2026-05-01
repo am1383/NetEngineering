@@ -16,9 +16,9 @@ interface ReservationServiceInterface
 {
     public function storeReservation(StoreReservationDTO $dto): Reservation;
 
-    public function getUserReserveWithoutCredential(): Collection;
+    public function getUserReservationsWithoutCredential(): Collection;
 
     public function getServerReservationsTime(Server $server): Collection;
 
-    public function getUserReservation(): Collection;
+    public function getUserReservations(): Collection;
 }

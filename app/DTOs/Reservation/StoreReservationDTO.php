@@ -9,6 +9,6 @@ final class StoreReservationDTO
         public readonly string $serverUlid,
         public readonly string $startTime,
         public readonly string $endTime,
-        public readonly string $rentType,
+        public readonly string $rentType
     ) {}
 }

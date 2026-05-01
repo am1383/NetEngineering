@@ -6,7 +6,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request as BaseRequest;
 use Illuminate\Validation\Rules\Password;
 
-class StoreServerCredentialRequest extends BaseRequest
+class StoreReservationCredentialRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class StoreServerCredentialRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|string|min:6|unique:server_credentials',
+            'username' => 'required|string|min:6|unique:reservation_credentials',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()
                 ->numbers()
-                ->symbols(),
-            ],
+                ->symbols()
+            ]
         ];
     }
 }

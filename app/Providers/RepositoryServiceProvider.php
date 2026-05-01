@@ -7,7 +7,7 @@ use App\Interfaces\Repositories\{
     CpuRepositoryInterface,
     GpuRepositoryInterface,
     ReservationRepositoryInterface,
-    ServerCredentialRepositoryInterface,
+    ReservationCredentialRepositoryInterface,
     ServerRepositoryInterface,
     UserRepositoryInterface
 };
@@ -17,7 +17,7 @@ use App\Models\{
     Gpu,
     Reservation,
     Server,
-    ServerCredential,
+    ReservationCredential,
     User
 };
 
@@ -25,7 +25,7 @@ use App\Repositories\{
     CpuRepository,
     GpuRepository,
     ReservationRepository,
-    ServerCredentialRepository,
+    ReservationCredentialRepository,
     ServerRepository,
     UserRepository
 };
@@ -57,8 +57,8 @@ class RepositoryServiceProvider extends ServiceProvider
             => new ReservationRepository($app->make(Reservation::class))
         );
 
-        $this->app->singleton(ServerCredentialRepositoryInterface::class, fn (Container $app): ServerCredentialRepository 
-            => new ServerCredentialRepository($app->make(ServerCredential::class))
+        $this->app->singleton(ReservationCredentialRepositoryInterface::class, fn (Container $app): ReservationCredentialRepository 
+            => new ReservationCredentialRepository($app->make(ReservationCredential::class))
         );
 
         $this->app->singleton(CpuRepositoryInterface::class, fn (Container $app): CpuRepository 
@@ -79,9 +79,9 @@ class RepositoryServiceProvider extends ServiceProvider
             UserRepositoryInterface::class,
             ServerRepositoryInterface::class,
             ReservationRepositoryInterface::class,
-            ServerCredentialRepositoryInterface::class,
+            ReservationCredentialRepositoryInterface::class,
             CpuRepositoryInterface::class,
-            GpuRepositoryInterface::class,
+            GpuRepositoryInterface::class
         ];
     }
 }

@@ -24,7 +24,7 @@ class PaginationRequest extends BaseRequest
     {
         return [
             'per_page' => ['nullable', 'integer', 'min:1', 'max:'.config('pagination.max_per_page')],
-            'page' => 'nullable|integer|min:1',
+            'page' => 'nullable|integer|min:1'
         ];
     }
 }

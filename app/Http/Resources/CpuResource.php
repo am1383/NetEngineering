@@ -21,7 +21,7 @@ class CpuResource extends JsonResource
             'cores' => $this->cores,
             'threads' => $this->threads,
             'base_clock' => $this->base_clock,
-            'boost_clock' => $this->boost_clock,
+            'boost_clock' => $this->boost_clock
         ];
     }
 }

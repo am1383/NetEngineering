@@ -19,6 +19,13 @@ class ReservationController extends Controller
         private readonly ReservationServiceInterface $reservationService
     ) {}
 
+    public function index(): JsonResponse
+    {
+        return $this->successResponse(ReservationResource::collection(
+            $this->reservationService->getUserReservations()
+        ));
+    }
+
     public function store(StoreReservationRequest $request): JsonResponse
     {
         $reservation = $this->reservationService
@@ -34,17 +41,10 @@ class ReservationController extends Controller
         );
     }
 
-    public function show(): JsonResponse
-    {
-        return $this->successResponse(ReservationResource::collection(
-            $this->reservationService->getUserReservation()
-        ));
-    }
-
     public function withoutCredential(): JsonResponse
     {
         return $this->successResponse($this->reservationService
-            ->getUserReserveWithoutCredential()
+            ->getUserReservationsWithoutCredential()
         );
     }
 }

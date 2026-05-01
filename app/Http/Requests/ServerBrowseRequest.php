@@ -24,7 +24,7 @@ class ServerBrowseRequest extends BaseRequest
     {
         return [
             'gpu' => 'nullable|slug|exists:gpus,slug',
-            'cpu' => 'nullable|slug|exists:cpus,slug',
+            'cpu' => 'nullable|slug|exists:cpus,slug'
         ];
     }
 }

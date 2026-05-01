@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
@@ -29,7 +30,7 @@ class GpuTest extends TestCase
     {
         Gpu::factory()->count(30)->create();
 
-        $response = $this->getJson(route('gpus.index') . '?page=1&per_page=10');
+        $response = $this->getJson(route('gpus.index').'?page=1&per_page=10');
 
         $response->assertOk()
             ->assertJsonCount(10, 'data');

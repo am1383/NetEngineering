@@ -1,9 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ReservationExportTest extends TestCase
@@ -22,12 +21,5 @@ class ReservationExportTest extends TestCase
             ->assertHeader('Content-Type',
                 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
             );
-    }
-
-    private function actingAsAdmin(): void
-    {
-        Passport::actingAs(User::factory()->admin()
-            ->create()
-        );
     }
 }
