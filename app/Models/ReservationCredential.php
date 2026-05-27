@@ -20,7 +20,7 @@ class ReservationCredential extends Model
     protected $fillable = [
         'reservation_id',
         'username',
-        'password',
+        'password'
     ];
 
     public function credential(): HasOne

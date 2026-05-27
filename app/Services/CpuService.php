@@ -14,9 +14,8 @@ class CpuService implements CpuServiceInterface
         private readonly CpuRepositoryInterface $cpuRepository
     ) {}
 
-    public function getAllCpu(PaginationDTO $dto): LengthAwarePaginator
+    public function paginate(PaginationDTO $dto): LengthAwarePaginator
     {
-        return $this->cpuRepository->fetchAll()
-            ->paginate($dto->perPage, page: $dto->page);
+        return $this->cpuRepository->paginate($dto);
     }
 }

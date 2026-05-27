@@ -5,7 +5,6 @@ namespace App\Services;
 
 use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Interfaces\Services\UserServiceInterface;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class UserService implements UserServiceInterface
 {
@@ -13,14 +12,14 @@ class UserService implements UserServiceInterface
         private readonly UserRepositoryInterface $userRepository
     ) {}
 
-    public function createUser(array $attributes): Authenticatable
+    public function createUser(array $attributes): void
     {
-        return $this->userRepository->create($attributes);
+        $this->userRepository->create($attributes);
     }
 
-    public function updateUser(array $attributes): bool
+    public function updateUser(array $attributes): void
     {
-        return $this->userRepository
+        $this->userRepository
             ->updateOrFail(auth()->user(), $attributes);
     }
 }

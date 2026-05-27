@@ -18,16 +18,21 @@ class LoginService implements LoginServiceInterface
     public function login(string $phoneNumber, string $password): array
     {
         $user = $this->userRepository
-            ->findUserByPhoneNumber($phoneNumber);
+            ->findUserByPhoneNumber($phoneNumber, ['id', 'password']);
 
         throw_unless(
-            $user and Hash::check($password, $user->password),
+            $this->isValidUser($user, $password),
             InvalidCredentialsException::class
         );
 
         return [
             'token' => $this->createAccessToken($user)
         ];
+    }
+
+    private function isValidUser(?User $user, string $password): bool
+    {
+        return $user and Hash::check($password, $user->password);
     }
 
     private function createAccessToken(User $user, string $name = 'api'): string

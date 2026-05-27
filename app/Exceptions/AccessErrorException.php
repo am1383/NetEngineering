@@ -13,7 +13,7 @@ class AccessErrorException extends \Exception
     public function render(): JsonResponse
     {
         return response()->json([
-            'message' => __('errors.access_error'),
+            'message' => __('errors.access_error')
         ], Response::HTTP_FORBIDDEN);
     }
 }

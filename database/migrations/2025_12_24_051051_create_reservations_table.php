@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('ip', 45);
             $table->unsignedBigInteger('start_time');
             $table->unsignedBigInteger('end_time');
+
+            $table->index(['server_id', 'start_time', 'end_time']);
+            
             $table->enum(
                 'rent_type',
                 array_column(RentType::cases(), 'value'));

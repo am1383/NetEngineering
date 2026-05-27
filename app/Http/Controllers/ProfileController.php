@@ -16,9 +16,9 @@ class ProfileController extends Controller
 
     public function update(UserRequest $request): JsonResponse
     {
-        return $this->successResponse($this->userService
-            ->updateUser($request->validated())
-        );
+        $this->userService->updateUser($request->validated());
+
+        return $this->noContentResponse();
     }
 
     public function show(): JsonResponse

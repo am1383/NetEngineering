@@ -11,6 +11,7 @@ class ReservationCredentialTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->actingAsAdmin();
     }
 
@@ -22,13 +23,13 @@ class ReservationCredentialTest extends TestCase
             route('reservation-credentials.put', $reservation->ulid),
             [
                 'username' => fake()->userName(),
-                'password' => 'Test@123',
+                'password' => 'Test@123'
             ]
         );
 
-        $response->assertOk();
+        $response->assertNoContent();
         $this->assertDatabaseHas('reservation_credentials', [
-            'reservation_id' => $reservation->id,
+            'reservation_id' => $reservation->id
         ]);
     }
 
@@ -38,7 +39,7 @@ class ReservationCredentialTest extends TestCase
             route('reservation-credentials.put', '01INVALIDULID000000000000'),
             [
                 'username' => fake()->userName(),
-                'password' => 'Test@123',
+                'password' => 'Test@123'
             ]
         );
 
@@ -56,7 +57,7 @@ class ReservationCredentialTest extends TestCase
         $response = $this->putJson(
             route('reservation-credentials.put', $reservation->ulid),
             [
-                'password' => 'Test@123',
+                'password' => 'Test@123'
             ]
         );
 
@@ -66,11 +67,10 @@ class ReservationCredentialTest extends TestCase
                 'result' => [
                     'message',
                     'errors' => [
-                        'username',
-                    ],
-                ],
-            ]
-        );
+                        'username'
+                    ]
+                ]
+            ]);
     }
 
     public function test_password_validation_fails(): void
@@ -91,22 +91,27 @@ class ReservationCredentialTest extends TestCase
                 'result' => [
                     'message',
                     'errors' => [
-                        'password',
-                    ],
-                ],
+                        'password'
+                    ]
+                ]
             ]);
     }
 
     public function test_race_condition_creates_only_one_credential(): void
     {
         $reservation = $this->createReservation();
+        
         $payload = [
             'username' => 'race_user',
-            'password' => 'Test@123',
+            'password' => 'Test@123'
         ];
 
-        $this->putJson(route('reservation-credentials.put', $reservation->ulid), $payload);
-        $this->putJson(route('reservation-credentials.put', $reservation->ulid), $payload);
+        $this->putJson(
+            route('reservation-credentials.put', $reservation->ulid), $payload
+        );
+        $this->putJson(
+            route('reservation-credentials.put', $reservation->ulid), $payload
+        );
 
         $this->assertDatabaseCount('reservation_credentials', 1);
     }
@@ -119,12 +124,12 @@ class ReservationCredentialTest extends TestCase
             route('reservation-credentials.put', $reservation->ulid),
             [
                 'username' => null,
-                'password' => null,
+                'password' => null
             ]
         );
 
         $this->assertDatabaseMissing('reservation_credentials', [
-            'reservation_id' => $reservation->id,
+            'reservation_id' => $reservation->id
         ]);
     }
 

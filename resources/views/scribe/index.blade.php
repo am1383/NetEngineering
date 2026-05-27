@@ -30,9 +30,9 @@
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
-    <script src="{{ asset("/vendor/scribe/js/tryitout-5.9.0.js") }}"></script>
+    <script src="{{ asset("/vendor/scribe/js/tryitout-5.10.0.js") }}"></script>
 
-    <script src="{{ asset("/vendor/scribe/js/theme-default-5.9.0.js") }}"></script>
+    <script src="{{ asset("/vendor/scribe/js/theme-default-5.10.0.js") }}"></script>
 
 </head>
 
@@ -82,8 +82,8 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-servers">
                                 <a href="#endpoints-GETapi-v1-servers">GET api/v1/servers</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-reservation-without-credential">
-                                <a href="#endpoints-GETapi-v1-reservation-without-credential">GET api/v1/reservation/without-credential</a>
+                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-reservations-without-credential">
+                                <a href="#endpoints-GETapi-v1-reservations-without-credential">GET api/v1/reservations/without-credential</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-GETapi-v1-my-reservations">
                                 <a href="#endpoints-GETapi-v1-my-reservations">GET api/v1/my-reservations</a>
@@ -123,7 +123,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 30, 2026</li>
+        <li>Last updated: May 27, 2026</li>
     </ul>
 </div>
 
@@ -496,7 +496,7 @@ fetch(url, {
 
 <span id="example-responses-GETapi-v1-servers--server_slug--unavailable">
             <blockquote>
-            <p>Example response (500):</p>
+            <p>Example response (404):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -504,12 +504,13 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;errors.try_again_later&quot;,
-    &quot;error&quot;: null
+    &quot;message&quot;: &quot;No resource was found.&quot;
 }</code>
  </pre>
     </span>
@@ -645,6 +646,8 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
@@ -788,6 +791,8 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
@@ -952,6 +957,8 @@ fetch(url, {
             </summary>
             <pre><code class="language-http">cache-control: no-cache, private
 content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
 access-control-allow-origin: *
  </code></pre></details>         <pre>
 
@@ -1213,27 +1220,27 @@ You can check the Dev Tools console for debugging information.</code></pre>
         </div>
         </form>
 
-                    <h2 id="endpoints-GETapi-v1-reservation-without-credential">GET api/v1/reservation/without-credential</h2>
+                    <h2 id="endpoints-GETapi-v1-reservations-without-credential">GET api/v1/reservations/without-credential</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-v1-reservation-without-credential">
+<span id="example-requests-GETapi-v1-reservations-without-credential">
 <blockquote>Example request:</blockquote>
 
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/reservation/without-credential" \
+    --get "http://localhost/api/v1/reservations/without-credential" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/reservation/without-credential"
+    "http://localhost/api/v1/reservations/without-credential"
 );
 
 const headers = {
@@ -1249,7 +1256,7 @@ fetch(url, {
 
 </span>
 
-<span id="example-responses-GETapi-v1-reservation-without-credential">
+<span id="example-responses-GETapi-v1-reservations-without-credential">
             <blockquote>
             <p>Example response (401):</p>
         </blockquote>
@@ -1267,43 +1274,43 @@ access-control-allow-origin: *
 }</code>
  </pre>
     </span>
-<span id="execution-results-GETapi-v1-reservation-without-credential" hidden>
+<span id="execution-results-GETapi-v1-reservations-without-credential" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-reservation-without-credential"></span>:
+                id="execution-response-status-GETapi-v1-reservations-without-credential"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-reservation-without-credential"
+    <pre class="json"><code id="execution-response-content-GETapi-v1-reservations-without-credential"
       data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
 </span>
-<span id="execution-error-GETapi-v1-reservation-without-credential" hidden>
+<span id="execution-error-GETapi-v1-reservations-without-credential" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-reservation-without-credential">
+    <pre><code id="execution-error-message-GETapi-v1-reservations-without-credential">
 
 Tip: Check that you&#039;re properly connected to the network.
 If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
 You can check the Dev Tools console for debugging information.</code></pre>
 </span>
-<form id="form-GETapi-v1-reservation-without-credential" data-method="GET"
-      data-path="api/v1/reservation/without-credential"
+<form id="form-GETapi-v1-reservations-without-credential" data-method="GET"
+      data-path="api/v1/reservations/without-credential"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-reservation-without-credential', this);">
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-reservations-without-credential', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-reservation-without-credential"
-                    onclick="tryItOut('GETapi-v1-reservation-without-credential');">Try it out ⚡
+                    id="btn-tryout-GETapi-v1-reservations-without-credential"
+                    onclick="tryItOut('GETapi-v1-reservations-without-credential');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-reservation-without-credential"
-                    onclick="cancelTryOut('GETapi-v1-reservation-without-credential');" hidden>Cancel 🛑
+                    id="btn-canceltryout-GETapi-v1-reservations-without-credential"
+                    onclick="cancelTryOut('GETapi-v1-reservations-without-credential');" hidden>Cancel 🛑
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-reservation-without-credential"
+                    id="btn-executetryout-GETapi-v1-reservations-without-credential"
                     data-initial-text="Send Request 💥"
                     data-loading-text="⏱ Sending..."
                     hidden>Send Request 💥
@@ -1311,7 +1318,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
             </h3>
             <p>
             <small class="badge badge-green">GET</small>
-            <b><code>api/v1/reservation/without-credential</code></b>
+            <b><code>api/v1/reservations/without-credential</code></b>
         </p>
                 <h4 class="fancy-heading-panel"><b>Headers</b></h4>
                                 <div style="padding-left: 28px; clear: unset;">
@@ -1320,7 +1327,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-v1-reservation-without-credential"
+                              name="Content-Type"                data-endpoint="GETapi-v1-reservations-without-credential"
                value="application/json"
                data-component="header">
     <br>
@@ -1332,7 +1339,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-v1-reservation-without-credential"
+                              name="Accept"                data-endpoint="GETapi-v1-reservations-without-credential"
                value="application/json"
                data-component="header">
     <br>
@@ -1485,8 +1492,8 @@ You can check the Dev Tools console for debugging information.</code></pre>
     --header "Accept: application/json" \
     --data "{
     \"server_ulid\": \"architecto\",
-    \"start_time\": \"2022-05-24\",
-    \"end_time\": \"2052-05-23\",
+    \"start_time\": \"2022-06-20\",
+    \"end_time\": \"2052-06-19\",
     \"rent_type\": \"architecto\"
 }"
 </code></pre></div>
@@ -1504,8 +1511,8 @@ const headers = {
 
 let body = {
     "server_ulid": "architecto",
-    "start_time": "2022-05-24",
-    "end_time": "2052-05-23",
+    "start_time": "2022-06-20",
+    "end_time": "2052-06-19",
     "rent_type": "architecto"
 };
 
@@ -1606,26 +1613,26 @@ You can check the Dev Tools console for debugging information.</code></pre>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>start_time</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="start_time"                data-endpoint="POSTapi-v1-reserves"
-               value="2022-05-24"
+               value="2022-06-20"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-05-24</code></p>
+<p>This field is required when <code>end_time</code> is present. Must be a valid date. Must be a date after <code>now</code>. Must be a date before <code>end_time</code>. Example: <code>2022-06-20</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>end_time</code></b>&nbsp;&nbsp;
 <small>string</small>&nbsp;
- &nbsp;
+<i>optional</i> &nbsp;
  &nbsp;
                 <input type="text" style="display: none"
                               name="end_time"                data-endpoint="POSTapi-v1-reserves"
-               value="2052-05-23"
+               value="2052-06-19"
                data-component="body">
     <br>
-<p>Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-05-23</code></p>
+<p>This field is required when <code>start_time</code> is present. Must be a valid date. Must be a date after <code>start_time</code>. Example: <code>2052-06-19</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>rent_type</code></b>&nbsp;&nbsp;
@@ -2511,8 +2518,8 @@ Must be one of:
     \"cpu_id\": 16,
     \"gpu_id\": 16,
     \"ram_id\": 16,
-    \"storage\": 256,
-    \"os\": \"Linux\",
+    \"storage\": 1024,
+    \"os\": \"Windows\",
     \"price_per_hour\": 39,
     \"price_per_day\": 84,
     \"is_active\": true
@@ -2534,8 +2541,8 @@ let body = {
     "cpu_id": 16,
     "gpu_id": 16,
     "ram_id": 16,
-    "storage": 256,
-    "os": "Linux",
+    "storage": 1024,
+    "os": "Windows",
     "price_per_hour": 39,
     "price_per_day": 84,
     "is_active": true
@@ -2679,10 +2686,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="storage"                data-endpoint="PATCHapi-v1-admin-servers--slug-"
-               value="256"
+               value="1024"
                data-component="body">
     <br>
-<p>Example: <code>256</code></p>
+<p>Example: <code>1024</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>128</code></li> <li><code>256</code></li> <li><code>512</code></li> <li><code>1024</code></li> <li><code>2048</code></li></ul>
         </div>
@@ -2693,10 +2700,10 @@ Must be one of:
  &nbsp;
                 <input type="text" style="display: none"
                               name="os"                data-endpoint="PATCHapi-v1-admin-servers--slug-"
-               value="Linux"
+               value="Windows"
                data-component="body">
     <br>
-<p>Example: <code>Linux</code></p>
+<p>Example: <code>Windows</code></p>
 Must be one of:
 <ul style="list-style-type: square;"><li><code>Windows</code></li> <li><code>Linux</code></li></ul>
         </div>

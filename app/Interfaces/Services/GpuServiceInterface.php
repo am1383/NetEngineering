@@ -8,5 +8,5 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface GpuServiceInterface
 {
-    public function getAllGpu(PaginationDTO $dto): LengthAwarePaginator;
+    public function paginate(PaginationDTO $dto): LengthAwarePaginator;
 }

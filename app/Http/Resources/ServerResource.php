@@ -18,21 +18,25 @@ class ServerResource extends JsonResource
         return [
             'id' => $this->ulid,
             'name' => $this->name,
+            
             'cpu' => $this->whenLoaded('cpu', function (): array {
                 return [
                     'name' => $this->cpu->model
                 ];
             }),
+
             'gpu' => $this->whenLoaded('gpu', function (): array {
                 return [
                     'name' => $this->gpu->model
                 ];
             }),
+
             'ram' => $this->whenLoaded('ram', function (): array {
                 return [
                     'name' => $this->ram->model
                 ];
             }),
+
             'storage' => $this->storage,
             'os' => $this->os,
             'is_active' => $this->is_active,

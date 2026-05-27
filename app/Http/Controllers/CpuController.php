@@ -20,7 +20,7 @@ class CpuController extends Controller
         $dto = PaginationDTO::fromRequest($request->validated());
 
         return $this->successResponse(CpuResource::collection(
-            $this->cpuService->getAllCpu($dto))
-        );
+            $this->cpuService->paginate($dto)
+        ));
     }
 }

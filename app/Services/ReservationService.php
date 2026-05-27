@@ -7,7 +7,7 @@ use App\DTOs\Pricing\ServerRentalPriceDTO;
 
 use App\DTOs\Reservation\{
     ServerReservationDTO,
-    StoreReservationDTO
+    CreateReservationDTO
 };
 
 use App\Enums\RentType;
@@ -27,8 +27,11 @@ use App\Models\{
     Server
 };
 
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
+use Illuminate\Support\{
+    Carbon,
+    Collection
+};
+
 use Illuminate\Support\Facades\DB;
 
 class ReservationService implements ReservationServiceInterface
@@ -39,7 +42,7 @@ class ReservationService implements ReservationServiceInterface
         private readonly ReservationCredentialRepositoryInterface $reservationCredentialRepository
     ) {}
 
-    public function storeReservation(StoreReservationDTO $dto): Reservation
+    public function createReservation(CreateReservationDTO $dto): void
     {
         $server = $this->serverRepository
             ->findOrFailByUlid($dto->serverUlid, [
@@ -49,7 +52,7 @@ class ReservationService implements ReservationServiceInterface
         $startTimestamp = TimeHelper::datetimeToTimestamp($dto->startTime);
         $endTimestamp = TimeHelper::datetimeToTimestamp($dto->endTime);
 
-        $this->hasConflict($server->id, $startTimestamp, $endTimestamp);
+        $this->hasConflict($server, $startTimestamp, $endTimestamp);
 
         $durationHours = $this->getDurationInHours($startTimestamp, $endTimestamp);
         $rentalPrice = $this->calculateRentalPrice(new ServerRentalPriceDTO(
@@ -59,7 +62,7 @@ class ReservationService implements ReservationServiceInterface
             $server->price_per_day
         ));
 
-        return $this->reserveServer(new ServerReservationDTO(
+        $this->reserveServer(new ServerReservationDTO(
             $server->id,
             $startTimestamp,
             $endTimestamp,
@@ -68,30 +71,30 @@ class ReservationService implements ReservationServiceInterface
         ));
     }
 
-    private function hasConflict(int $serverId, int $startTime, int $endTime): void
+    private function hasConflict(Server $server, int $startTime, int $endTime): void
     {
-        throw_if($this->reservationRepository->hasConflict(
-            $serverId, $startTime, $endTime
+        throw_if(
+            $this->reservationRepository->hasConflict(
+                $server, $startTime, $endTime
             ), ConfilictException::class
         );
     }
 
-    private function reserveServer(ServerReservationDTO $dto): Reservation
+    private function reserveServer(ServerReservationDTO $dto): void
     {
-        return DB::transaction(function () use ($dto): Reservation {
-            return tap(
-                $this->reservationRepository->create([
-                    'user_id' => auth()->id(),
-                    'server_id' => $dto->serverId,
-                    'start_time' => $dto->startTime,
-                    'end_time' => $dto->endTime,
-                    'rent_type' => $dto->rentType,
-                    'total_price' => $dto->price
-                ]), function (Reservation $reservation): void {
-                    $this->reservationCredentialRepository->create([
-                        'reservation_id' => $reservation->id
-                ]);
-            });
+        DB::transaction(function () use ($dto): void {
+            $reservation = $this->reservationRepository->create([
+                'user_id' => auth()->id(),
+                'server_id' => $dto->serverId,
+                'start_time' => $dto->startTime,
+                'end_time' => $dto->endTime,
+                'rent_type' => $dto->rentType,
+                'total_price' => $dto->price
+            ]);
+    
+            $this->reservationCredentialRepository->create([
+                'reservation_id' => $reservation->id
+            ]);
         });
     }
 

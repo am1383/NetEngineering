@@ -25,6 +25,6 @@ class ReservationCredentialController extends Controller
             )
         );
 
-        return $this->successResponse();
+        return $this->noContentResponse();
     }
 }

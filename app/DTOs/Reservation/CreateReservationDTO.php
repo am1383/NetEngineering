@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\DTOs\Reservation;
 
-final class StoreReservationDTO
+final class CreateReservationDTO
 {
     public function __construct(
         public readonly string $serverUlid,

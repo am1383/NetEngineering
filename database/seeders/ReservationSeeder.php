@@ -28,7 +28,7 @@ class ReservationSeeder extends Seeder
             'end_time' => now()->addHours(5)->timestamp,
             'rent_type' => RentType::HOURLY_RENT->value,
             'total_price' => 50000,
-            'status' => TransactionStatus::PAID->value,
+            'status' => TransactionStatus::PAID->value
         ]);
     }
 }

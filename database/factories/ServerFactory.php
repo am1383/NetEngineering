@@ -32,14 +32,14 @@ class ServerFactory extends Factory
             'os' => fake()->randomElement(['Windows', 'Linux']),
             'price_per_hour' => fake()->numberBetween(50_000, 3_000_000),
             'price_per_day' => fake()->numberBetween(50_000, 3_000_000),
-            'cpu_id' => Cpu::factory()->create()->getKey(),
+            'cpu_id' => Cpu::factory()->create()->getKey()
         ];
     }
 
     public function notActive(): static
     {
         return $this->state(fn (): array => [
-            'is_active' => false,
+            'is_active' => false
         ]);
     }
 }

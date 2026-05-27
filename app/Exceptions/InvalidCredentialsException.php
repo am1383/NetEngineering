@@ -13,7 +13,7 @@ class InvalidCredentialsException extends \Exception
     public function render(): JsonResponse
     {
         return response()->json([
-            'message' => __('errors.invalid_credentials_error'),
+            'message' => __('errors.invalid_credentials_error')
         ], Response::HTTP_UNAUTHORIZED);
     }
 }

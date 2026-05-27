@@ -1,8 +1,8 @@
-<?php 
-declare(strict_types=1);
+<?php
 
 return [
-    App\Providers\ServicesServiceProvider::class,
     App\Providers\AuthServiceProvider::class,
     App\Providers\RepositoryServiceProvider::class,
+    App\Providers\RouteServiceProvider::class,
+    App\Providers\ServicesServiceProvider::class,
 ];

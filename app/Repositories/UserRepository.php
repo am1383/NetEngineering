@@ -13,9 +13,10 @@ class UserRepository extends GenericRepository implements UserRepositoryInterfac
         protected readonly Model $model
     ) {}
 
-    public function findUserByPhoneNumber(string $phoneNumber): ?User
+    public function findUserByPhoneNumber(string $phoneNumber, array $columns = ['*']): ?User
     {
-        return $this->model->where('phone_number', $phoneNumber)
+        return $this->model->select($columns)
+            ->where('phone_number', $phoneNumber)
             ->first();
     }
 }

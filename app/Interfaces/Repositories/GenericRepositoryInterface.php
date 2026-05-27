@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Repositories;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\DTOs\Pagination\PaginationDTO;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface GenericRepositoryInterface
 {
-    public function count(string $columns = '*'): int;
+    public function count(): int;
 
-    public function fetchAll(array $columns = ['*']): Builder;
+    public function paginate(PaginationDTO $dto, array $columns = ['*']): LengthAwarePaginator;
 
     public function create(array $attributes): Model;
 
-    public function updateOrFail(Model $model, array $attributes): bool;
+    public function updateOrFail(Model $model, array $attributes): void;
 }

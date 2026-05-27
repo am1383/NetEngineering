@@ -26,7 +26,7 @@ class CpuFactory extends Factory
             'boost_clock' => fake()->numberBetween(30, 500),
             'socket' => fake()->name(),
             'tdp' => fake()->numberBetween(24, 65),
-            'price' => fake()->numberBetween(50_000, 3_000_000),
+            'price' => fake()->numberBetween(50_000, 3_000_000)
         ];
     }
 }

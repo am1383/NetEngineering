@@ -8,5 +8,5 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CpuServiceInterface
 {
-    public function getAllCpu(PaginationDTO $dto): LengthAwarePaginator;
+    public function paginate(PaginationDTO $dto): LengthAwarePaginator;
 }

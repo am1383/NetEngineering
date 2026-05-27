@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\DTOs\Pagination\PaginationDTO;
 use App\Interfaces\Repositories\GenericRepositoryInterface;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class GenericRepository implements GenericRepositoryInterface
 {
@@ -13,14 +14,15 @@ abstract class GenericRepository implements GenericRepositoryInterface
         protected readonly Model $model
     ) {}
 
-    public function count(string $columns = 'id'): int
+    public function count(): int
     {
-        return $this->model->count($columns);
+        return $this->model->count();
     }
 
-    public function fetchAll(array $columns = ['*']): Builder
+    public function paginate(PaginationDTO $dto, array $columns = ['*']): LengthAwarePaginator
     {
-        return $this->model->select($columns);
+        return $this->model->select($columns)
+            ->paginate($dto->perPage, page: $dto->page);
     }
 
     public function create(array $attributes): Model
@@ -28,8 +30,8 @@ abstract class GenericRepository implements GenericRepositoryInterface
         return $this->model->create($attributes);
     }
 
-    public function updateOrFail(Model $model, array $attributes): bool
+    public function updateOrFail(Model $model, array $attributes): void
     {
-        return $model->updateOrFail($attributes);
+        $model->updateOrFail($attributes);
     }
 }

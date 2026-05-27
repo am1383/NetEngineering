@@ -21,7 +21,7 @@ class Server extends Model
      */
     protected $fillable = [
         'cpu_id', 'gpu_id', 'ram_id', 'storage', 'os',
-        'price_per_hour', 'price_per_day', 'is_active',
+        'price_per_hour', 'price_per_day', 'is_active'
     ];
 
     protected $with = ['cpu', 'gpu', 'ram'];
@@ -34,7 +34,7 @@ class Server extends Model
     protected function casts(): array
     {
         return [
-            'is_active' => 'boolean',
+            'is_active' => 'boolean'
         ];
     }
 

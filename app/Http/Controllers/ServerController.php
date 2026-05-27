@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServerRequest;
-use App\Http\Resources\ServerResource;
 
 use App\Interfaces\Services\{
     ReservationServiceInterface,
@@ -12,11 +11,7 @@ use App\Interfaces\Services\{
 };
 
 use App\Models\Server;
-
-use Illuminate\Http\{
-    JsonResponse,
-    Response
-};
+use Illuminate\Http\JsonResponse;
 
 class ServerController extends Controller
 {
@@ -27,19 +22,16 @@ class ServerController extends Controller
 
     public function store(ServerRequest $request): JsonResponse
     {
-        $server = $this->serverService
-            ->createServer($request->validated());
+        $this->serverService->createServer($request->validated());
 
-        return $this->successResponse(new ServerResource($server),
-            Response::HTTP_CREATED
-        );
+        return $this->createdResponse();
     }
 
     public function update(Server $server, ServerRequest $request): JsonResponse
     {
-        return $this->successResponse($this->serverService
-            ->updateServer($server, $request->validated())
-        );
+        $this->serverService->updateServer($server, $request->validated());
+
+        return $this->noContentResponse();
     }
 
     public function unavailable(Server $server): JsonResponse

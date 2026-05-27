@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Laravel\Passport\Client;
@@ -13,11 +14,12 @@ class LoginTest extends TestCase
     public function test_user_can_login(): void
     {
         $this->setupPassportClient();
+
         $payload = [
             'phone_number' => fake()->regexify('09[0-9]{9}'),
-            'password' => 'Test@1234',
+            'password' => 'Test@1234'
         ];
-
+        
         User::factory()->user()->create($payload);
 
         $response = $this->postJson(route('login'), $payload);
@@ -25,7 +27,7 @@ class LoginTest extends TestCase
         $response->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    'token',
+                    'token'
                 ],
             ]);
     }
@@ -34,19 +36,19 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson(route('login'), [
             'phone_number' => fake()->regexify('09[0-9]{9}'),
-            'password' => 'Test@1234',
+            'password' => 'Test@1234'
         ]);
 
         $response->assertUnauthorized()
             ->assertJson([
-                'message' => __('errors.invalid_credentials_error'),
+                'message' => __('errors.invalid_credentials_error')
             ]);
     }
 
     public function test_login_fails_when_phone_number_is_missing(): void
     {
         $response = $this->postJson(route('login'), [
-            'password' => 'Test@1234',
+            'password' => 'Test@1234'
         ]);
 
         $response->assertUnprocessable()
@@ -55,16 +57,16 @@ class LoginTest extends TestCase
                 'result' => [
                     'message',
                     'errors' => [
-                        'phone_number',
-                    ],
-                ],
+                        'phone_number'
+                    ]
+                ]
             ]);
     }
 
     public function test_login_fails_when_password_is_missing(): void
     {
         $response = $this->postJson(route('login'), [
-            'phone_number' => fake()->regexify('09[0-9]{9}'),
+            'phone_number' => fake()->regexify('09[0-9]{9}')
         ]);
 
         $response->assertUnprocessable()
@@ -73,9 +75,9 @@ class LoginTest extends TestCase
                 'result' => [
                     'message',
                     'errors' => [
-                        'password',
-                    ],
-                ],
+                        'password'
+                    ]
+                ]
             ]);
     }
 
@@ -83,7 +85,7 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson(route('login'), [
             'phone_number' => '123456',
-            'password' => 'Test@1234',
+            'password' => 'Test@1234'
         ]);
 
         $response->assertUnprocessable()
@@ -92,9 +94,9 @@ class LoginTest extends TestCase
                 'result' => [
                     'message',
                     'errors' => [
-                        'phone_number',
-                    ],
-                ],
+                        'phone_number'
+                    ]
+                ]
             ]);
     }
 
@@ -104,17 +106,17 @@ class LoginTest extends TestCase
 
         User::factory()->user()->create([
             'phone_number' => $phoneNumber,
-            'password' => 'Correct@123',
+            'password' => 'Correct@123'
         ]);
 
         $response = $this->postJson(route('login'), [
             'phone_number' => $phoneNumber,
-            'password' => 'Wrong@123',
+            'password' => 'Wrong@123'
         ]);
 
         $response->assertUnauthorized()
             ->assertJson([
-                'message' => __('errors.invalid_credentials_error'),
+                'message' => __('errors.invalid_credentials_error')
             ]);
     }
 
@@ -130,8 +132,42 @@ class LoginTest extends TestCase
                     'errors' => [
                         'phone_number',
                         'password'
-                    ],
+                    ]
                 ],
+            ]);
+    }
+
+    public function test_login_rate_limiter_allows_five_requests(): void
+    {
+        for ($i = 0; $i < 5; $i++) {
+            $response = $this->postJson(route('login'), [
+                'phone_number' => fake()->regexify('09[0-9]{9}'),
+                'password' => 'Test@123'
+            ]);
+
+            $response->assertUnauthorized();
+        }
+    }
+
+    public function test_login_rate_limiter_blocks_after_five_requests(): void
+    {
+        $phoneNumber = fake()->regexify('09[0-9]{9}');
+
+        for ($i = 0; $i < 5; $i++) {
+            $this->postJson(route('login'), [
+                'phone_number' => $phoneNumber,
+                'password' => 'Test@123'
+            ]);
+        }
+
+        $response = $this->postJson(route('login'), [
+            'phone_number' => $phoneNumber,
+            'password' => 'Test@123'
+        ]);
+
+        $response->assertTooManyRequests()
+           ->assertJson([
+                'message' => __('errors.too_many_requests')
             ]);
     }
 
@@ -146,7 +182,7 @@ class LoginTest extends TestCase
             'provider' => 'users',
             'redirect_uris' => ['http://localhost'],
             'grant_types' => ['personal_access'],
-            'revoked' => false,
+            'revoked' => false
         ]);
     }
 }

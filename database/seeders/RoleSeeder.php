@@ -15,12 +15,12 @@ class RoleSeeder extends Seeder
     {
         Role::create([
             'id' => RoleType::ADMIN->value,
-            'name' => 'admin',
+            'name' => 'admin'
         ]);
 
         Role::create([
             'id' => RoleType::USER->value,
-            'name' => 'user',
+            'name' => 'user'
         ]);
     }
 }

@@ -18,7 +18,7 @@ class RoleFactory extends Factory
     {
         return $this->state(fn (): array => [
             'id' => RoleType::ADMIN->value,
-            'name' => 'admin',
+            'name' => 'admin'
         ]);
     }
 
@@ -26,7 +26,7 @@ class RoleFactory extends Factory
     {
         return $this->state(fn (): array => [
             'id' => RoleType::USER->value,
-            'name' => 'user',
+            'name' => 'user'
         ]);
     }
 }

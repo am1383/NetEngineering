@@ -23,7 +23,7 @@ class GpuFactory extends Factory
             'vram' => fake()->numberBetween(2, 12),
             'chipset' => fake()->name(),
             'power' => fake()->numberBetween(5, 12),
-            'price' => fake()->numberBetween(50_000, 3_000_000),
+            'price' => fake()->numberBetween(50_000, 3_000_000)
         ];
     }
 }

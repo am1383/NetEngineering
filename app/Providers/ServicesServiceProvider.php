@@ -25,28 +25,28 @@ use App\Services\{
     UserService
 };
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class ServicesServiceProvider extends ServiceProvider
+class ServicesServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * This provider is deferred.
-     */
-    protected $defer = true;
+    public array $singletons = [
+        LoginServiceInterface::class => LoginService::class,
+        HomeServiceInterface::class => HomeService::class,
+        ReservationServiceInterface::class => ReservationService::class,
+        ReservationCredentialServiceInterface::class => ReservationCredentialService::class,
+        ServerServiceInterface::class => ServerService::class,
+        UserServiceInterface::class => UserService::class,
+        CpuServiceInterface::class => CpuService::class,
+        GpuServiceInterface::class => GpuService::class
+    ];
 
     /**
      * Register application service bindings.
      */
     public function register(): void
     {
-        $this->app->bind(LoginServiceInterface::class, LoginService::class);
-        $this->app->bind(HomeServiceInterface::class, HomeService::class);
-        $this->app->bind(ReservationServiceInterface::class, ReservationService::class);
-        $this->app->bind(ReservationCredentialServiceInterface::class, ReservationCredentialService::class);
-        $this->app->bind(ServerServiceInterface::class, ServerService::class);
-        $this->app->bind(UserServiceInterface::class, UserService::class);
-        $this->app->bind(CpuServiceInterface::class, CpuService::class);
-        $this->app->bind(GpuServiceInterface::class, GpuService::class);
+        //
     }
 
     /**

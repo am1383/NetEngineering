@@ -18,6 +18,7 @@ class UserTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        
         $this->actingAsUser();
     }
 
@@ -41,13 +42,13 @@ class UserTest extends TestCase
         $name = fake()->name();
 
         $response = $this->patchJson(route('profile.update'), [
-            'name' => $name,
+            'name' => $name
         ]);
 
-        $response->assertOk();
+        $response->assertNoContent();
         $this->assertDatabaseHas('users', [
             'id' => auth()->id(),
-            'name' => $name,
+            'name' => $name
         ]);
     }
 
@@ -58,7 +59,7 @@ class UserTest extends TestCase
         $response = $this->postJson(route('users.store'), [
             'email' => $email,
             'phone_number' => fake()->regexify('09[0-9]{9}'),
-            'password' => 'Test@123',
+            'password' => 'Test@1234',
             'role_id' => RoleType::ADMIN->value,
             'name' => fake()->name()
         ]);
@@ -75,10 +76,10 @@ class UserTest extends TestCase
         $serverId = Server::factory()->create()->getKey();
         $reservation = Reservation::factory()->create([
             'user_id' => auth()->id(),
-            'server_id' => $serverId,
+            'server_id' => $serverId
         ]);
         ReservationCredential::factory()->create([
-            'reservation_id' => $reservation->id,
+            'reservation_id' => $reservation->id
         ]);
 
         $response = $this->getJson(route('credential.without'));

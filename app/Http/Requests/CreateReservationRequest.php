@@ -7,7 +7,7 @@ use App\Enums\RentType;
 use App\Http\Requests\Request as BaseRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class StoreReservationRequest extends BaseRequest
+class CreateReservationRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,8 @@ class StoreReservationRequest extends BaseRequest
     {
         return [
             'server_ulid' => 'required|string|exists:servers,ulid',
-            'start_time' => 'required|date|after:now|before:end_time',
-            'end_time' => 'required|date|after:start_time',
+            'start_time' => 'required_with:end_time|date|after:now|before:end_time',
+            'end_time' => 'required_with:start_time|date|after:start_time',
             'rent_type' => ['required', 'string', new Enum(RentType::class)]
         ];
     }

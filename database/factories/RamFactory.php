@@ -23,7 +23,7 @@ class RamFactory extends Factory
             'frequency' => fake()->numberBetween(2, 12),
             'type' => fake()->name(),
             'slots' => fake()->numberBetween(5, 12),
-            'price' => fake()->numberBetween(50_000, 3_000_000),
+            'price' => fake()->numberBetween(50_000, 3_000_000)
         ];
     }
 }

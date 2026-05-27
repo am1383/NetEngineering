@@ -25,7 +25,7 @@ class ServerSeeder extends Seeder
                 'os' => 'Windows',
                 'price_per_hour' => 20000,
                 'price_per_day' => 300000,
-                'is_active' => true,
+                'is_active' => true
             ],
             [
                 'slug' => 'ryzen-7-7800x3d',
@@ -38,7 +38,7 @@ class ServerSeeder extends Seeder
                 'os' => 'Linux',
                 'price_per_hour' => 10000,
                 'price_per_day' => 50000,
-                'is_active' => true,
+                'is_active' => true
             ],
             [
                 'slug' => 'intel-i9-13900k',
@@ -51,7 +51,7 @@ class ServerSeeder extends Seeder
                 'os' => 'Windows',
                 'price_per_hour' => 10000,
                 'price_per_day' => 50000,
-                'is_active' => true,
+                'is_active' => true
             ],
         ]);
     }

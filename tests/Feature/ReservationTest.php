@@ -17,6 +17,7 @@ class ReservationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        
         $this->actingAsUser();
     }
 
@@ -28,21 +29,22 @@ class ReservationTest extends TestCase
             'server_ulid' => $server->ulid,
             'start_time' => now()->addHour()->toDateTimeString(),
             'end_time' => now()->addHours(5)->toDateTimeString(),
-            'rent_type' => RentType::DAILY_RENT->value,
+            'rent_type' => RentType::DAILY_RENT->value
         ]);
 
         $response->assertCreated();
         $this->assertDatabaseHas('reservations', [
             'server_id' => $server->id,
-            'rent_type' => RentType::DAILY_RENT->value,
+            'rent_type' => RentType::DAILY_RENT->value
         ]);
     }
 
     public function test_get_user_reservation(): void
     {
+        $serverId = Server::factory()->create()->getKey();
         Reservation::factory()->create([
             'user_id' => auth()->id(),
-            'server_id' => Server::factory()->create()->getKey(),
+            'server_id' => $serverId
         ]);
  
         $response = $this->getJson(route('reservations.index'));

@@ -20,7 +20,7 @@ class GpuController extends Controller
         $dto = PaginationDTO::fromRequest($request->validated());
 
         return $this->successResponse(GpuResource::collection(
-            $this->gpuService->getAllGpu($dto))
-        );
+            $this->gpuService->paginate($dto)
+        ));
     }
 }

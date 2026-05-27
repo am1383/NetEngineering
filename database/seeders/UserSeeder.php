@@ -18,15 +18,15 @@ class UserSeeder extends Seeder
             'email' => 'user@example.com',
             'phone_number' => '09183121516',
             'password' => 'Password@123',
-            'role_id' => RoleType::USER->value,
+            'role_id' => RoleType::USER->value
         ]);
 
         User::create([
             'name' => 'Test admin user',
-            'email' => 'admin@.com',
+            'email' => 'admin@example.com',
             'phone_number' => '09183121517',
             'password' => 'Password@123',
-            'role_id' => RoleType::ADMIN->value,
+            'role_id' => RoleType::ADMIN->value
         ]);
     }
 }

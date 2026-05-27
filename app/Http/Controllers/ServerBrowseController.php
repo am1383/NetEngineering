@@ -16,10 +16,12 @@ class ServerBrowseController extends Controller
 
     public function index(ServerBrowseRequest $request): JsonResponse
     {
-        return $this->successResponse(ServerResource::collection(
-            $this->serverService->getAvailableServers(
-                $request->query('gpu'), $request->query('cpu')
-            )
-        ));
+        $servers = $this->serverService->getAvailableServers(
+            $request->query('gpu'), $request->query('cpu')
+        );
+
+        return $this->successResponse(
+            ServerResource::collection($servers)
+        );
     }
 }

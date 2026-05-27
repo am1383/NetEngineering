@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'phone_number',
         'role_id',
-        'password',
+        'password'
     ];
 
     /**
@@ -33,7 +33,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
 
     /**
@@ -44,7 +44,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'password' => 'hashed',
+            'password' => 'hashed'
         ];
     }
 

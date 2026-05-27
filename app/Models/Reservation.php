@@ -22,7 +22,7 @@ class Reservation extends Model
      */
     protected $fillable = [
         'user_id', 'server_id', 'start_time',
-        'end_time', 'rent_type', 'total_price', 'status',
+        'end_time', 'rent_type', 'total_price', 'status'
     ];
 
     protected $with = ['credential'];

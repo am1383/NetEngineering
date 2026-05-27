@@ -7,5 +7,5 @@ use App\Models\User;
 
 interface UserRepositoryInterface extends GenericRepositoryInterface
 {
-    public function findUserByPhoneNumber(string $phoneNumber): ?User;
+    public function findUserByPhoneNumber(string $phoneNumber, array $columns = ['*']): ?User;
 }

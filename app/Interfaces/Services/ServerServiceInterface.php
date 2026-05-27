@@ -8,9 +8,9 @@ use Illuminate\Support\Collection;
 
 interface ServerServiceInterface
 {
-    public function createServer(array $attributes): Server;
+    public function createServer(array $attributes): void;
 
-    public function updateServer(Server $server, array $attributes): bool;
+    public function updateServer(Server $server, array $attributes): void;
 
     public function getAvailableServers(?string $gpu, ?string $cpu): Collection;
 }

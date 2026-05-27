@@ -31,15 +31,11 @@ use App\Repositories\{
 };
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class RepositoryServiceProvider extends ServiceProvider
+class RepositoryServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * This provider is deferred.
-     */
-    protected $defer = true;
-
     /**
      * Register application services.
      */

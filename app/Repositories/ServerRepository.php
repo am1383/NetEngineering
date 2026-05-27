@@ -21,7 +21,7 @@ class ServerRepository extends GenericRepository implements ServerRepositoryInte
 
     public function findOrFailByUlid(string $ulid, array $columns = ['*']): Server
     {
-        return $this->fetchAll($columns)
+        return $this->model->select($columns)
             ->where('ulid', $ulid)
             ->firstOrFail();
     }
@@ -30,12 +30,12 @@ class ServerRepository extends GenericRepository implements ServerRepositoryInte
     {
         return $this->model->active()
             ->when($cpu, function (Builder $q) use ($cpu): void {
-                $q->whereHas('cpu', function (Builder $q) use ($cpu): void {
+                $q->whereRelation('cpu', function (Builder $q) use ($cpu): void {
                     $q->where('slug', $cpu);
                 });
             })
             ->when($gpu, function (Builder $q) use ($gpu): void {
-                $q->whereHas('gpu', function (Builder $q) use ($gpu): void {
+                $q->whereRelation('gpu', function (Builder $q) use ($gpu): void {
                     $q->where('slug', $gpu);
                 });
             })->get();

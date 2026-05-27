@@ -10,7 +10,31 @@ use Illuminate\Http\{
 
 trait ApiResponseTrait
 {
-    protected function successResponse(mixed $data = null, int $status = Response::HTTP_OK, string $message = ''): JsonResponse
+    protected function successResponse(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return response()->json(
+            $this->response($data, $message),
+            Response::HTTP_OK
+        );
+    }
+
+    public function createdResponse(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return response()->json(
+            $this->response($data, $message),
+            Response::HTTP_CREATED
+        );
+    }
+
+    public function noContentResponse(mixed $data = null, string $message = ''): JsonResponse
+    {
+        return response()->json(
+            $this->response($data, $message),
+            Response::HTTP_NO_CONTENT
+        );
+    }
+
+    private function response(mixed $data, string $message): array
     {
         $response = [
             'success' => true,
@@ -21,6 +45,6 @@ trait ApiResponseTrait
             $response['data'] = $data;
         }
 
-        return response()->json($response, $status);
+        return $response;
     }
 }

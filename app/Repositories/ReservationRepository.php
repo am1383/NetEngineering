@@ -10,8 +10,11 @@ use App\Models\{
     User
 };
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{
+    Builder,
+    Model
+};
+
 use Illuminate\Support\Collection;
 
 class ReservationRepository extends GenericRepository implements ReservationRepositoryInterface
@@ -20,9 +23,9 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
         protected readonly Model $model
     ) {}
 
-    public function hasConflict(int $serverId, int $startTime, int $endTime): bool
+    public function hasConflict(Server $server, int $startTime, int $endTime): bool
     {
-        return $this->model->where('server_id', $serverId)
+        return $this->model->whereBelongsTo($server)
             ->where('start_time', '<', $endTime)
             ->where('end_time', '>', $startTime)
             ->exists();
@@ -59,12 +62,11 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
     public function fetchUserReservationsWithoutCredential(User $user): Collection
     {
         return $user->reservations()
-            ->whereHas('credential', function (Builder $query): void {
+            ->whereRelation('credential', function (Builder $query): void {
                 $query->whereNull('username')->whereNull('password');
             })
-            ->with('server')
-            ->get()
-            ->pluck('server.name');
+            ->join('servers', 'reservations.server_id', '=', 'servers.id')
+            ->pluck('servers.name');
     }
 
     public function fetchServerReservations(Server $server): Collection

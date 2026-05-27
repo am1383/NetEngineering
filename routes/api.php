@@ -17,13 +17,14 @@ use App\Http\Controllers\{
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('throttle:60,1')->group(function () {
-    Route::prefix('v1')->group(function () {
-        Route::post('/login', [LoginController::class, 'login'])
-            ->name('login');
-        Route::post('/register', RegisterController::class)
-            ->name('register');
-
+Route::prefix('v1')->group(function () {
+    Route::post('/login', [LoginController::class, 'login'])
+        ->middleware('throttle:login')
+        ->name('login');
+    Route::post('/register', RegisterController::class)
+        ->name('register');
+        
+    Route::middleware('throttle:60,1')->group(function () {
         Route::get('/servers/{server}/unavailable', [ServerController::class, 'unavailable'])
             ->name('servers.unavailable');
         Route::get('/status', HomeController::class)

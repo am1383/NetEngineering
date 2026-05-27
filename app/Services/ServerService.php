@@ -14,14 +14,14 @@ class ServerService implements ServerServiceInterface
         private readonly ServerRepositoryInterface $serverRepository
     ) {}
 
-    public function createServer(array $attributes): Server
+    public function createServer(array $attributes): void
     {
-        return $this->serverRepository->create($attributes);
+        $this->serverRepository->create($attributes);
     }
 
-    public function updateServer(Server $server, array $attributes): bool
+    public function updateServer(Server $server, array $attributes): void
     {
-        return $this->serverRepository->updateOrFail($server, $attributes);
+        $this->serverRepository->updateOrFail($server, $attributes);
     }
 
     public function getAvailableServers(?string $gpu, ?string $cpu): Collection

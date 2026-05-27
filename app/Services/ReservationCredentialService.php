@@ -10,7 +10,7 @@ use App\Interfaces\Services\ReservationCredentialServiceInterface;
 class ReservationCredentialService implements ReservationCredentialServiceInterface
 {
     public function __construct(
-        private readonly ReservationCredentialRepositoryInterface $reservationCredentialRepository,
+        private readonly ReservationCredentialRepositoryInterface $reservationCredentialRepository
     ) {}
 
     public function assignReservationCredential(AssignReservationCredentialDTO $dto): void
