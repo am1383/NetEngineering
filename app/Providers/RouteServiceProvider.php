@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('login', function (Request $request) {
             return [
-                Limit::perMinutes(10, 5)->by($request->input('phone_number')),
+                Limit::perMinutes(10, 5)->by($request->phone_number),
                 Limit::perMinute(20)->by($request->ip())
             ];
         });
