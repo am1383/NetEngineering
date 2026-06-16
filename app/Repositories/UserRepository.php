@@ -16,7 +16,6 @@ class UserRepository extends GenericRepository implements UserRepositoryInterfac
     public function findUserByPhoneNumber(string $phoneNumber, array $columns = ['*']): ?User
     {
         return $this->model->select($columns)
-            ->where('phone_number', $phoneNumber)
-            ->first();
+            ->firstWhere('phone_number', $phoneNumber);
     }
 }
