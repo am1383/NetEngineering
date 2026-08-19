@@ -34,7 +34,7 @@ class ReservationRepository extends GenericRepository implements ReservationRepo
     public function fetchUserReservations(User $user): Collection
     {
         return $user->reservations()
-            ->with(['server', 'credential'])
+            ->with('credential:username,password')
             ->get();
     }
 
