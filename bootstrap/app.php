@@ -32,7 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ], Response::HTTP_NOT_FOUND);
         });
 
-        $exceptions->renderable(function (ThrottleRequestsException $e, $request) {
+        $exceptions->renderable(function (ThrottleRequestsException $e, $request): JsonResponse {
             return response()->json([
                 'message' => __('errors.too_many_requests'),
                 'retry_after' => $e->getHeaders()['Retry-After'] ?? null,
