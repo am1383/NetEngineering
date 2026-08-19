@@ -24,7 +24,7 @@ class Server extends Model
         'price_per_hour', 'price_per_day', 'is_active'
     ];
 
-    protected $with = ['cpu', 'gpu', 'ram'];
+    protected $with = ['cpu:model', 'gpu:model', 'ram:model'];
 
     /**
      * Get the attributes that should be cast.
